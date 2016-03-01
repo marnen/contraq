@@ -58,4 +58,5 @@ group :test do
   gem 'faker'
   gem 'launchy'
   gem 'rspec-rails', '~> 3.4'
+  gem 'shoulda-matchers'
 end
