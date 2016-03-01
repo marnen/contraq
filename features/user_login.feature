@@ -15,3 +15,9 @@ Scenario Outline: Valid login
   Examples:
     | email           | password |
     | joe@example.com | påssw0rd |
+
+Scenario: Invalid login
+  Given I am not logged in
+  When I go to the login page
+  And I log in with e-mail "invalid@email" and password "oops"
+  Then I should not be logged in
