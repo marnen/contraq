@@ -51,6 +51,7 @@ group :development do
   gem 'guard', require: false
   gem 'guard-cucumber', require: false
   gem 'guard-rspec', require: false
+  gem 'spring-commands-rspec', require: false
 end
 
 group :test do
