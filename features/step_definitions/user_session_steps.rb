@@ -1,7 +1,7 @@
-Given /^I am logged in with e-?mail "(.*?)" and password "(.*?)"$/ do |email, password|
-  User.create! email: email, password: password
+Given /^I am logged in(?: with e-?mail "(.*?)" and password "(.*?)")?$/ do |email, password|
+  user = FactoryGirl.create :user, {email: email, password: password}.compact
   visit new_user_session_path
-  login_as email: email, password: password
+  login_as email: user.email, password: user.password
 end
 
 Given 'I am not logged in' do
