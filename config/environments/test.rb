@@ -39,4 +39,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  default_locale = config.i18n.default_locale
+  config.i18n.available_locales = [default_locale, :en] # see https://github.com/stympy/faker/issues/480 and https://github.com/stympy/faker/issues/266
 end
