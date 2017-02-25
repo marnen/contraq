@@ -33,6 +33,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem 'gettext_i18n_rails'
 gem 'haml'
 gem 'responders'
 
@@ -47,6 +48,9 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'gettext', require: false
+  gem 'ruby_parser', require: false # for finding translations in Haml
 
   gem 'guard', require: false
   gem 'guard-cucumber', require: false
