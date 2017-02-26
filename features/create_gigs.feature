@@ -1,7 +1,7 @@
 Feature: Create gigs
 As a user
 I can create gigs
-So I can see what I've committed to
+So I can record what I've committed to
 
 Scenario Outline: Basic gig creation
   Given I am logged in
