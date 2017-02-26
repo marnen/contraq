@@ -1,4 +1,7 @@
+@import 'normalize';
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+@include normalize();
 
 $montserrat: Montserrat, "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
 $base-font: $montserrat;
