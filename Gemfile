@@ -36,6 +36,7 @@ gem 'devise'
 gem 'gettext_i18n_rails'
 gem 'haml'
 gem 'responders'
+gem 'rails-i18n' # still needed for Rails boilerplate text
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
