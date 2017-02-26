@@ -1,0 +1,19 @@
+@import 'fonts';
+
+$base-font: $montserrat;
+$base-size: 16px;
+
+$background-color: white;
+$text-color: #111;
+$emphasis-color: purple;
+
+$padding: 0.5rem;
+
+html {
+  font: {
+    family: $base-font;
+    size: $base-size;
+  }
+  background-color: $background-color;
+  color: $text-color;
+}
