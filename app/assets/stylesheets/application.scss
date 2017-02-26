@@ -1,8 +1,70 @@
 $helvetica: "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
 $base-font: $helvetica;
+$base-size: 16px;
 
-body {
+$background-color: white;
+$text-color: #111;
+$emphasis-color: purple;
+
+$padding: 0.5rem;
+
+@mixin clearfix {
+  overflow: auto;
+  zoom: 1;
+}
+
+@mixin huge {
+  font: {
+    size: 2rem;
+    weight: bolder;
+  }
+}
+
+html {
   font: {
     family: $base-font;
+    size: $base-size;
+  }
+  background-color: $background-color;
+  color: $text-color;
+}
+
+body {
+  margin: 0px;
+}
+
+header {
+  @include clearfix;
+
+  $header-background-color: black;
+  $header-text-color: white;
+  $header-emphasis-color: lighten($emphasis-color, 25%);
+
+  background-color: $header-background-color;
+  color: $header-text-color;
+  padding: $padding;
+
+  .app-name {
+    @include huge;
+    float: left;
+  }
+
+  .current-user {
+    text-align: right;
+
+    span {
+      color: $header-emphasis-color;
+      font-weight: bolder;
+    }
+  }
+}
+
+section.main {
+  padding: $padding;
+}
+
+table {
+  td, th {
+    background-color: darken($background-color, 5%);
   }
 }

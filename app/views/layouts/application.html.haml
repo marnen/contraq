@@ -7,6 +7,10 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    - if current_user
-      %p= _('Logged in as %{email}') % {email: current_user.email}
-    = yield
+    %header
+      .app-name= _ 'Contraq'
+      .current-user
+        - if current_user
+          %p!= h(_ 'Logged in as %{email}') % {email: content_tag(:span, current_user.email).html_safe}
+    %section.main
+      = yield
