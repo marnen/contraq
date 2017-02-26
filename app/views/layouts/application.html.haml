@@ -2,13 +2,11 @@
 %html
   %head
     %meta(content="text/html; charset=UTF-8" http-equiv="Content-Type")
-    %title Contraq
+    %title= _ 'Contraq'
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
     - if current_user
-      %p
-        Logged in as
-        = current_user.email
+      %p= _('Logged in as %{email}') % {email: current_user.email}
     = yield
