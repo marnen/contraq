@@ -1,5 +1,7 @@
-$helvetica: "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
-$base-font: $helvetica;
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+$montserrat: Montserrat, "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
+$base-font: $montserrat;
 $base-size: 16px;
 
 $background-color: white;
