@@ -1,7 +1,10 @@
 Given /^I am logged in(?: with e-?mail "(.*?)" and password "(.*?)")?$/ do |email, password|
-  user = FactoryGirl.create :user, {email: email, password: password}.compact
+  @current_user = User.find_by(email: email) if email
+  @current_user ||= FactoryGirl.create :user, {email: email, password: password}.compact
+  email ||= @current_user.email
+  password ||= @current_user.password
   visit new_user_session_path
-  login_as email: user.email, password: user.password
+  login_as email: email, password: password
 end
 
 Given 'I am not logged in' do
@@ -9,6 +12,7 @@ Given 'I am not logged in' do
 end
 
 When /^I log in with e-?mail "(.*?)" and password "(.*?)"$/ do |email, password|
+  @current_user = User.find_by email: email
   login_as email: email, password: password
 end
 

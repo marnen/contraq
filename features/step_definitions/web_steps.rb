@@ -19,3 +19,7 @@ end
 Then /^I should (not )?be on (.+)$/ do |negation, page_name|
   expect(current_path == path_to(page_name)).to be == !negation
 end
+
+Then(/^I should (not )?see "([^"]*)"$/) do |negation, text|
+  expect(page.has_text? text).to be == !negation
+end

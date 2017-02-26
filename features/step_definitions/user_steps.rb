@@ -1,3 +1,3 @@
-Given 'the following user exists:' do |table|
-  User.create table.hashes.first
+Given /^the following users? exists?:$/ do |table|
+  table.hashes.each {|hash| FactoryGirl.create :user, hash }
 end

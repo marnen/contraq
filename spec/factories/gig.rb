@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :gig do
+    user
     name { Faker::Lorem.sentence }
     start_time { Faker::Time.forward 100, :evening }
     end_time { start_time + 2.hours }
