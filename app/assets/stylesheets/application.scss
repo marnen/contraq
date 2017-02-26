@@ -20,9 +20,7 @@ header {
     @include huge;
     color: $app-name-color;
     float: left;
-    font: {
-      family: $im-fell-english;
-    }
+    font-family: $im-fell-english;
   }
 
   .current-user {
@@ -30,7 +28,7 @@ header {
 
     span {
       color: $header-emphasis-color;
-      font-weight: bolder;
+      font-weight: 500;
     }
   }
 }
@@ -42,5 +40,9 @@ section.main {
 table {
   td, th {
     background-color: darken($background-color, 5%);
+  }
+
+  th {
+    font-weight: bolder;
   }
 }
