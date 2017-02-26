@@ -33,6 +33,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem 'gettext_i18n_rails'
+gem 'haml'
+gem 'responders'
+gem 'rails-i18n' # still needed for Rails boilerplate text
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -46,14 +50,21 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
+  gem 'gettext', require: false
+  gem 'ruby_parser', require: false # for finding translations in Haml
+
   gem 'guard', require: false
   gem 'guard-cucumber', require: false
   gem 'guard-rspec', require: false
+  gem 'spring-commands-rspec', require: false
 end
 
 group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'faker'
   gem 'launchy'
   gem 'rspec-rails', '~> 3.4'
+  gem 'shoulda-matchers'
 end

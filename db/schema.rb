@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227214950) do
+ActiveRecord::Schema.define(version: 20170226051306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "gigs", force: :cascade do |t|
+    t.string   "name",                 null: false
+    t.datetime "start_time",           null: false
+    t.datetime "end_time",             null: false
+    t.string   "venue"
+    t.string   "street"
+    t.string   "city"
+    t.string   "state",      limit: 2
+    t.string   "zip"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -34,4 +48,5 @@ ActiveRecord::Schema.define(version: 20160227214950) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "gigs", "users"
 end

@@ -1,0 +1,4 @@
+%tr[gig]
+  %td= gig.name
+  %td= _('%{start_time}–%{end_time}') % gig.attributes.symbolize_keys
+  %td= [gig.city, gig.state].compact.join _(', ')
