@@ -35,6 +35,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'gettext_i18n_rails'
 gem 'haml'
+gem 'normalize-scss'
 gem 'responders'
 gem 'rails-i18n' # still needed for Rails boilerplate text
 

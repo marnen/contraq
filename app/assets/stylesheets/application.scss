@@ -1,0 +1,14 @@
+@import 'base';
+@import 'settings';
+
+@import 'header';
+
+section.main {
+  padding: $padding;
+}
+
+table {
+  td, th {
+    background-color: darken($background-color, 5%);
+  }
+}

@@ -1,0 +1,25 @@
+@import 'fonts';
+
+$base-font: $montserrat;
+$base-size: 16px;
+
+$background-color: white;
+$text-color: #111;
+$app-name-color: darken(papayawhip, 3%);
+$emphasis-color: purple;
+
+$padding: 0.5rem;
+
+html {
+  font: {
+    family: $base-font;
+    size: $base-size;
+    weight: 400;
+  }
+  background-color: $background-color;
+  color: $text-color;
+}
+
+body {
+  margin: 0px;
+}
