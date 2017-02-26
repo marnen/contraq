@@ -16,6 +16,6 @@ When 'I go to $page_name' do |page_name|
   visit path_to page_name
 end
 
-Then 'I should be on $page_name' do |page_name|
-  expect(current_path).to be == path_to(page_name)
+Then /^I should (not )?be on (.+)$/ do |negation, page_name|
+  expect(current_path == path_to(page_name)).to be == !negation
 end

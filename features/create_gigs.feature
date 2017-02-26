@@ -3,7 +3,7 @@ As a user
 I can create gigs
 So I can see what I've committed to
 
-Scenario Outline:
+Scenario Outline: Basic gig creation
   Given I am logged in
   And I have no gigs
   And I am on the new gig page
@@ -23,3 +23,8 @@ Scenario Outline:
   Examples:
     | name   | start            | end              | venue         | street             | city     | state | zip   |
     | My Gig | 2100-12-25 20:00 | 2100-12-25 22:30 | Carnegie Hall | 881 Seventh Avenue | New York | NY    | 10019 |
+
+Scenario: Can't create gigs unless logged in
+  Given I am not logged in
+  When I go to the new gig page
+  Then I should not be on the new gig page

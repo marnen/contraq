@@ -2,6 +2,8 @@ class GigsController < ApplicationController
   responders :collection
   respond_to :html
 
+  before_action :authenticate_user!
+
   def index
     @gigs = Gig.all.order :start_time, :name
   end
