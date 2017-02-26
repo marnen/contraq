@@ -18,7 +18,11 @@ header {
 
   .app-name {
     @include huge;
+    color: $app-name-color;
     float: left;
+    font: {
+      family: $im-fell-english;
+    }
   }
 
   .current-user {
