@@ -4,4 +4,5 @@ Significant changes to the project will be documented here, in the format recomm
 
 ## Unreleased
 
+- Test with Travis. [#10]
 - Basic gig display. [#2]
