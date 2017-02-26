@@ -1,37 +1,7 @@
 @import 'base';
 @import 'settings';
 
-body {
-  margin: 0px;
-}
-
-header {
-  @include clearfix;
-
-  $header-background-color: black;
-  $header-text-color: white;
-  $header-emphasis-color: lighten($emphasis-color, 25%);
-
-  background-color: $header-background-color;
-  color: $header-text-color;
-  padding: $padding;
-
-  .app-name {
-    @include huge;
-    color: $app-name-color;
-    float: left;
-    font-family: $im-fell-english;
-  }
-
-  .current-user {
-    text-align: right;
-
-    span {
-      color: $header-emphasis-color;
-      font-weight: 500;
-    }
-  }
-}
+@import 'header';
 
 section.main {
   padding: $padding;
