@@ -36,3 +36,8 @@ Scenario: Can't edit gigs unless logged in
   Given I am not logged in
   And a gig exists
   Then I should not be able to get to the edit page for the gig
+
+Scenario: Can't edit other users' gigs
+  Given I am logged in
+  And a gig exists
+  Then I should not be able to get to the edit page for the gig

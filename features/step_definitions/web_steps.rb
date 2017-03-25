@@ -18,8 +18,12 @@ end
 
 Then 'I should not be able to get to $page_name' do |page_name|
   path = path_to page_name
-  visit path
-  expect(current_path).not_to be == path
+  begin
+    visit path
+    expect(current_path).not_to be == path
+  rescue Pundit::NotAuthorizedError
+    # don't worry about it
+  end
 end
 
 Then /^I should (not )?be on (.+)$/ do |negation, page_name|

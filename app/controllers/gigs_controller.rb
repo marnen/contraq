@@ -18,12 +18,19 @@ class GigsController < ApplicationController
   end
 
   def edit
-    @gig = Gig.find params[:id]
+    load_and_authorize_gig!
   end
 
   def update
-    @gig = Gig.find params[:id]
+    load_and_authorize_gig!
     @gig.update! params.require(:gig).permit(Gig.permitted_params)
     respond_with @gig
+  end
+
+  private
+
+  def load_and_authorize_gig!
+    @gig = Gig.find params[:id]
+    authorize @gig
   end
 end
