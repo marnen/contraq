@@ -1,11 +1,14 @@
 class GigsController < ApplicationController
+  include Resourceful
+
   responders :collection
   respond_to :html
 
   before_action :authenticate_user!
+  skip_after_action :verify_authorized, only: [:new, :create]
 
   def index
-    @gigs = current_user.gigs.order :start_time, :name
+    @gigs = policy_scope(Gig).order :start_time, :name
   end
 
   def new
