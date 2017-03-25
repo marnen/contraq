@@ -1,27 +1,25 @@
 require 'rails_helper'
 
 describe GigPolicy do
-  let(:user) { double 'User' }
-  let(:gig) { double 'Gig' }
-  let(:policy) { GigPolicy.new user, gig }
-  subject { policy }
+  subject { described_class }
 
-  it { is_expected.to be_a_kind_of ApplicationPolicy }
-
-  describe '#update?' do
+  permissions :update?, :edit? do
     let(:user) { FactoryGirl.create :user }
-    subject { policy.update? }
 
     context 'own gig' do
       let(:gig) { FactoryGirl.create :gig, user: user }
 
-      it { is_expected.to be true }
+      it 'grants access' do
+        expect(subject).to permit user, gig
+      end
     end
 
     context "someone else's gig" do
       let(:gig) { FactoryGirl.create :gig }
 
-      it { is_expected.to be false }
+      it 'does not grant access' do
+        expect(subject).not_to permit user, gig
+      end
     end
   end
 end
