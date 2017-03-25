@@ -16,4 +16,14 @@ class GigsController < ApplicationController
     @gig = current_user.gigs.create! params.require(:gig).permit(Gig.permitted_params)
     respond_with @gig
   end
+
+  def edit
+    @gig = Gig.find params[:id]
+  end
+
+  def update
+    @gig = Gig.find params[:id]
+    @gig.update! params.require(:gig).permit(Gig.permitted_params)
+    respond_with @gig
+  end
 end

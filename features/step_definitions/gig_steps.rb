@@ -2,9 +2,13 @@ Given 'I have no gigs' do
   Gig.destroy_all
 end
 
-Given 'I have the following gigs:' do |table|
+Given 'a gig exists' do
+  @gig = FactoryGirl.create :gig
+end
+
+Given /^I have the following gigs?:$/ do |table|
   table.hashes.each do |hash|
-    FactoryGirl.create :gig, hash.merge(user: @current_user)
+    FactoryGirl.create :gig, hash.transform_keys {|key| key.gsub %r{\s}, '_' }.merge(user: @current_user)
   end
 end
 
@@ -19,9 +23,10 @@ Then 'I should see a gig with name: "$name"' do |name|
   expect(page).to have_css '.gig', text: name
 end
 
-Then(/^I should see the following gigs:$/) do |table|
+Then /^I should (not )?see the following gigs?:$/ do |negation, table|
   table.hashes.each do |hash|
     fields = hash.values.map {|value| "[contains(., '#{value}')]" }.join
-    expect(page).to have_xpath "//*[@class='gig']#{fields}"
+    xpath_state = ['has', (negation && 'no'), 'xpath?'].compact.join '_'
+    expect(page.send xpath_state, "//*[@class='gig']#{fields}").to be true
   end
 end
