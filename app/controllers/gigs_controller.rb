@@ -5,6 +5,7 @@ class GigsController < ApplicationController
   respond_to :html
 
   before_action :authenticate_user!
+  before_action :load_and_authorize_gig!, only: [:edit, :update]
   skip_after_action :verify_authorized, only: [:new, :create]
 
   def index
@@ -21,11 +22,9 @@ class GigsController < ApplicationController
   end
 
   def edit
-    load_and_authorize_gig!
   end
 
   def update
-    load_and_authorize_gig!
     @gig.update! params.require(:gig).permit(Gig.permitted_params)
     respond_with @gig
   end
