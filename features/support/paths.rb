@@ -3,6 +3,8 @@ module PathHelpers
     case page_name
     when 'the login page'
       new_user_session_path
+    when 'the edit page for the gig'
+      edit_gig_path @gig
     when 'the new gig page'
       new_gig_path
     when 'the gigs page'
