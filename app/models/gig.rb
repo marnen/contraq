@@ -1,4 +1,4 @@
-class Gig < ActiveRecord::Base
+class Gig < ApplicationRecord
   belongs_to :user
   validates_presence_of :name, :start_time, :end_time, :user_id
 
