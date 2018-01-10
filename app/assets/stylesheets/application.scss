@@ -3,12 +3,37 @@
 
 @import 'header';
 
+@mixin darken-background {
+  background-color: darken($background-color, 5%);
+}
+
 section.main {
   padding: $padding;
 }
 
+
 table {
   td, th {
-    background-color: darken($background-color, 5%);
+    @include darken-background;
+  }
+}
+
+.gig {
+  @include darken-background;
+  border: {
+    top: 1px solid black;
+    bottom: 1px solid black;
+  }
+  padding: {
+    top: 2px;
+    bottom: 2px;
+  }
+
+  .name {
+    font-size: 1.33rem;
+    margin: {
+      top: 0;
+      bottom: 0.33em;
+    }
   }
 }

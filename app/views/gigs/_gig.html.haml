@@ -1,5 +1,5 @@
-%tr[gig]
-  %td= gig.name
-  %td= _('%{start_time}–%{end_time}') % gig.attributes.symbolize_keys
-  %td= [gig.city, gig.state].compact.join _(', ')
-  %td.actions= link_to _('edit'), [:edit, gig]
+%article[gig]
+  %h1.name= gig.name
+  %div= _('%{start_time}–%{end_time}') % gig.attributes.symbolize_keys
+  %div= [gig.city, gig.state].compact.join _(', ')
+  %div.actions= link_to _('edit'), [:edit, gig]
