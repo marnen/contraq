@@ -33,6 +33,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem 'draper', '~> 3.0.1'
 gem 'gettext_i18n_rails'
 gem 'haml'
 gem 'normalize-scss'

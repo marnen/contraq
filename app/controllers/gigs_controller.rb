@@ -9,7 +9,7 @@ class GigsController < ApplicationController
   skip_after_action :verify_authorized, only: [:new, :create]
 
   def index
-    @gigs = policy_scope(Gig).order :start_time, :name
+    @gigs = policy_scope(Gig).order(:start_time, :name).decorate
   end
 
   def new
