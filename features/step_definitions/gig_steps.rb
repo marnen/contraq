@@ -20,13 +20,20 @@ Given 'the following gigs exist:' do |table|
 end
 
 Then 'I should see a gig with name: "$name"' do |name|
-  expect(page).to have_css '.gig', text: name
+  # TODO: use selectors helper
+  expect(page).to have_css '.gig .name', text: name
 end
 
 Then /^I should (not )?see the following gigs?:$/ do |negation, table|
   table.hashes.each do |hash|
+    name = hash.delete 'name'
+    start_time = hash.delete 'start time'
+    end_time = hash.delete 'end time'
+    time_range = [start_time, end_time].map {|time| Time.parse(time).strftime '%-d %b %Y %-l:%M %p' }.join '–'
     fields = hash.values.map {|value| "[contains(., '#{value}')]" }.join
     xpath_state = ['has', (negation && 'no'), 'xpath?'].compact.join '_'
-    expect(page.send xpath_state, "//*[@class='gig']#{fields}").to be true
+    selector = "//*[@class='gig']#{fields}[*[@class='time_range'][contains(., '#{time_range}')]]"
+    selector << "[*[@class='name'][contains(., '#{name}')]]" if name.present?
+    expect(page.send xpath_state, selector).to be true
   end
 end
