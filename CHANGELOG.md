@@ -4,6 +4,7 @@ Significant changes to the project will be documented here, in the format recomm
 
 ## Unreleased
 
+- Upgrade Nokogiri due to security vulnerabilities. [#22]
 - Improve display of gig list. [#17]
 - Upgrade to Rails 5. [#6]
 - Improve styling. [#7]
