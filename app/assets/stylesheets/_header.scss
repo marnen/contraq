@@ -1,4 +1,4 @@
-header {
+body > header {
   @include clearfix;
 
   $header-background-color: black;
