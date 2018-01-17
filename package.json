@@ -6,5 +6,8 @@
   "repository": "git@github.com:marnen/contraq.git",
   "author": "Marnen Laibow-Koser <marnen@marnen.org>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "rocket-button": "^6.2.0"
+  }
 }
