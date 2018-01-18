@@ -18,6 +18,14 @@ table {
   }
 }
 
+// TODO: consider breaking this up by controller
+
+// Gigs
+
+a.new-gig, input.new-gig {
+  @include button($color: #009900, $style: gradient);
+}
+
 .gig {
   @include darken-background;
   border: {
