@@ -27,15 +27,18 @@ a.new-gig, input.new-gig {
 }
 
 .gig {
+  $border: 1px solid black;
   @include darken-background;
   border: {
-    top: 1px solid black;
-    bottom: 1px solid black;
+    top: $border;
+    bottom: $border;
   }
   padding: {
     top: 2px;
     bottom: 2px;
   }
+
+  @include collapse-borders;
 
   .name {
     font-size: 1.33rem;
