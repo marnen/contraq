@@ -8,3 +8,10 @@
     size: 2.5rem;
   }
 }
+
+@mixin padding-side($x) {
+  padding: {
+    left: $x;
+    right: $x;
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "contraq",
+  "version": "0.0.1",
+  "description": "Contract tracker for musicians and other freelancers",
+  "main": "index.js",
+  "repository": "git@github.com:marnen/contraq.git",
+  "author": "Marnen Laibow-Koser <marnen@marnen.org>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "rocket-button": "TODO: Waiting for https://github.com/chrishumboldt/Rocket-Button/pull/87.",
+    "rocket-button": "https://github.com/marnen/Rocket-Button.git#apply-text-color-to-all-states"
+  }
+}

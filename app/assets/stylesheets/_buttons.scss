@@ -1,0 +1,14 @@
+@import "rocket-button/build/sass/import";
+
+@mixin button($color: white, $style: flat) {
+  @extend button;
+  @include mod-button-setup;
+  @include mod-button-shape(rounded);
+  @include mod-button-size(normal);
+  @include mod-button-size-custom($height: 28px, $padding: 0.75rem);
+  @include mod-button-style($style, $color);
+}
+
+@mixin button-create {
+  @include button($color: color(button-create), $style: gradient);
+}
