@@ -8,8 +8,7 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "rocket-button": "TODO: Waiting for https://github.com/chrishumboldt/Rocket-Button/pull/87.",
-    "rocket-button": "https://github.com/marnen/Rocket-Button.git#apply-text-color-to-all-states",
+    "rocket-button": "^6.2.1",
     "system-font-css": "^2.0.1"
   }
 }

@@ -6,9 +6,9 @@ es6-promise@^4.1.1:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.2.2.tgz#f722d7769af88bd33bc13ec6605e1f92966b82d9"
 
-"rocket-button@https://github.com/marnen/Rocket-Button.git#apply-text-color-to-all-states":
-  version "6.2.0"
-  resolved "https://github.com/marnen/Rocket-Button.git#26ee885b72335c8f660e8fa51489e89438e96b9c"
+rocket-button@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/rocket-button/-/rocket-button-6.2.1.tgz#b3f696f86874ff9cb3e9b32f9a9bb983b7468825"
   dependencies:
     rocket-propel "^3.1.1"
     rocket-tools "^1.16.0"
