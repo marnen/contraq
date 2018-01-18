@@ -4,6 +4,7 @@ Significant changes to the project will be documented here, in the format recomm
 
 ## Unreleased
 
+- Upgrade to Ruby 2.5 (and Devise 4.4.0, because older versions of Devise didn't work). [#18]
 - Use Rocket-Button and FontAwesome to improve styling. [#20]
 - Add "new gig" link to gig list. [#20]
 - Install Yarn to deal with NPM dependencies. [#24]
