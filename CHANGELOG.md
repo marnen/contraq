@@ -4,6 +4,7 @@ Significant changes to the project will be documented here, in the format recomm
 
 ## Unreleased
 
+- Update insecure and outdated gems. [#31]
 - Add status badges to README. [#27]
 - Upgrade to Ruby 2.5 (and Devise 4.4.0, because older versions of Devise didn't work). [#18]
 - Use Rocket-Button and FontAwesome to improve styling. [#20]
