@@ -7,3 +7,7 @@
   @include mod-button-size(normal);
   @include mod-button-style($style, $color);
 }
+
+@mixin button-create {
+  @include button($color: color(button-create), $style: gradient);
+}

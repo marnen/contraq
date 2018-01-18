@@ -23,7 +23,7 @@ table {
 // Gigs
 
 a.new-gig, input.new-gig {
-  @include button($color: #009900, $style: gradient);
+  @include button-create;
 }
 
 .gig {
