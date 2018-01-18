@@ -5,6 +5,7 @@
   @include mod-button-setup;
   @include mod-button-shape(rounded);
   @include mod-button-size(normal);
+  @include mod-button-size-custom($height: 28px, $padding: 0.75rem);
   @include mod-button-style($style, $color);
 }
 
