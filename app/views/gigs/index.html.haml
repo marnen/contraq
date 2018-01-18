@@ -1,5 +1,8 @@
 %h1 Gigs
 
-%p= link_to _('New gig'), {action: 'new'}, {class: 'new-gig'}
+%p
+  = link_to({action: 'new'}, {class: 'new-gig'}) do
+    = icon 'plus-circle'
+    = _ 'New gig'
 
 = render @gigs
