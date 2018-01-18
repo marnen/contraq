@@ -1,0 +1,7 @@
+$colors: (
+  button-create: #009900
+);
+
+@function color($name) {
+  @return map-get($colors, $name);
+}

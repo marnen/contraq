@@ -4,6 +4,8 @@ Significant changes to the project will be documented here, in the format recomm
 
 ## Unreleased
 
+- Use Rocket-Button and FontAwesome to improve styling. [#20]
+- Add "new gig" link to gig list. [#20]
 - Install Yarn to deal with NPM dependencies. [#24]
 - Upgrade Nokogiri due to security vulnerabilities. [#22]
 - Improve display of gig list. [#17]
