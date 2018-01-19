@@ -7,6 +7,8 @@ module PathHelpers
       edit_gig_path @gig
     when 'the new gig page'
       new_gig_path
+    when /^the gig page for "(.+)"$/
+      gig_path Gig.find_by!(name: $1)
     when 'the gigs page'
       gigs_path
     else
