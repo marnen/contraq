@@ -13,6 +13,7 @@ class GigsController < ApplicationController
   end
 
   def show
+    @gig = @gig.decorate
   end
 
   def new

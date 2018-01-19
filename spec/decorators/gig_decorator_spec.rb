@@ -6,6 +6,35 @@ RSpec.describe GigDecorator do
     expect(subject).to be_a_kind_of ApplicationDecorator
   end
 
+  describe '#location' do
+    let(:params) { {} }
+    let(:gig) { FactoryGirl.create :gig, params }
+
+    subject { gig.decorate.location }
+
+    context 'both city and state present' do
+      it 'returns the city and state, comma-separated' do
+        expect(subject).to be == "#{gig.city}, #{gig.state}"
+      end
+    end
+
+    context 'no city' do
+      let(:params) { {city: nil} }
+
+      it 'returns the state only' do
+        expect(subject).to be == gig.state
+      end
+    end
+
+    context 'no state' do
+      let(:params) { {state: nil} }
+
+      it 'returns the city only' do
+        expect(subject).to be == gig.city
+      end
+    end
+  end
+
   describe '#time_range' do
     it 'returns the start and end times for the gig in human-readable format, joined by an en-dash' do
       gig = FactoryGirl.create(:gig) do |gig|
