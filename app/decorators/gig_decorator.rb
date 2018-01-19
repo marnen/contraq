@@ -11,12 +11,6 @@ class GigDecorator < ApplicationDecorator
   #   end
 
   def time_range
-    [start_time, end_time].map {|time| time.strftime time_format }.join '–'
-  end
-
-  private
-
-  def time_format
-    '%-d %b %Y %-l:%M %p'
+    [start_time, end_time].map {|time| time.strftime Time::DATE_FORMATS[:datetime] }.join '–'
   end
 end

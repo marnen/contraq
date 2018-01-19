@@ -33,3 +33,9 @@ end
 Then(/^I should (not )?see "([^"]*)"$/) do |negation, text|
   expect(page.has_text? text).to be == !negation
 end
+
+Then 'I should see the following:' do |table|
+  table.raw.flatten.each do |string|
+    expect(page).to have_text string
+  end
+end
