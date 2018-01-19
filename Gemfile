@@ -15,7 +15,7 @@ gem 'coffee-rails', '~> 4.2.2'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails' # TODO: may no longer be needed; see http://guides.rubyonrails.org/5_1_release_notes.html#jquery-no-longer-a-default-dependency
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
