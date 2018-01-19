@@ -1,5 +1,5 @@
 %article[gig]
-  %h1.name= gig.name
-  .time_range= gig.time_range
-  %div= [gig.city, gig.state].compact.join _(', ')
+  %h1.name= link_to gig.name, gig
+  .time-range= gig.time_range
+  %div.location= gig.location
   %div.actions= link_to _('edit'), [:edit, gig]

@@ -10,13 +10,11 @@ class GigDecorator < ApplicationDecorator
   #     end
   #   end
 
-  def time_range
-    [start_time, end_time].map {|time| time.strftime time_format }.join '–'
+  def location
+    [model.city, model.state].compact.join _(', ')
   end
 
-  private
-
-  def time_format
-    '%-d %b %Y %-l:%M %p'
+  def time_range
+    [model.start_time, model.end_time].map {|time| time.strftime Time::DATE_FORMATS[:datetime] }.join '–'
   end
 end

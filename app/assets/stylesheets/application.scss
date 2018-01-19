@@ -18,6 +18,10 @@ table {
   }
 }
 
+.field-name {
+  font-weight: bolder;
+}
+
 // TODO: consider breaking this up by controller
 
 // Gigs
@@ -26,7 +30,7 @@ a.new-gig, input.new-gig {
   @include button-create;
 }
 
-.gig {
+article.gig {
   $border: 1px solid black;
   @include darken-background;
   border: {

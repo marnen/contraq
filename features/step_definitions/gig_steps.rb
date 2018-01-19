@@ -32,7 +32,7 @@ Then /^I should (not )?see the following gigs?:$/ do |negation, table|
     time_range = [start_time, end_time].map {|time| Time.parse(time).strftime '%-d %b %Y %-l:%M %p' }.join '–'
     fields = hash.values.map {|value| "[contains(., '#{value}')]" }.join
     xpath_state = ['has', (negation && 'no'), 'xpath?'].compact.join '_'
-    selector = "//*[@class='gig']#{fields}[*[@class='time_range'][contains(., '#{time_range}')]]"
+    selector = "//*[@class='gig']#{fields}[*[@class='time-range'][contains(., '#{time_range}')]]"
     selector << "[*[@class='name'][contains(., '#{name}')]]" if name.present?
     expect(page.send xpath_state, selector).to be true
   end

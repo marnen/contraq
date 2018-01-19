@@ -5,11 +5,15 @@ class GigsController < ApplicationController
   respond_to :html
 
   before_action :authenticate_user!
-  before_action :load_and_authorize_gig!, only: [:edit, :update]
+  before_action :load_and_authorize_gig!, only: [:show, :edit, :update]
   skip_after_action :verify_authorized, only: [:new, :create]
 
   def index
     @gigs = policy_scope(Gig).order(:start_time, :name).decorate
+  end
+
+  def show
+    @gig = @gig.decorate
   end
 
   def new

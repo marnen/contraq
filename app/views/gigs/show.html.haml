@@ -1,0 +1,15 @@
+%div[@gig]
+
+  %h1.name= @gig.name
+
+  .start-time
+    %span.field-name= _ 'Start time:'
+    = @gig.start_time.to_s :datetime
+
+  .end-time
+    %span.field-name= _ 'End time:'
+    = @gig.end_time.to_s :datetime
+
+  .location
+    %span.field-name= _ 'Location:'
+    = @gig.location
