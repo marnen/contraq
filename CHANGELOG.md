@@ -4,6 +4,7 @@ Significant changes to the project will be documented here, in the format recomm
 
 ## Unreleased
 
+- Start creating gig detail page. [#21]
 - Update insecure and outdated gems. [#31]
 - Add status badges to README. [#27]
 - Upgrade to Ruby 2.5 (and Devise 4.4.0, because older versions of Devise didn't work). [#18]
