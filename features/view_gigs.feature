@@ -8,15 +8,15 @@ Background:
 
 Scenario Outline: Link to gig detail from gig list
   Given I have the following gig:
-    | name  | city   | state   | start time | end time |
-    | <gig> | <city> | <state> | <start>    | <end>    |
+    | name  | city   | state   |
+    | <gig> | <city> | <state> |
   And I am on the gigs page
   When I click "<gig>"
   Then I should be on the gig page for "<gig>"
 
   Examples:
-    | gig             | city      | state | start             | end               |
-    | Ig Nobel Awards | Cambridge | MA    | 18 Sep 2090 20:30 | 18 Sep 2090 23:00 |
+    | gig             | city      | state |
+    | Ig Nobel Awards | Cambridge | MA    |
 
 Scenario: Can't see others' gigs
   Given a gig exists
