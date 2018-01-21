@@ -7,7 +7,5 @@
       %span.amount-due
         == #{gig.amount_due}#{',' if gig.terms}
     - if gig.terms
-      %span.terms
-        = n_('1 day', '%{count} days', gig.terms) % {count: gig.terms}
-        = _("(%{date})") % {date: gig.start_time.advance(days: gig.terms).to_s(:dmy) }
+      %span.terms= gig.terms
   %div.actions= link_to _('edit'), [:edit, gig]

@@ -53,6 +53,39 @@ RSpec.describe GigDecorator do
       end
     end
 
+    describe '#terms' do
+      let(:block_params) { ->(gig) { gig.end_time = gig.start_time + rand(2..5).days } }
+      let(:params) { {terms: terms} }
+      subject { decorator.terms }
+
+      context 'present in model' do
+        let(:expected_date_string) { gig.start_time.advance(days: gig.terms).to_s :dmy }
+
+        context 'greater than 1' do
+          let(:terms) { rand(2..120) }
+
+          it 'returns a count of days from start date to due date, followed by the due date in parentheses' do
+            expect(subject).to be == "#{gig.terms} days (#{expected_date_string})"
+          end
+        end
+
+        context '1' do
+          let(:terms) { 1 }
+
+          it 'behaves as for greater than 1, but "day" is singular' do
+            expect(subject).to be == "1 day (#{expected_date_string})"
+          end
+        end
+
+        it "uses i18n for the pluralization, but I'm not sure how to test that"
+      end
+
+      context 'not present in model' do
+        let(:terms) { nil }
+        it { is_expected.to be_nil }
+      end
+    end
+
     describe '#time_range' do
       let(:block_params) { ->(gig) { gig.end_time = gig.start_time + rand(2..5).hours } }
       let(:subject) { decorator.time_range }
