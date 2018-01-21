@@ -2,14 +2,27 @@
 
   %h1.name= @gig.name
 
-  .start-time
-    %span.field-name= _ 'Start time:'
-    = @gig.start_time.to_s :datetime
+  .basic-info
+    .start-time
+      %span.field-name= _ 'Start time:'
+      = @gig.start_time.to_s :datetime
 
-  .end-time
-    %span.field-name= _ 'End time:'
-    = @gig.end_time.to_s :datetime
+    .end-time
+      %span.field-name= _ 'End time:'
+      = @gig.end_time.to_s :datetime
 
-  .location
-    %span.field-name= _ 'Location:'
-    = @gig.location
+    .location
+      %span.field-name= _ 'Location:'
+      = @gig.location
+
+  .payment
+    .amount-due
+      %span.field-name= _ 'Amount due:'
+      - if @gig.amount_due
+        = number_to_currency @gig.amount_due, unit: ''
+
+    .terms
+      %span.field-name= _ 'Terms:'
+      - if @gig.terms
+        = n_('1 day', '%{count} days', @gig.terms) % {count: @gig.terms}
+        = _("(%{date})") % {date: @gig.start_time.advance(days: @gig.terms).to_s(:dmy) }

@@ -1,1 +1,5 @@
-Time::DATE_FORMATS[:datetime] = '%-d %b %Y %-l:%M %p'
+dmy = '%-d %b %Y'
+Time::DATE_FORMATS.reverse_merge!(
+  datetime: "#{dmy} %-l:%M %p",
+  dmy: dmy
+)
