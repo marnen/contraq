@@ -31,7 +31,8 @@ Then /^I should (not )?be on (.+)$/ do |negation, page_name|
 end
 
 Then(/^I should (not )?see "([^"]*)"$/) do |negation, text|
-  expect(page.has_text? text).to be == !negation
+  to_or_not = negation ? :not_to : :to
+  expect(page).public_send to_or_not, have_text(text)
 end
 
 Then 'I should see the following:' do |table|
