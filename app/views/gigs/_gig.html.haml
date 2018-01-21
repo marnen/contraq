@@ -2,4 +2,12 @@
   %h1.name= link_to gig.name, gig
   .time-range= gig.time_range
   %div.location= gig.location
+  %div
+    - if gig.amount_due
+      %span.amount-due
+        == #{number_to_currency gig.amount_due, unit: ''}#{',' if gig.terms}
+    - if gig.terms
+      %span.terms
+        = n_('1 day', '%{count} days', gig.terms) % {count: gig.terms}
+        = _("(%{date})") % {date: gig.start_time.advance(days: gig.terms).to_s(:dmy) }
   %div.actions= link_to _('edit'), [:edit, gig]

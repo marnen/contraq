@@ -26,14 +26,22 @@ end
 
 Then /^I should (not )?see the following gigs?:$/ do |negation, table|
   table.hashes.each do |hash|
+    # TODO: refactor this mess!
+
     name = hash.delete 'name'
     start_time = hash.delete 'start time'
     end_time = hash.delete 'end time'
-    time_range = [start_time, end_time].map {|time| Time.parse(time).strftime '%-d %b %Y %-l:%M %p' }.join '–'
-    fields = hash.values.map {|value| "[contains(., '#{value}')]" }.join
-    xpath_state = ['has', (negation && 'no'), 'xpath?'].compact.join '_'
-    selector = "//*[@class='gig']#{fields}[*[@class='time-range'][contains(., '#{time_range}')]]"
-    selector << "[*[@class='name'][contains(., '#{name}')]]" if name.present?
-    expect(page.send xpath_state, selector).to be true
+    time_range = [start_time, end_time].compact.map {|time| Time.parse(time).strftime '%-d %b %Y %-l:%M %p' }.join '–'
+    terms = "#{hash.delete 'terms'} (#{hash.delete 'due date'})" if hash['terms']
+    amount_due = hash.delete 'amount due'
+    fields = hash.values.map {|value| "[contains(normalize-space(.), '#{value}')]" }.join
+
+    selector = "//*[@class='gig']#{fields}[//*[@class='time-range'][contains(normalize-space(.), '#{time_range}')]]"
+    selector << "[//*[@class='terms'][contains(normalize-space(.), '#{terms}')]]" if terms.present?
+    selector << "[//*[@class='amount-due'][contains(normalize-space(.), '#{amount_due}')]]" if amount_due.present?
+    selector << "[//*[@class='name'][contains(normalize-space(.), '#{name}')]]" if name.present?
+
+    sense = negation ? :not_to : :to
+    expect(page).public_send sense, have_xpath(selector)
   end
 end
