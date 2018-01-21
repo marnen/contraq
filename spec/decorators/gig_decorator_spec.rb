@@ -12,6 +12,23 @@ RSpec.describe GigDecorator do
     let(:block_params) { ->(gig) { } }
     let(:decorator) { gig.decorate }
 
+    describe '#amount_due' do
+      subject { decorator.amount_due }
+
+      context 'present in model' do
+        let(:amount_due) { rand(50000) / 100.0 }
+        let(:params) { {amount_due: amount_due} }
+
+        it 'returns the amount due, formatted as currency without units' do
+          expect(subject).to be == '%.2f' % amount_due
+        end
+      end
+
+      context 'not present in model' do
+        it { is_expected.to be_nil }
+      end
+    end
+
     describe '#location' do
       subject { decorator.location }
 

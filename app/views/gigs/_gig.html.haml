@@ -5,7 +5,7 @@
   %div
     - if gig.amount_due
       %span.amount-due
-        == #{number_to_currency gig.amount_due, unit: ''}#{',' if gig.terms}
+        == #{gig.amount_due}#{',' if gig.terms}
     - if gig.terms
       %span.terms
         = n_('1 day', '%{count} days', gig.terms) % {count: gig.terms}

@@ -17,9 +17,9 @@
 
   .payment
     .amount-due
-      %span.field-name= _ 'Amount due:'
-      - if @gig.amount_due
-        = number_to_currency @gig.amount_due, unit: ''
+      %span.field-name
+        = _ 'Amount due:'
+        = @gig.amount_due
 
     .terms
       %span.field-name= _ 'Terms:'

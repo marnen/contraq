@@ -10,6 +10,10 @@ class GigDecorator < ApplicationDecorator
   #     end
   #   end
 
+  def amount_due
+    model.amount_due ? '%.2f' % model.amount_due : nil
+  end
+
   def location
     [model.city, model.state].compact.join _(', ')
   end
