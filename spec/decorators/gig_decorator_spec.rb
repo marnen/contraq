@@ -16,15 +16,13 @@ RSpec.describe GigDecorator do
       subject { decorator.amount_due }
 
       context 'present in model' do
-        let(:amount_due) { rand(50000) / 100.0 }
-        let(:params) { {amount_due: amount_due} }
-
         it 'returns the amount due, formatted as currency without units' do
-          expect(subject).to be == '%.2f' % amount_due
+          expect(subject).to be == '%.2f' % gig.amount_due
         end
       end
 
       context 'not present in model' do
+        let(:params) { {amount_due: nil} }
         it { is_expected.to be_nil }
       end
     end
