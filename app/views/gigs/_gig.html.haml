@@ -8,4 +8,7 @@
         == #{gig.amount_due}#{',' if gig.terms}
     - if gig.terms
       %span.terms= gig.terms
-  %div.actions= link_to _('edit'), [:edit, gig]
+  %div.actions
+    = link_to edit_gig_path(gig), class: 'edit-gig' do
+      = icon 'pencil'
+      = _ 'Edit gig'

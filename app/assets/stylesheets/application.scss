@@ -26,8 +26,12 @@ table {
 
 // Gigs
 
-a.new-gig, input.new-gig {
+a.new-gig {
   @include button-create;
+}
+
+a.edit-gig {
+  @include button-edit;
 }
 
 article.gig {
