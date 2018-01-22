@@ -4,6 +4,7 @@ Significant changes to the project will be documented here, in the format recomm
 
 ## Unreleased
 
+- Record payment terms for gigs. [#3]
 - Upgrade to Rails 5.1. [#19]
 - Start creating gig detail page. [#21]
 - Update insecure and outdated gems. [#31]
