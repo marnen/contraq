@@ -64,6 +64,9 @@ GEM
       declarative-option (< 0.2.0)
       tilt (>= 1.4, < 3)
       uber (< 0.2.0)
+    cells-haml (0.0.10)
+      cells (>= 4.0.1, <= 6.0.0)
+      haml (>= 4.1.0.beta.1)
     cells-rails (0.0.8)
       actionpack (>= 3.0)
       cells (>= 4.1.6, < 5.0.0)
@@ -331,6 +334,7 @@ PLATFORMS
 DEPENDENCIES
   badgerbadgerbadger
   byebug
+  cells-haml
   cells-rails
   coffee-rails (~> 4.2.2)
   cucumber-rails
