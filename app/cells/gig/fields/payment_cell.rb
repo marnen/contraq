@@ -1,4 +1,4 @@
-class Gig::PaymentCell < OutputFieldsCell
+class Gig::Fields::PaymentCell < OutputFieldsCell
   def show
     render
   end

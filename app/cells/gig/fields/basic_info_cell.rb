@@ -1,4 +1,4 @@
-class Gig::BasicInfoCell < OutputFieldsCell
+class Gig::Fields::BasicInfoCell < OutputFieldsCell
 
   def show
     render
