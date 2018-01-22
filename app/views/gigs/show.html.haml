@@ -1,6 +1,10 @@
 %div[@gig]
-
   %h1.name= @gig.name
+
+  %p
+    = link_to edit_gig_path(@gig), class: 'edit-gig' do
+      = icon 'pencil'
+      = _ 'Edit gig'
 
   .basic-info
     .start-time
