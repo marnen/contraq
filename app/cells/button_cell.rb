@@ -1,5 +1,5 @@
 class ButtonCell < Cell::ViewModel
-  include FontAwesome::Sass::Rails::ViewHelpers
+  include Cell::FontAwesome
 
   def show
     set_options_for_action!
