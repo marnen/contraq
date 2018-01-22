@@ -1,8 +1,4 @@
 class Gig::Fields::PaymentCell < OutputFieldsCell
-  def show
-    render
-  end
-
   private
 
   def css_class

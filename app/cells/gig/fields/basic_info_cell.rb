@@ -1,9 +1,4 @@
 class Gig::Fields::BasicInfoCell < OutputFieldsCell
-
-  def show
-    render
-  end
-
   private
 
   def css_class
