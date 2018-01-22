@@ -1,26 +1,27 @@
-class Button::LinkCell < Cell::ViewModel
-  include Cell::FontAwesome
+module Button
+  class LinkCell < BaseCell
+    private
 
-  def show
-    set_options_for_action!
-    render
-  end
+    attr_reader :link_options
 
-  private
+    def icon_name
+      icon_names[action]
+    end
 
-  attr_reader :css_class, :icon_name, :link_options, :text
+    def icon_names
+      @icon_names ||= {edit: 'pencil', new: 'plus-circle'}
+    end
 
-  def set_options_for_action!
-    action = options[:action]
-    @css_class = "#{action}-gig"
-    @text = _ "#{action.to_s.titleize} gig"
-    case action
-    when :edit
-      @icon_name = 'pencil'
-      @link_options = edit_gig_path(model)
-    when :new
-      @icon_name = 'plus-circle'
-      @link_options = {action: 'new'}
+    def link_options
+      result = link_info[action]
+      result = result.call if result.respond_to? :call
+    end
+
+    def link_info
+      @link_info ||= {
+        edit: -> { edit_gig_path model },
+        new: {action: 'new'}
+      }
     end
   end
 end

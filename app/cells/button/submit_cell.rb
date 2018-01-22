@@ -1,23 +1,13 @@
-class Button::SubmitCell < Cell::ViewModel
-  include Cell::FontAwesome
+module Button
+  class SubmitCell < BaseCell
+    private
 
-  def show
-    set_options_for_action!
-    render
-  end
+    def icon_name
+      'check-circle'
+    end
 
-  private
-
-  attr_reader :css_class, :icon_name, :text
-
-  def form
-    model
-  end
-
-  def set_options_for_action!
-    action = options[:action] # always :save
-    @css_class = "#{action}-gig"
-    @text = _ "#{action.to_s.titleize} gig"
-    @icon_name = 'check-circle'
+    def form
+      model
+    end
   end
 end
