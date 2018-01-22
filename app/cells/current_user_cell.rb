@@ -1,5 +1,5 @@
 class CurrentUserCell < Cell::ViewModel
-  include ERB::Util
+  include H
 
   def show
     render

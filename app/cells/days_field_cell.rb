@@ -1,5 +1,5 @@
 class DaysFieldCell < Cell::ViewModel
-  include ERB::Util
+  include H
 
   private
 
