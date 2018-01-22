@@ -1,4 +1,4 @@
-class SubmitCell < Cell::ViewModel
+class Button::SubmitCell < Cell::ViewModel
   include Cell::FontAwesome
 
   def show
