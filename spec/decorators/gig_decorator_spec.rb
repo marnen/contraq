@@ -12,6 +12,37 @@ RSpec.describe GigDecorator do
     let(:block_params) { ->(gig) { } }
     let(:decorator) { gig.decorate }
 
+    context 'date and time' do
+      let(:datetime_format) { '%-d %b %Y %-l:%M %p' }
+
+      shared_examples_for 'a date presenter' do
+        subject { decorator.public_send method_name }
+
+        it "returns the model's start time as a string" do
+          expect(subject).to be == gig.public_send(method_name).strftime(datetime_format)
+        end
+      end
+
+      describe '#end_time' do
+        let(:method_name) { :end_time }
+        it_behaves_like 'a date presenter'
+      end
+
+      describe '#start_time' do
+        let(:method_name) { :start_time }
+        it_behaves_like 'a date presenter'
+      end
+
+      describe '#time_range' do
+        let(:block_params) { ->(gig) { gig.end_time = gig.start_time + rand(2..5).hours } }
+        let(:subject) { decorator.time_range }
+
+        it 'returns the start and end times for the gig in human-readable format, joined by an en-dash' do
+          expect(subject).to be == [gig.start_time, gig.end_time].map {|time| time.strftime datetime_format }.join('–')
+        end
+      end
+    end
+
     describe '#amount_due' do
       subject { decorator.amount_due }
 
@@ -88,15 +119,6 @@ RSpec.describe GigDecorator do
       context 'not present in model' do
         let(:terms) { nil }
         it { is_expected.to be_nil }
-      end
-    end
-
-    describe '#time_range' do
-      let(:block_params) { ->(gig) { gig.end_time = gig.start_time + rand(2..5).hours } }
-      let(:subject) { decorator.time_range }
-
-      it 'returns the start and end times for the gig in human-readable format, joined by an en-dash' do
-        expect(subject).to be == [gig.start_time, gig.end_time].map {|time| time.strftime '%-d %b %Y %-l:%M %p' }.join('–')
       end
     end
   end
