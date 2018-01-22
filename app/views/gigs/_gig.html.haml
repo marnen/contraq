@@ -1,11 +1,11 @@
 %article[gig]
   %h1.name= link_to gig.name, gig
   .time-range= gig.time_range
-  %div.location= gig.location
-  %div
+  .location= gig.location
+  .payment
     - if gig.amount_due
       %span.amount-due
         == #{gig.amount_due}#{',' if gig.terms}
     - if gig.terms
       %span.terms= gig.terms
-  %div.actions= cell :button, gig, action: :edit
+  .actions= cell :button, gig, action: :edit
