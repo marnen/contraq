@@ -1,6 +1,6 @@
 @import "rocket-button/build/sass/import";
 
-@mixin button($color: white, $style: gradient) {
+@mixin button($color: color(button-default), $style: gradient) {
   @extend button;
   @include mod-button-setup;
   @include mod-button-shape(rounded);
@@ -19,4 +19,8 @@
 
 @mixin button-edit {
   @include button($color: color(button-edit));
+}
+
+@mixin button-save {
+  @include button($color: color(button-save));
 }
