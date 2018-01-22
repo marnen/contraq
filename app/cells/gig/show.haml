@@ -1,0 +1,6 @@
+%article[model]
+  %h1.name= link_to name, model
+  .time-range= time_range
+  .location= location
+  .payment= cell 'gig/payment', model
+  .actions= cell :button, model, action: :edit
