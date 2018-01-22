@@ -1,6 +1,4 @@
 class Button::BaseCell < Cell::ViewModel
-  include Cell::FontAwesome
-
   def show
     @action = options[:action]
     super
