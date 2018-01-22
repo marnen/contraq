@@ -31,4 +31,12 @@
   = f.text_field :zip
   %br
 
+  = f.label :amount_due
+  = f.number_field :amount_due, value: gig.decorate.amount_due
+  %br
+
+  = f.label :terms
+  != h('%{field} days') % {field: f.number_field(:terms, size: 3).html_safe}
+  %br
+
   = f.submit 'Save'

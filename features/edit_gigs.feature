@@ -18,6 +18,8 @@ Scenario Outline: Basic gig editing
     | City       | <new_city>   |
     | State      | <new_state>  |
     | Zip        | <new_zip>    |
+    | Amount due | <amount_due> |
+    | Terms      | <terms>      |
   And I click "Save"
   Then I should be on the gigs page
   And I should see the following gig:
@@ -29,8 +31,8 @@ Scenario Outline: Basic gig editing
 
 
   Examples:
-    | old_name | new_name | old_start        | old_end          | new_start        | new_end          | old_street         | new_street      | old_city | old_state | new_city   | new_state |
-    | My Gig   | Tunez!   | 2100-12-25 20:00 | 2100-12-25 22:30 | 2100-01-01 08:00 | 2100-01-02 01:00 | 881 Seventh Avenue | 123 Main Street | New York | NY        | Charleston | SC        |
+    | old_name | new_name | old_start        | old_end          | new_start        | new_end          | old_street         | new_street      | old_city | old_state | new_city   | new_state | amount_due | terms |
+    | My Gig   | Tunez!   | 2100-12-25 20:00 | 2100-12-25 22:30 | 2100-01-01 08:00 | 2100-01-02 01:00 | 881 Seventh Avenue | 123 Main Street | New York | NY        | Charleston | SC        | 225.00     | 10    |
 
 Scenario: Can't edit gigs unless logged in
   Given I am not logged in
