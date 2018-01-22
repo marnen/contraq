@@ -55,6 +55,7 @@ RSpec.describe GigDecorator do
 
     describe '#terms' do
       let(:block_params) { ->(gig) { gig.end_time = gig.start_time + rand(2..5).days } }
+      let(:terms) { rand(1..120) }
       let(:params) { {terms: terms} }
       subject { decorator.terms }
 
@@ -77,7 +78,11 @@ RSpec.describe GigDecorator do
           end
         end
 
-        it "uses i18n for the pluralization, but I'm not sure how to test that"
+        it 'uses i18n for the pluralization' do
+          # TODO: do we really have to do it this way?
+          expect(decorator.helpers).to receive(:n_).with('1 day', a_string_matching(/^%\S+ days$/), anything).and_call_original
+          subject
+        end
       end
 
       context 'not present in model' do
