@@ -9,11 +9,6 @@ class OutputFieldsCell < Cell::ViewModel
 
   private
 
-  def css_class
-    nil
-  end
-
-  def fields
-    {}
-  end
+  css_class nil
+  fields({})
 end
