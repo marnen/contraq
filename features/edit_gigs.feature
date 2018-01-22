@@ -9,7 +9,7 @@ Scenario Outline: Basic gig editing
    | name       | start time  | end time  | city       | state       |
    | <old_name> | <old_start> | <old_end> | <old_city> | <old_state> |
   And I am on the gigs page
-  When I click "edit"
+  When I click "Edit gig"
   And I fill in the following:
     | Name       | <new_name>   |
     | Start time | <new_start>  |
