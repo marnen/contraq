@@ -1,0 +1,3 @@
+%div(class=css_class)
+  - fields.each do |method, name|
+    = cell :output_field, model, method: method, name: name

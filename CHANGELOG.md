@@ -4,6 +4,7 @@ Significant changes to the project will be documented here, in the format recomm
 
 ## Unreleased
 
+- Use Cells to clean up views. [#25]
 - Upgrade outdated gems. [#34]
 - Record payment terms for gigs. [#3]
 - Upgrade to Rails 5.1. [#19]

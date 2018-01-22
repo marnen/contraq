@@ -1,0 +1,5 @@
+- if amount_due
+  %span.amount-due
+    == #{amount_due}#{',' if terms}
+- if terms
+  %span.terms= terms

@@ -1,14 +1,14 @@
 class ButtonCell < Cell::ViewModel
   include FontAwesome::Sass::Rails::ViewHelpers
 
-  attr_reader :css_class, :icon_name, :link_options, :text
-
   def show
     set_options_for_action!
     render
   end
 
   private
+
+  attr_reader :css_class, :icon_name, :link_options, :text
 
   def set_options_for_action!
     action = options[:action]

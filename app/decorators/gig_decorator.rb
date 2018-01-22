@@ -14,8 +14,16 @@ class GigDecorator < ApplicationDecorator
     super ? '%.2f' % super : nil
   end
 
+  def end_time
+    super.to_s :datetime
+  end
+
   def location
     [model.city, model.state].compact.join _(', ')
+  end
+
+  def start_time
+    super.to_s :datetime
   end
 
   def terms

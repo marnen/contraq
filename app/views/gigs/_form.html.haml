@@ -36,7 +36,7 @@
   %br
 
   = f.label :terms
-  != h('%{field} days') % {field: f.number_field(:terms, size: 3).html_safe}
+  = cell :days_field, f, name: :terms
   %br
 
   = f.submit 'Save'

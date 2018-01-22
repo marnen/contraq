@@ -9,8 +9,6 @@
   %body
     %header
       .app-name= _ 'Contraq'
-      .current-user
-        - if current_user
-          %p!= h(_ 'Logged in as %{email}') % {email: content_tag(:span, current_user.email).html_safe}
+      .current-user= cell :current_user, current_user
     %section.main
       = yield
