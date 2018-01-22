@@ -1,8 +1,5 @@
 %h1 Gigs
 
-%p
-  = link_to({action: 'new'}, {class: 'new-gig'}) do
-    = icon 'plus-circle'
-    = _ 'New gig'
+%p= cell :button, nil, action: :new
 
 = render @gigs
