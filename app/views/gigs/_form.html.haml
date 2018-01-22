@@ -39,4 +39,6 @@
   = cell :days_field, f, name: :terms
   %br
 
-  = f.submit 'Save', class: 'save-gig'
+  = f.button class: 'save-gig' do
+    = icon 'check-circle'
+    = _ 'Save gig'
