@@ -59,6 +59,14 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (>= 2.0, < 4.0)
+    cells (4.1.7)
+      declarative-builder (< 0.2.0)
+      declarative-option (< 0.2.0)
+      tilt (>= 1.4, < 3)
+      uber (< 0.2.0)
+    cells-rails (0.0.8)
+      actionpack (>= 3.0)
+      cells (>= 4.1.6, < 5.0.0)
     coderay (1.1.1)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -87,6 +95,9 @@ GEM
       railties (>= 4, < 5.2)
     cucumber-wire (0.0.1)
     database_cleaner (1.5.1)
+    declarative-builder (0.1.0)
+      declarative-option (< 0.2.0)
+    declarative-option (0.1.0)
     devise (4.4.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -297,6 +308,7 @@ GEM
     turbolinks-source (5.0.0)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
+    uber (0.1.0)
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -319,6 +331,7 @@ PLATFORMS
 DEPENDENCIES
   badgerbadgerbadger
   byebug
+  cells-rails
   coffee-rails (~> 4.2.2)
   cucumber-rails
   database_cleaner
