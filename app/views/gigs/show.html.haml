@@ -4,23 +4,10 @@
   %p= cell :button, @gig, action: :edit
 
   .basic-info
-    .start-time
-      %span.field-name= _ 'Start time:'
-      = @gig.start_time
-
-    .end-time
-      %span.field-name= _ 'End time:'
-      = @gig.end_time
-
-    .location
-      %span.field-name= _ 'Location:'
-      = @gig.location
+    = cell :output_field, @gig, method: :start_time, name: _('Start time:')
+    = cell :output_field, @gig, method: :end_time, name: _('End time:')
+    = cell :output_field, @gig, method: :location, name: _('Location:')
 
   .payment
-    .amount-due
-      %span.field-name= _ 'Amount due:'
-      = @gig.amount_due
-
-    .terms
-      %span.field-name= _ 'Terms:'
-      = @gig.terms
+    = cell :output_field, @gig, method: :amount_due, name: _('Amount due:')
+    = cell :output_field, @gig, method: :terms, name: _('Terms:')
