@@ -32,6 +32,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'cells-rails'
+gem 'cells-haml'
 gem 'devise', '~> 4.4.0'
 gem 'draper', '~> 3.0.1'
 gem 'font-awesome-sass', '~> 4.7.0'

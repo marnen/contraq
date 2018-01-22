@@ -10,8 +10,21 @@ class GigDecorator < ApplicationDecorator
   #     end
   #   end
 
+  def amount_due
+    super ? '%.2f' % super : nil
+  end
+
   def location
     [model.city, model.state].compact.join _(', ')
+  end
+
+  def terms
+    if super
+      [
+        h.n_('1 day', '%{count} days', super) % {count: super},
+        "(#{model.start_time.advance(days: super).to_s(:dmy)})"
+      ].join ' '
+    end
   end
 
   def time_range

@@ -6,6 +6,10 @@ Given 'a gig exists' do
   @gig = FactoryGirl.create :gig
 end
 
+Given 'I have a gig' do
+  @gig = FactoryGirl.create :gig, user: @current_user
+end
+
 Given /^I have the following gigs?:$/ do |table|
   table.hashes.each do |hash|
     FactoryGirl.create :gig, hash.transform_keys {|key| key.gsub %r{\s}, '_' }.merge(user: @current_user)
@@ -26,14 +30,33 @@ end
 
 Then /^I should (not )?see the following gigs?:$/ do |negation, table|
   table.hashes.each do |hash|
+    # TODO: refactor this mess!
+
     name = hash.delete 'name'
     start_time = hash.delete 'start time'
     end_time = hash.delete 'end time'
-    time_range = [start_time, end_time].map {|time| Time.parse(time).strftime '%-d %b %Y %-l:%M %p' }.join '–'
-    fields = hash.values.map {|value| "[contains(., '#{value}')]" }.join
-    xpath_state = ['has', (negation && 'no'), 'xpath?'].compact.join '_'
-    selector = "//*[@class='gig']#{fields}[*[@class='time-range'][contains(., '#{time_range}')]]"
-    selector << "[*[@class='name'][contains(., '#{name}')]]" if name.present?
-    expect(page.send xpath_state, selector).to be true
+    time_range = [start_time, end_time].compact.map {|time| Time.parse(time).strftime '%-d %b %Y %-l:%M %p' }.join '–'
+    terms = "#{hash.delete 'terms'} (#{hash.delete 'due date'})" if hash['terms']
+    amount_due = hash.delete 'amount due'
+    fields = hash.values.map {|value| "[contains(normalize-space(.), '#{value}')]" }.join
+
+    selector = "//*[@class='gig']#{fields}"
+    {
+      'time-range' => time_range,
+      'terms' => terms,
+      'amount-due' => amount_due,
+      'name' => name
+    }.each do |class_name, text|
+      selector << "[#{xpath class_name: class_name, text: text}]" if text.present?
+    end
+
+    sense = negation ? :not_to : :to
+    expect(page).public_send sense, have_xpath(selector)
   end
+end
+
+private
+
+def xpath(class_name:, text:)
+  "//*[@class='#{class_name}'][contains(normalize-space(.), '#{text}')]"
 end
