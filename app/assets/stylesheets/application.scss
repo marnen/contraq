@@ -34,6 +34,10 @@ a.edit-gig {
   @include button-edit;
 }
 
+input.save-gig {
+  @include button-edit;
+}
+
 article.gig {
   $border: 1px solid black;
   @include darken-background;
