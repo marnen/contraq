@@ -1,5 +1,4 @@
 class Gig::Fields::BasicInfoCell < OutputFieldsCell
-  private
   css_class 'basic-info'
   fields(
     start_time: _('Start time:'),
