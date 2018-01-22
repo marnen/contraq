@@ -14,7 +14,7 @@ module Button
 
     def link_options
       result = link_info[action]
-      result = result.call if result.respond_to? :call
+      result = result.respond_to?(:call) ? result.call : result
     end
 
     def link_info
