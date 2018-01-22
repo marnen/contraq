@@ -3,11 +3,5 @@
 
   %p= cell :button, @gig, action: :edit
 
-  .basic-info
-    = cell :output_field, @gig, method: :start_time, name: _('Start time:')
-    = cell :output_field, @gig, method: :end_time, name: _('End time:')
-    = cell :output_field, @gig, method: :location, name: _('Location:')
-
-  .payment
-    = cell :output_field, @gig, method: :amount_due, name: _('Amount due:')
-    = cell :output_field, @gig, method: :terms, name: _('Terms:')
+  = cell 'gig/basic_info', @gig
+  = cell 'gig/payment', @gig
