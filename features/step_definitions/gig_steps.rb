@@ -40,12 +40,23 @@ Then /^I should (not )?see the following gigs?:$/ do |negation, table|
     amount_due = hash.delete 'amount due'
     fields = hash.values.map {|value| "[contains(normalize-space(.), '#{value}')]" }.join
 
-    selector = "//*[@class='gig']#{fields}[//*[@class='time-range'][contains(normalize-space(.), '#{time_range}')]]"
-    selector << "[//*[@class='terms'][contains(normalize-space(.), '#{terms}')]]" if terms.present?
-    selector << "[//*[@class='amount-due'][contains(normalize-space(.), '#{amount_due}')]]" if amount_due.present?
-    selector << "[//*[@class='name'][contains(normalize-space(.), '#{name}')]]" if name.present?
+    selector = "//*[@class='gig']#{fields}"
+    {
+      'time-range' => time_range,
+      'terms' => terms,
+      'amount-due' => amount_due,
+      'name' => name
+    }.each do |class_name, text|
+      selector << "[#{xpath class_name: class_name, text: text}]" if text.present?
+    end
 
     sense = negation ? :not_to : :to
     expect(page).public_send sense, have_xpath(selector)
   end
+end
+
+private
+
+def xpath(class_name:, text:)
+  "//*[@class='#{class_name}'][contains(normalize-space(.), '#{text}')]"
 end
