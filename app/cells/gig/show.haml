@@ -1,6 +1,5 @@
 %article[model]
   %h1.name= link_to name, model
-  .time-range= time_range
-  .location= location
-  .payment= cell 'gig/payment', model
+  - fields.each do |field|
+    %div{class: field.to_s.dasherize}= self.send field
   .actions= cell :button, model, action: :edit
