@@ -10,4 +10,8 @@ class GigCell < Cell::ViewModel
   def payment
     cell 'gig/payment', model
   end
+
+  def payments
+    model.payments.order :received_at
+  end
 end

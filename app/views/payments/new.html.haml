@@ -1,0 +1,10 @@
+= form_for [:gig, @payment] do |f|
+  = f.label :received_at, _('Date received')
+  = f.date_field :received_at
+  %br
+
+  = f.label :amount
+  = f.number_field :amount
+  %br
+
+  = cell :button, f, action: :save
