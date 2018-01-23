@@ -12,7 +12,7 @@ end
 
 Given /^I have the following gigs?:$/ do |table|
   table.hashes.each do |hash|
-    FactoryGirl.create :gig, hash.transform_keys {|key| key.gsub %r{\s}, '_' }.merge(user: @current_user)
+    @gig = FactoryGirl.create :gig, hash.transform_keys {|key| key.gsub %r{\s}, '_' }.merge(user: @current_user)
   end
 end
 
