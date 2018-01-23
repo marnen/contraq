@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180121035645) do
+ActiveRecord::Schema.define(version: 20180123182052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(version: 20180121035645) do
     t.integer "terms", limit: 2
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.bigint "gig_id", null: false
+    t.date "received_at"
+    t.decimal "amount", precision: 8, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gig_id"], name: "index_payments_on_gig_id"
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -49,4 +58,5 @@ ActiveRecord::Schema.define(version: 20180121035645) do
   end
 
   add_foreign_key "gigs", "users"
+  add_foreign_key "payments", "gigs"
 end

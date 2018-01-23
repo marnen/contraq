@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Gig do
   describe 'associations' do
+    it { is_expected.to have_many :payments }
     it { is_expected.to belong_to :user }
   end
 
