@@ -1,6 +1,8 @@
 class PaymentsController < ApplicationController
   include Resourceful
 
+  respond_to :html
+
   before_action :authenticate_user!
   before_action :load_and_authorize_gig!
 
@@ -11,7 +13,7 @@ class PaymentsController < ApplicationController
 
   def create
     @payment = @gig.payments.create! params.require(:payment).permit(Payment.permitted_params)
-    redirect_to(session.delete(:previous_url) || gigs_path)
+    respond_with @payment, location: -> { session.delete(:previous_url) || gigs_path }
   end
 
   private
