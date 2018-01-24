@@ -3,7 +3,6 @@ class PaymentsController < ApplicationController
 
   respond_to :html
 
-  before_action :authenticate_user!
   before_action :load_and_authorize_gig!
 
   def new

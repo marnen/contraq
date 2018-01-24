@@ -4,7 +4,6 @@ class GigsController < ApplicationController
   responders :collection
   respond_to :html
 
-  before_action :authenticate_user!
   before_action :load_and_authorize_gig!, only: [:show, :edit, :update]
   skip_after_action :verify_authorized, only: [:new, :create]
 
