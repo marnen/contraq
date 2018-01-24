@@ -1,5 +1,5 @@
 class GigsController < ApplicationController
-  include Resourceful
+  include Authorization
 
   responders :collection
   respond_to :html

@@ -1,4 +1,4 @@
-module Resourceful
+module Authorization
   extend ActiveSupport::Concern
   included do
     include Pundit

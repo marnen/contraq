@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  include Resourceful
+  include Authorization
 
   respond_to :html
 
