@@ -13,15 +13,7 @@ module Button
     end
 
     def link_options
-      result = link_info[action]
-      result = result.respond_to?(:call) ? result.call : result
-    end
-
-    def link_info
-      @link_info ||= {
-        edit: -> { edit_gig_path model },
-        new: {action: 'new'}
-      }
+      polymorphic_path model, action: action
     end
   end
 end
