@@ -4,7 +4,7 @@
   %p= cell :button, @gig, action: :edit
 
   = cell 'gig/fields/basic_info', @gig
-  = cell 'gig/fields/payment', @gig
+  = cell 'gig/fields/payment_terms', @gig
   .payments-made
     = cell :payment, collection: @gig.payments
     = link_to _('Report payment'), new_gig_payment_path(@gig)

@@ -1,4 +1,4 @@
-class Gig::PaymentCell < Cell::ViewModel
+class Gig::PaymentTermsCell < Cell::ViewModel
   private
 
   property :amount_due, :terms
