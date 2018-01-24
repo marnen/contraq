@@ -4,7 +4,4 @@
     %div{class: field.to_s.dasherize}= self.send field
   .actions= cell :button, model, action: :edit
 
-  %h2= _ 'Payments made'
-  .payments-made
-    = cell :payment, collection: payments
-    = link_to _('Report payment'), new_gig_payment_path(model)
+  = cell 'gig/payments', model
