@@ -5,3 +5,6 @@
 
   = cell 'gig/fields/basic_info', @gig
   = cell 'gig/fields/payment', @gig
+  .payments-made
+    = cell :payment, collection: @gig.payments
+    = link_to _('Report payment'), new_gig_payment_path(@gig)

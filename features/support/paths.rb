@@ -8,7 +8,7 @@ module PathHelpers
     when /^the gig page for "(.+)"$/
       gig_path Gig.find_by!(name: $1)
     when "the gig's page"
-      url_for @gig
+      polymorphic_path @gig
     when 'the gigs page'
       gigs_path
     when 'the new gig page'
