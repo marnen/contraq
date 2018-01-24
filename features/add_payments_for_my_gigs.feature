@@ -1,6 +1,6 @@
-Feature: Add payments for gigs that haven't been paid in full
+Feature: Add payments for my gigs
 As a user
-I can report payments for gigs not yet paid in full
+I can report payments for my gigs
 So that I can keep track of what I'm still owed
 
 Scenario Outline: Add payments from gig list or detail page
