@@ -1,4 +1,4 @@
 %section.payments
   %h1= _ 'Payments made'
   = cell :payment, collection: payments
-  = link_to _('Report payment'), new_gig_payment_path(model)
+  = cell :button, [model, Payment], action: :new, text: _('Report payment'), class: 'report-payment', icon: :money

@@ -7,7 +7,7 @@ module Button
     end
 
     def icon_name
-      'check-circle'
+      super || 'check-circle'
     end
 
     def form

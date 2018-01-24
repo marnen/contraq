@@ -9,15 +9,15 @@ class Button::BaseCell < Cell::ViewModel
   attr_reader :action
 
   def css_class
-    [action, model_name].join '-'
+    [:button, (options[:class] || action)]
   end
 
   def effective_model
-    model
+    Array(model).last
   end
 
   def icon_name
-    nil
+    options[:icon]
   end
 
   def model_name
@@ -25,6 +25,6 @@ class Button::BaseCell < Cell::ViewModel
   end
 
   def text
-    _ [action.to_s.titleize, model_name].join ' '
+    options[:text] || _([action.to_s.titleize, model_name].join ' ')
   end
 end

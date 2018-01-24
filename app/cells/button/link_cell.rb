@@ -5,7 +5,7 @@ module Button
     attr_reader :link_options
 
     def icon_name
-      icon_names[action]
+      super || icon_names[action]
     end
 
     def icon_names
