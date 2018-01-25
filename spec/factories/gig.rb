@@ -9,7 +9,7 @@ FactoryGirl.define do
     city { Faker::Address.city }
     state { Faker::Address.state_abbr }
     zip { Faker::Address.zip }
-    amount_due { rand(50000) / 100.0 }
+    amount_due { rand(10000..50000) / 100.0 }
     terms { rand 120 }
   end
 end
