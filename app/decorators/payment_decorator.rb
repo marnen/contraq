@@ -2,7 +2,7 @@ class PaymentDecorator < ApplicationDecorator
   delegate_all
 
   def amount
-    super ? '%.2f' % super : nil
+    currency super
   end
 
   def received_at
