@@ -1,10 +1,10 @@
-$button-default: #000099;
+$button-edit-save: #000099;
 
 $colors: (
   button-create: #009900,
-  button-default: $button-default,
-  button-edit: $button-default,
-  button-save: $button-default
+  button-default: purple,
+  button-edit: $button-edit-save,
+  button-save: $button-edit-save
 );
 
 @function color($name) {

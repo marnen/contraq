@@ -9,14 +9,22 @@ class Button::BaseCell < Cell::ViewModel
   attr_reader :action
 
   def css_class
-    "#{action}-gig"
+    [:button, *(options[:class] || [action, model_name])]
+  end
+
+  def effective_model
+    Array(model).last
   end
 
   def icon_name
-    nil
+    options[:icon]
+  end
+
+  def model_name
+    effective_model.model_name.human.downcase
   end
 
   def text
-    _ "#{action.to_s.titleize} gig"
+    options[:text] || _([action.to_s.titleize, model_name].join ' ')
   end
 end

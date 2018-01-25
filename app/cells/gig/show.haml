@@ -3,3 +3,5 @@
   - fields.each do |field|
     %div{class: field.to_s.dasherize}= self.send field
   .actions= cell :button, model, action: :edit
+
+  = cell 'gig/payments', model

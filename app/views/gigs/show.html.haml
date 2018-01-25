@@ -4,4 +4,6 @@
   %p= cell :button, @gig, action: :edit
 
   = cell 'gig/fields/basic_info', @gig
-  = cell 'gig/fields/payment', @gig
+  = cell 'gig/fields/payment_terms', @gig
+
+  = cell 'gig/payments', @gig

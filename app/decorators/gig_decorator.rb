@@ -11,7 +11,7 @@ class GigDecorator < ApplicationDecorator
   #   end
 
   def amount_due
-    super ? '%.2f' % super : nil
+    currency super
   end
 
   def end_time

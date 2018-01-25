@@ -40,3 +40,7 @@ Then 'I should see the following:' do |table|
     expect(page).to have_text string
   end
 end
+
+Then 'I should see the value "$value" in the "$field" field' do |value, field|
+  expect(page.find_field(field).value).to be == value
+end

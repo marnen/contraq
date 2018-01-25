@@ -26,18 +26,6 @@ table {
 
 // Gigs
 
-a.new-gig {
-  @include button-create;
-}
-
-a.edit-gig {
-  @include button-edit;
-}
-
-button.save-gig {
-  @include button-save;
-}
-
 article.gig {
   $border: 1px solid black;
   @include darken-background;

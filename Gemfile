@@ -74,4 +74,5 @@ group :test do
   gem 'launchy'
   gem 'rspec-rails', '~> 3.4'
   gem 'shoulda-matchers'
+  gem 'timecop'
 end

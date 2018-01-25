@@ -1,14 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationDecorator do
+  let(:wrapped) { {} }
+  let(:decorator) { described_class.new wrapped }
+
   it 'is a Draper decorator' do
-    expect(described_class.new({})).to be_a_kind_of Draper::Decorator
+    expect(decorator).to be_a_kind_of Draper::Decorator
+  end
+
+  describe '#currency' do
+    subject { decorator.currency amount }
+
+    context 'amount is present' do
+      let(:amount) { rand(100000) / 1000.0 }
+
+      it 'returns the amount formatted as currency without units' do
+        expect(subject).to be == '%.2f' % amount
+      end
+    end
+
+    context 'amount is nil' do
+      let(:amount) { nil }
+      it { is_expected.to be_nil }
+    end
   end
 
   describe '#haml_object_ref' do
     let(:wrapped) { klass.new }
-    let(:decorator) { described_class.new wrapped }
-
     subject { decorator.haml_object_ref }
 
     context 'wrapped object defines haml_object_ref' do

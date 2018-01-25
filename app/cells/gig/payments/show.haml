@@ -1,0 +1,4 @@
+%section.payments
+  %h1= _ 'Payments made'
+  = cell :button, [model, Payment], action: :new, text: _('Report payment'), class: 'report-payment', icon: :money
+  = cell :payment, collection: payments

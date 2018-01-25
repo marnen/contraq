@@ -4,8 +4,7 @@ class GigsController < ApplicationController
   responders :collection
   respond_to :html
 
-  before_action :authenticate_user!
-  before_action :load_and_authorize_gig!, only: [:show, :edit, :update]
+  before_action :load_and_authorize_resource!, only: [:show, :edit, :update]
   skip_after_action :verify_authorized, only: [:new, :create]
 
   def index
@@ -21,7 +20,7 @@ class GigsController < ApplicationController
   end
 
   def create
-    @gig = current_user.gigs.create! params.require(:gig).permit(Gig.permitted_params)
+    @gig = current_user.gigs.create! model_params
     respond_with @gig
   end
 
@@ -29,14 +28,7 @@ class GigsController < ApplicationController
   end
 
   def update
-    @gig.update! params.require(:gig).permit(Gig.permitted_params)
+    @gig.update! model_params
     respond_with @gig
-  end
-
-  private
-
-  def load_and_authorize_gig!
-    @gig = Gig.find params[:id]
-    authorize @gig
   end
 end
