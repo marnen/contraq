@@ -14,3 +14,4 @@
 
 # Ignore other files.
 node_modules
+/.pg_data

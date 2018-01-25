@@ -1,0 +1,4 @@
+.git/*
+.pg_data/*
+log/*
+tmp/*
