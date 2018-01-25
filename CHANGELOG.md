@@ -4,6 +4,7 @@ Significant changes to the project will be documented here, in the format recomm
 
 ## Unreleased
 
+- Record details of payments received. [#38]
 - Tweak look of Save button and refactor resulting cells. [#46]
 - Use Cells to clean up views. [#25]
 - Upgrade outdated gems. [#34]
