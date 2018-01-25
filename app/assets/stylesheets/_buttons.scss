@@ -12,14 +12,20 @@
     weight: bolder;
   }
   margin: 2px 0px;
+
+  &:hover {
+    @if $style == line {
+      @include mod-button-style(gradient, $color);
+    }
+  }
 }
 
 @mixin button-create {
   @include button($color: color(button-create));
 }
 
-@mixin button-edit {
-  @include button($color: color(button-edit));
+@mixin button-edit($style: null) {
+  @include button($color: color(button-edit), $style: $style);
 }
 
 @mixin button-save {
@@ -35,6 +41,10 @@
 
   &.edit {
     @include button-edit;
+
+    &.payment {
+      @include button-edit($style: line);
+    }
   }
 
   &.save {

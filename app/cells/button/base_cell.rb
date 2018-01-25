@@ -9,7 +9,7 @@ class Button::BaseCell < Cell::ViewModel
   attr_reader :action
 
   def css_class
-    [:button, (options[:class] || action)]
+    [:button, *(options[:class] || [action, model_name])]
   end
 
   def effective_model
