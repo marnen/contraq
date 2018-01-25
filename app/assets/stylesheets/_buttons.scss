@@ -1,6 +1,7 @@
 @import "rocket-button/build/sass/import";
 
 @mixin button($color: color(button-default), $style: gradient) {
+  $style: if($style, $style, gradient); // TODO: file a bug on this: nulls don't propagate properly from caller
   @extend button;
   @include mod-button-setup;
   @include mod-button-shape(rounded);
