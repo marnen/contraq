@@ -1,5 +1,6 @@
 class GigsController < ApplicationController
   include Authorization
+  include Resourceful
 
   responders :collection
   respond_to :html
@@ -20,7 +21,7 @@ class GigsController < ApplicationController
   end
 
   def create
-    @gig = current_user.gigs.create! params.require(:gig).permit(Gig.permitted_params)
+    @gig = current_user.gigs.create! model_params
     respond_with @gig
   end
 
@@ -28,7 +29,7 @@ class GigsController < ApplicationController
   end
 
   def update
-    @gig.update! params.require(:gig).permit(Gig.permitted_params)
+    @gig.update! model_params
     respond_with @gig
   end
 

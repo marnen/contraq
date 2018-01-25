@@ -1,5 +1,6 @@
 class PaymentsController < ApplicationController
   include Authorization
+  include Resourceful
 
   respond_to :html
 
@@ -12,7 +13,7 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    @payment = @gig.payments.create! params.require(:payment).permit(Payment.permitted_params)
+    @payment = @gig.payments.create! model_params
     respond_with @payment, location: previous_url
   end
 
@@ -20,7 +21,7 @@ class PaymentsController < ApplicationController
   end
 
   def update
-    @payment.update! params.require(:payment).permit(Payment.permitted_params)
+    @payment.update! model_params
     respond_with @payment, location: previous_url
   end
 
