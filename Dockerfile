@@ -6,7 +6,6 @@ ENV port 3000
 
 WORKDIR ${workdir}
 COPY . ${workdir}
-COPY ./config/database.docker.yml ${workdir}/config/database.yml
 
 # Install build tools and packages needed for native extensions
 RUN apk add --update build-base postgresql-dev

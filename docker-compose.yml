@@ -8,6 +8,8 @@ services:
     environment:
       APP_DB_USERNAME: ${DOCKER_APP_DB_USERNAME}
       APP_DB_PASSWORD: ${DOCKER_APP_DB_PASSWORD}
+    volumes:
+      - ".:/contraq"
     ports: ["3000:3000"]
     networks: [internal]
   db:
