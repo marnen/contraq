@@ -25,3 +25,8 @@ Scenario Outline: Edit existing payments for my gigs from gig list or detail pag
     | page_to_test | old_amount | new_amount |
     | gigs page    | 20.00      | 10.50      |
     | gig's page   | 20.00      | 30.00      |
+
+Scenario: Can't edit payments for others' gigs
+  Given a gig exists
+  And the gig has a payment
+  Then I should not be able to get to the edit page for the payment
