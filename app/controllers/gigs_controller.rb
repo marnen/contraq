@@ -1,11 +1,10 @@
 class GigsController < ApplicationController
-  include Authorization
   include Resourceful
 
   responders :collection
   respond_to :html
 
-  before_action :load_and_authorize_gig!, only: [:show, :edit, :update]
+  before_action :load_and_authorize_resource!, only: [:show, :edit, :update]
   skip_after_action :verify_authorized, only: [:new, :create]
 
   def index
@@ -31,12 +30,5 @@ class GigsController < ApplicationController
   def update
     @gig.update! model_params
     respond_with @gig
-  end
-
-  private
-
-  def load_and_authorize_gig!
-    @gig = Gig.find params[:id]
-    authorize @gig
   end
 end

@@ -1,11 +1,10 @@
 class PaymentsController < ApplicationController
-  include Authorization
   include Resourceful
 
   respond_to :html
 
   before_action :load_and_authorize_gig!, only: %i[new create]
-  before_action :load_and_authorize_payment!, only: %i[edit update]
+  before_action :load_and_authorize_resource!, only: %i[edit update]
   before_action :save_previous_url, only: %i[new edit]
 
   def new
@@ -30,11 +29,6 @@ class PaymentsController < ApplicationController
   def load_and_authorize_gig!
     @gig = Gig.find params[:gig_id] # TODO: use policy_scope?
     authorize @gig, :update?
-  end
-
-  def load_and_authorize_payment!
-    @payment = Payment.find params[:id]
-    authorize @payment
   end
 
   def save_previous_url
