@@ -1,10 +1,8 @@
 require 'rails_helper'
+require_relative 'decorator_examples'
 
 RSpec.describe PaymentDecorator do
-  it 'inherits from ApplicationDecorator' do
-    subject = described_class.new Gig.new
-    expect(subject).to be_a_kind_of ApplicationDecorator
-  end
+  it_behaves_like 'a decorator'
 
   context 'decorator methods' do
     let(:params) { {} }
