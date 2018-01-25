@@ -5,11 +5,9 @@ class PaymentCell < Cell::ViewModel
 
   private
 
-  def amount
-    '%.2f' % model.amount
-  end
+  property :amount, :received_at
 
-  def received_at
-    model.received_at.to_s :dmy
+  def model
+    super.decorate
   end
 end
