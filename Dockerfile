@@ -18,4 +18,5 @@ RUN bundle install
 
 EXPOSE ${port}
 
-CMD ["bundle", "exec", "rails", "server", "-p", "3000", "-b", "0.0.0.0"]
+ENTRYPOINT ["bundle", "exec"]
+CMD ["rails", "server", "-p", "3000", "-b", "0.0.0.0"]
