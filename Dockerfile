@@ -14,6 +14,7 @@ RUN apk add nodejs
 # See https://github.com/phusion/passenger-docker/issues/195
 RUN apk add tzdata
 
+RUN gem install bundler
 RUN bundle install
 
 EXPOSE ${port}
