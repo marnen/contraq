@@ -13,9 +13,11 @@ RUN apk add --update build-base postgresql-dev
 RUN apk add nodejs
 # See https://github.com/phusion/passenger-docker/issues/195
 RUN apk add tzdata
+RUN apk add yarn
 
 RUN gem install bundler
 RUN bundle install
+RUN yarn install
 
 EXPOSE ${port}
 
