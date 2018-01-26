@@ -12,6 +12,8 @@ services:
       - ".:/contraq"
     ports: ["3000:3000"]
     networks: [internal]
+    tty: true
+    stdin_open: true
   db:
     build:
       context: .
