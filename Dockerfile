@@ -17,7 +17,7 @@ RUN apk add yarn
 
 RUN gem install bundler
 RUN bundle install
-RUN yarn install
+RUN yarn install --verbose
 
 EXPOSE ${port}
 
