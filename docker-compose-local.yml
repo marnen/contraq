@@ -1,0 +1,10 @@
+version: "3"
+services:
+  web:
+    volumes:
+      - ".:/contraq"
+    tty: true
+    stdin_open: true
+  db:
+    volumes:
+      - "./.pg_data:/var/lib/postgresql/data"

@@ -8,12 +8,8 @@ services:
     environment:
       APP_DB_USERNAME: ${DOCKER_APP_DB_USERNAME}
       APP_DB_PASSWORD: ${DOCKER_APP_DB_PASSWORD}
-    volumes:
-      - ".:/contraq"
     ports: ["3000:3000"]
     networks: [internal]
-    tty: true
-    stdin_open: true
   db:
     build:
       context: .
@@ -23,7 +19,5 @@ services:
       POSTGRES_PASSWORD: ${DOCKER_POSTGRES_PASSWORD}
       APP_DB_USERNAME: ${DOCKER_APP_DB_USERNAME}
       APP_DB_PASSWORD: ${DOCKER_APP_DB_PASSWORD}
-    volumes:
-      - "./.pg_data:/var/lib/postgresql/data"
     expose: ["5432"]
     networks: [internal]
