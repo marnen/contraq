@@ -5,6 +5,7 @@ networks:
 services:
   web:
     build: .
+    depends_on: [db]
     environment:
       APP_DB_USERNAME: ${DOCKER_APP_DB_USERNAME}
       APP_DB_PASSWORD: ${DOCKER_APP_DB_PASSWORD}
