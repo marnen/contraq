@@ -8,10 +8,12 @@ cache:
 rvm: [system] # since we don't really need RVM Ruby at all
 env:
   global:
+    - "DOCKER_COMPOSE_FILE=docker-compose.yml:docker-compose-travis.yml"
     - DOCKER_POSTGRES_PASSWORD=c02aaadbdb5c592f55dccbe4b115faa828878afe5f5b5634d33127d20670d1dc563e8dc71918a902cb0277d6767c93cbdbd89dcc77da2c77d422f5cf3c9b3b6f
     - DOCKER_APP_DB_USERNAME=contraq
     - DOCKER_APP_DB_PASSWORD=fe4c6960edc296e2e5e81689f39d2048b2e66cd23a4266efbcd683e32e8d36fdd92269d80d9de15c15cfa7e8e7f48890015a43d5594ab5355bd9f78777830b62
-before_install: true
+before_install:
+  - "docker pull marnen/contraq:latest || true"
 install:
   - docker-compose build
   - docker-compose up --no-start
