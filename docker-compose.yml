@@ -5,6 +5,7 @@ networks:
 services:
   web:
     build: .
+    cache_from: [marnen/contraq:latest]
     depends_on: [db]
     environment:
       APP_DB_USERNAME: ${DOCKER_APP_DB_USERNAME}
