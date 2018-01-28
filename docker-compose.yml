@@ -23,3 +23,5 @@ services:
       APP_DB_PASSWORD: ${DOCKER_APP_DB_PASSWORD}
     expose: ["5432"]
     networks: [internal]
+  cache: # needed to warm up cache_from; see https://github.com/docker/docker-py/issues/998
+    image: "marnen/contraq:latest"

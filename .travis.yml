@@ -14,10 +14,10 @@ env:
     - DOCKER_APP_DB_PASSWORD=fe4c6960edc296e2e5e81689f39d2048b2e66cd23a4266efbcd683e32e8d36fdd92269d80d9de15c15cfa7e8e7f48890015a43d5594ab5355bd9f78777830b62
 before_install:
   - docker-compose --version
-  - "docker pull marnen/contraq:latest || true"
+  - "docker-compose pull cache || true"
 install:
   - docker-compose build
-  - docker-compose up --no-start
+  - docker-compose up web --no-start
 before_script:
   - docker-compose run --rm web rails db:setup
 script:
