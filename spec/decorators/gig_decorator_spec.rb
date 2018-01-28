@@ -16,7 +16,7 @@ RSpec.describe GigDecorator do
       shared_examples_for 'a date presenter' do
         subject { decorator.public_send method_name }
 
-        it "returns the model's start time as a string" do
+        it "returns the model's time property as a string" do
           expect(subject).to be == gig.public_send(method_name).strftime(datetime_format)
         end
       end
