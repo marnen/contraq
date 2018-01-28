@@ -18,7 +18,7 @@ install:
   - docker-compose build
   - docker-compose up --no-start
 before_script:
-  - docker-compose run -e RAILS_ENV=test --rm web rails db:setup
+  - docker-compose run --rm web rails db:setup
 script:
   - docker-compose run --rm web rspec
   - docker-compose run --rm web cucumber

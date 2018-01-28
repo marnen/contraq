@@ -3,3 +3,5 @@ services:
   web:
     build:
       cache_from: ["marnen/contraq:latest"]
+    environment:
+      - RAILS_ENV=test
