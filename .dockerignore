@@ -1,0 +1,5 @@
+.git/*
+.pg_data/*
+log/*
+node_modules/*
+tmp/*
