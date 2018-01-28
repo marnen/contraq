@@ -1,6 +1,9 @@
 version: "3.2"
 services:
   web:
+    environment:
+      CUCUMBER_FORMAT: ${CUCUMBER_FORMAT}
+      CUCUMBER_EXTRA_OPTIONS: ${CUCUMBER_EXTRA_OPTIONS}
     volumes:
       - ".:/contraq"
     tty: true
