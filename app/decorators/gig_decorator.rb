@@ -14,6 +14,10 @@ class GigDecorator < ApplicationDecorator
     currency super
   end
 
+  def due_date
+    model.terms.present? ? model.start_time.advance(days: model.terms).to_s(:dmy) : nil
+  end
+
   def end_time
     super.to_s :datetime
   end
