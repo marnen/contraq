@@ -34,7 +34,7 @@ class GigDecorator < ApplicationDecorator
     if super
       [
         h.n_('1 day', '%{count} days', super) % {count: super},
-        "(#{model.start_time.advance(days: super).to_s(:dmy)})"
+        "(#{due_date})"
       ].join ' '
     end
   end
