@@ -1,4 +1,5 @@
 [![Build Status](http://img.shields.io/travis/marnen/contraq.svg?style=flat-square)](https://travis-ci.org/marnen/contraq)
+[![Docker Automated build](https://img.shields.io/docker/automated/marnen/contraq.svg?style=flat-square)](https://hub.docker.com/r/marnen/contraq)
 [![Dependency Status](http://img.shields.io/gemnasium/marnen/contraq.svg?style=flat-square)](https://gemnasium.com/marnen/contraq)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://marnen.mit-license.org)
 
