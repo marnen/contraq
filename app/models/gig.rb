@@ -6,4 +6,8 @@ class Gig < ApplicationRecord
   def self.permitted_params
     @permitted_params ||= column_names - [:created_at, :updated_at]
   end
+
+  def due_date
+    terms.present? ? start_time.advance(days: terms) : nil
+  end
 end

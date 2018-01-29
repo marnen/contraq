@@ -56,21 +56,6 @@ RSpec.describe GigDecorator do
       end
     end
 
-    describe '#due_date' do
-      subject { decorator.due_date }
-
-      context 'terms and start time are present' do
-        it "returns the start date plus as many days as terms specifies, formatted as a date" do
-          expect(subject).to be == gig.start_time.advance(days: gig.terms).to_s(:dmy)
-        end
-      end
-
-      context 'terms is not present' do
-        let(:params) { {terms: nil} }
-        it { is_expected.to be_nil }
-      end
-    end
-
     describe '#location' do
       subject { decorator.location }
 
@@ -104,7 +89,7 @@ RSpec.describe GigDecorator do
       subject { decorator.terms }
 
       context 'present in model' do
-        let(:due_date) { decorator.due_date }
+        let(:due_date) { gig.due_date.to_s :dmy }
 
         context 'greater than 1' do
           let(:terms) { rand(2..120) }
