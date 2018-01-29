@@ -1,3 +1,7 @@
 .payment-terms
-  - fields.each do |method, name|
-    = cell :output_field, model, method: method, name: name
+  = cell :output_field, model, method: :amount_due, name: _('Amount due:')
+  .terms
+    %span.field-name&= _ 'Terms:'
+    &= terms
+    - if overdue?
+      %span.overdue&= _ 'Overdue'
