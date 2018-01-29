@@ -1,7 +1,7 @@
 - if amount_due
-  %span.amount-due>= amount_due
+  %span.amount-due>&= amount_due
   = ',' if terms
 - if terms
-  %span.terms= terms
+  %span.terms&= terms
 - if overdue?
-  %span.overdue= _ 'Overdue'
+  %span.overdue&= _ 'Overdue'
