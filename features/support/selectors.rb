@@ -1,6 +1,8 @@
 module SelectorHelpers
   def selector_for(selector_name)
     case selector_name
+    when /^terms for the gig named "(.+)"$/
+      [:xpath,  "//*[@class='payment-terms'][ancestor::*[@class='gig']//*[@class='name'][string()='#{$1}']]"]
     when /^the "(.+)" field$/
       [:field, $1]
     when 'the gig'
