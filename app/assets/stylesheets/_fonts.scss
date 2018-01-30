@@ -1,3 +1,10 @@
 @import 'fonts/*';
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+@mixin system-font-bold {
+  font: {
+    family: $system-font;
+    weight: bolder;
+  }
+}

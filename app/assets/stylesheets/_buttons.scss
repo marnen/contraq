@@ -8,10 +8,7 @@
   @include mod-button-size(normal);
   @include mod-button-size-custom($height: 28px, $padding: 0.75rem);
   @include mod-button-style($style, $color);
-  font: {
-    family: $system-font;
-    weight: bolder;
-  }
+  @include system-font-bold;
   margin: 2px 0px;
 
   &:hover {
