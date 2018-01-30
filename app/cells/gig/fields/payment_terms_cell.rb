@@ -1,4 +1,4 @@
 class Gig::Fields::PaymentTermsCell < Cell::ViewModel
   private
-  property :overdue?, :terms
+  property :terms
 end

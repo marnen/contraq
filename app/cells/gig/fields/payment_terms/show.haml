@@ -3,5 +3,4 @@
   .terms
     %span.field-name&= _ 'Terms:'
     &= terms
-    - if overdue?
-      %span.overdue&= _ 'Overdue'
+    = cell :overdue, model
