@@ -57,7 +57,9 @@ end
 
 Then /^the gig named "([^"]*)" should (not )?be flagged as overdue$/ do |name, negation|
   sense = negation ? :not_to : :to
-  expect(page).public_send sense, have_selector(*selector_for(%Q{terms for the gig named "#{name}"}), text: 'Overdue')
+  within *selector_for(%Q{terms for the gig named "#{name}"}) do
+    expect(page).public_send sense, have_selector('.overdue', text: 'Overdue')
+  end
 end
 
 private
