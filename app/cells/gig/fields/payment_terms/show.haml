@@ -1,0 +1,6 @@
+.payment-terms
+  = cell :output_field, model, method: :amount_due, name: _('Amount due:')
+  .terms
+    %span.field-name&= _ 'Terms:'
+    &= terms
+    = cell :overdue, model

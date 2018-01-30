@@ -16,7 +16,7 @@ RSpec.describe GigDecorator do
       shared_examples_for 'a date presenter' do
         subject { decorator.public_send method_name }
 
-        it "returns the model's start time as a string" do
+        it "returns the model's time property as a string" do
           expect(subject).to be == gig.public_send(method_name).strftime(datetime_format)
         end
       end
@@ -89,13 +89,13 @@ RSpec.describe GigDecorator do
       subject { decorator.terms }
 
       context 'present in model' do
-        let(:expected_date_string) { gig.start_time.advance(days: gig.terms).to_s :dmy }
+        let(:due_date) { gig.due_date.to_s :dmy }
 
         context 'greater than 1' do
           let(:terms) { rand(2..120) }
 
           it 'returns a count of days from start date to due date, followed by the due date in parentheses' do
-            expect(subject).to be == "#{gig.terms} days (#{expected_date_string})"
+            expect(subject).to be == "#{gig.terms} days (#{due_date})"
           end
         end
 
@@ -103,7 +103,7 @@ RSpec.describe GigDecorator do
           let(:terms) { 1 }
 
           it 'behaves as for greater than 1, but "day" is singular' do
-            expect(subject).to be == "1 day (#{expected_date_string})"
+            expect(subject).to be == "1 day (#{due_date})"
           end
         end
 

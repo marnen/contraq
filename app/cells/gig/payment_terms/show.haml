@@ -1,5 +1,6 @@
 - if amount_due
-  %span.amount-due>= amount_due
+  %span.amount-due>&= amount_due
   = ',' if terms
 - if terms
-  %span.terms= terms
+  %span.terms&= terms
+= cell :overdue, model

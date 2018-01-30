@@ -1,6 +1,9 @@
 $button-edit-save: #000099;
+$badge-default: button-edit-save;
 
 $colors: (
+  badge-default: $badge-default,
+  badge-warning: darken(red, 5%),
   button-create: #009900,
   button-default: purple,
   button-edit: $button-edit-save,

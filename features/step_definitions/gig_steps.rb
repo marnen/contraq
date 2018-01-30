@@ -55,6 +55,13 @@ Then /^I should (not )?see the following gigs?:$/ do |negation, table|
   end
 end
 
+Then /^the gig named "([^"]*)" should (not )?be flagged as overdue$/ do |name, negation|
+  sense = negation ? :not_to : :to
+  within *selector_for(%Q{terms for the gig named "#{name}"}) do
+    expect(page).public_send sense, have_selector('.overdue', text: 'Overdue')
+  end
+end
+
 private
 
 def xpath(class_name:, text:)

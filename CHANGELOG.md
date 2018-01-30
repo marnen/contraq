@@ -4,6 +4,7 @@ Significant changes to the project will be documented here, in the format recomm
 
 ## Unreleased
 
+- Visually flag overdue payments. [#4]
 - Set up Docker for development and testing. [#33]
 - Record details of payments received. [#38]
 - Tweak look of Save button and refactor resulting cells. [#46]
