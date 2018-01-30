@@ -1,13 +1,14 @@
 @mixin badge($color: color(badge-default)) {
   $font-size: 0.75rem;
-  $height: 20px;
+  $height: 18px; // TODO: deal with units so that this can be $font-size * 1.5.
   $padding: $font-size / 2;
   @include mod-button-size-custom($height: $height, $padding: $padding);
   @include mod-button-style(flat, color($color));
   @include system-font-bold;
   border-radius: 10000px; // easiest way of making an oval
+  display: inline-block;
   font-size: $font-size;
-  vertical-align: 5%;
+  vertical-align: bottom;
 }
 
 .overdue {
