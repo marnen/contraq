@@ -2,7 +2,6 @@
   $font-size: 0.75rem;
   $height: 20px;
   $padding: $font-size / 2;
-  @include mod-button-setup;
   @include mod-button-size-custom($height: $height, $padding: $padding);
   @include mod-button-style(flat, color($color));
   @include system-font-bold;
