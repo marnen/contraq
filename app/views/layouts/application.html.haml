@@ -10,5 +10,10 @@
     %header
       .app-name= _ 'Contraq'
       .current-user= cell :current_user, current_user
+    %section.flash
+      - if flash.alert
+        .alert= flash.alert
+      - if flash.notice
+        .notice= flash.notice
     %section.main
       = yield
