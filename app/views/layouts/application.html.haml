@@ -12,8 +12,11 @@
       .current-user= cell :current_user, current_user
     %section.flash
       - if flash.alert
-        .alert= flash.alert
+        = icon 'times'
+        = flash.alert
       - if flash.notice
-        .notice= flash.notice
+        .notice
+          = icon 'check'
+          = flash.notice
     %section.main
       = yield
