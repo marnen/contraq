@@ -1,9 +1,6 @@
-%div[@gig]
-  %h1.name= @gig.name
+%p= cell :button, @gig, action: :edit
 
-  %p= cell :button, @gig, action: :edit
+= cell 'gig/fields/basic_info', @gig
+= cell 'gig/fields/payment_terms', @gig
 
-  = cell 'gig/fields/basic_info', @gig
-  = cell 'gig/fields/payment_terms', @gig
-
-  = cell 'gig/payments', @gig
+= cell 'gig/payments', @gig

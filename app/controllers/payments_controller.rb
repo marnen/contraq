@@ -8,6 +8,7 @@ class PaymentsController < ApplicationController
   before_action :save_previous_url, only: %i[new edit]
 
   def new
+    @page_title = _ 'Report Payment'
     @payment = Payment.new received_at: Time.zone.today
   end
 
@@ -17,6 +18,7 @@ class PaymentsController < ApplicationController
   end
 
   def edit
+    @page_title = _ 'Edit Payment'
   end
 
   def update

@@ -2,7 +2,7 @@
 %html
   %head
     %meta(content="text/html; charset=UTF-8" http-equiv="Content-Type")
-    %title= _ 'Contraq'
+    %title= [@page_title, _('Contraq')].compact.join ' | '
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
@@ -10,14 +10,16 @@
     %header
       .app-name= _ 'Contraq'
       .current-user= cell :current_user, current_user
-    %section.flash
-      - if flash.alert
-        .alert
-          = icon 'times'
-          = flash.alert
-      - if flash.notice
-        .notice
-          = icon 'check'
-          = flash.notice
-    %section.main
+    - if flash.present?
+      %section.flash
+        - if flash.alert
+          .alert
+            = icon 'times'
+            = flash.alert
+        - if flash.notice
+          .notice
+            = icon 'check'
+            = flash.notice
+    %section.main[@page_resource]
+      %h1(class=@header_class)= @page_title
       = yield
