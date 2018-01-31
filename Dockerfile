@@ -11,18 +11,14 @@ RUN apk add yarn
 
 RUN gem install bundler
 
-# Use temporary build directory for dependencies to improve layer caching
-ARG dependencies=/dependencies
-
-WORKDIR ${dependencies}
-COPY Gemfile Gemfile.lock ${dependencies}/
-RUN bundle install
-COPY package.json yarn.lock ${dependencies}/
-RUN yarn install --verbose
-
 ARG workdir=/contraq
 
 WORKDIR ${workdir}
+COPY Gemfile Gemfile.lock .
+RUN bundle install
+COPY package.json yarn.lock .
+RUN yarn install --verbose
+
 COPY . ${workdir}
 
 ARG port=3000
@@ -30,8 +26,6 @@ ARG port=3000
 EXPOSE ${port}
 ENV BUNDLE_GEMFILE Gemfile
 ENV PORT ${port}
-RUN cp -r ${dependencies}/node_modules ${workdir}
-RUN rm -r ${dependencies}/node_modules
 
 ENTRYPOINT ["bundle", "exec"]
 CMD ["rails", "server", "-b", "0.0.0.0"]
