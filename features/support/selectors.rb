@@ -2,7 +2,7 @@ module SelectorHelpers
   def selector_for(selector_name)
     case selector_name
     when /^terms for the gig named "(.+)"$/
-      [:xpath,  "//*[@class='payment-terms'][ancestor::*[@class='gig']//*[@class='name'][string()='#{$1}']]"]
+      [:xpath,  "//*[@class='payment-terms'][ancestor::*[#{contains_token '@class', 'gig'}]//*[@class='name'][string()='#{$1}']]"]
     when /^the "(.+)" field$/
       [:field, $1]
     when 'the gig'
@@ -14,6 +14,12 @@ module SelectorHelpers
     else
       raise ArgumentError, "No selector defined for '#{selector_name}'. Please add a mapping in #{__FILE__}."
     end
+  end
+
+  private
+
+  def contains_token(xpath, token) # TODO: remove when Nokogiri supports XPath >1 so we can use tokenize() (2) or contains-token (3)
+    %Q{contains(concat(' ', #{xpath}, ' '), ' #{token} ')}
   end
 end
 

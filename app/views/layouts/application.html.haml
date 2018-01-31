@@ -20,7 +20,6 @@
           .notice
             = icon 'check'
             = flash.notice
-    %section.main
-      - unless @hide_header
-        %h1= @page_title
+    %section.main[@page_resource]
+      %h1(class=@header_class)= @page_title
       = yield

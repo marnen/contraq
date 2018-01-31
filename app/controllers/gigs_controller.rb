@@ -13,8 +13,9 @@ class GigsController < ApplicationController
   end
 
   def show
-    @hide_header = true
+    @page_resource = @gig
     @page_title = @gig.name
+    @header_class = :name
     @gig = @gig.decorate
   end
 
