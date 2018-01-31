@@ -12,8 +12,9 @@
       .current-user= cell :current_user, current_user
     %section.flash
       - if flash.alert
-        = icon 'times'
-        = flash.alert
+        .alert
+          = icon 'times'
+          = flash.alert
       - if flash.notice
         .notice
           = icon 'check'
