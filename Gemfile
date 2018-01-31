@@ -41,9 +41,11 @@ gem 'font-awesome-sass', '~> 4.7.0'
 gem 'gettext_i18n_rails'
 gem 'haml'
 gem 'normalize-scss'
+# gem 'oj', '~> 2.16.1' # for Rollbar; see https://rollbar.com/Contraq/Contraq/#ruby, but doesn't work with Ruby 2.5 till version 2.17. TODO: get clarification about whether newer oj works with Rollbar.
 gem 'pundit'
 gem 'responders'
 gem 'rails-i18n' # still needed for Rails boilerplate text
+gem 'rollbar'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
