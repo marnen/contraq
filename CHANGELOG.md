@@ -4,6 +4,7 @@ Significant changes to the project will be documented here, in the format recomm
 
 ## Unreleased
 
+- Set up Rollbar. [#49]
 - Improve page titles. [#23]
 - Display flash message in application layout. [#51]
 - Visually flag overdue payments. [#4]
