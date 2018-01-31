@@ -13,5 +13,5 @@ $colors: (
 );
 
 @function color($name) {
-  @return map-get($colors, $name) or $name;
+  @return map-get($colors, $name);
 }
