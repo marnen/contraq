@@ -14,9 +14,9 @@ RUN gem install bundler
 ARG workdir=/contraq
 
 WORKDIR ${workdir}
-COPY Gemfile Gemfile.lock .
+COPY Gemfile Gemfile.lock ${workdir}/
 RUN bundle install
-COPY package.json yarn.lock .
+COPY package.json yarn.lock ${workdir}/
 RUN yarn install --verbose
 
 COPY . ${workdir}
