@@ -2,6 +2,7 @@
 @import 'settings';
 
 @import 'header';
+@import 'flash';
 
 @mixin darken-background {
   background-color: darken($background-color, 5%);

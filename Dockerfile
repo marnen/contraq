@@ -29,7 +29,7 @@ COPY . ${workdir}
 
 ENV BUNDLE_GEMFILE Gemfile
 RUN cp -r ${dependencies}/node_modules ${workdir}
-RUN rm -rf ${dependencies}
+RUN rm -r ${dependencies}/node_modules
 
 ENTRYPOINT ["bundle", "exec"]
 CMD ["rails", "server", "-p", "3000", "-b", "0.0.0.0"]

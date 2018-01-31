@@ -4,6 +4,7 @@ Significant changes to the project will be documented here, in the format recomm
 
 ## Unreleased
 
+- Display flash message in application layout. [#51]
 - Visually flag overdue payments. [#4]
 - Set up Docker for development and testing. [#33]
 - Record details of payments received. [#38]
