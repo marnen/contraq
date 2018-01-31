@@ -8,14 +8,18 @@ class GigsController < ApplicationController
   skip_after_action :verify_authorized, only: [:new, :create]
 
   def index
+    @page_title = _ 'Gigs'
     @gigs = policy_scope(Gig).order(:start_time, :name).decorate
   end
 
   def show
+    @hide_header = true
+    @page_title = @gig.name
     @gig = @gig.decorate
   end
 
   def new
+    @page_title = _ 'Create Gig'
     @gig = Gig.new
   end
 
@@ -25,6 +29,7 @@ class GigsController < ApplicationController
   end
 
   def edit
+    @page_title = (_ 'Edit Gig "%{gig}"') % {gig: @gig.name}
   end
 
   def update
