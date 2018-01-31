@@ -1,0 +1,19 @@
+.flash {
+  @mixin flash($color, $lighten: 45%) {
+    $color: color($color);
+    border: 1px solid $color;
+    border-radius: $padding / 2;
+    background-color: lighten($color, $lighten);
+    padding: $padding / 2;
+  }
+
+  padding: $padding;
+
+  .alert {
+    @include flash(flash-alert, $lighten: 45%);
+  }
+
+  .notice {
+    @include flash(flash-notice, $lighten: 60%);
+  }
+}

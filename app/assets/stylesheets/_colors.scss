@@ -7,9 +7,11 @@ $colors: (
   button-create: #009900,
   button-default: purple,
   button-edit: $button-edit-save,
-  button-save: $button-edit-save
+  button-save: $button-edit-save,
+  flash-alert: red,
+  flash-notice: green
 );
 
 @function color($name) {
-  @return map-get($colors, $name);
+  @return map-get($colors, $name) or $name;
 }
