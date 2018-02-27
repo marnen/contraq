@@ -26,6 +26,12 @@ config :logger, :console,
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
 
+config :white_bread,
+  outputers: [{WhiteBread.Outputers.Console, []},
+              {WhiteBread.Outputers.HTML, path: "#{__DIR__}/../whitebread_report.html"},
+              # {WhiteBread.Outputers.JSON, path: "~/build/whitebread_report.json"}
+             ]
+
 # %% Coherence Configuration %%   Don't remove this line
 config :coherence,
   user_schema: Contraq.Coherence.User,
