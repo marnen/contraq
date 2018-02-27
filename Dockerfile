@@ -2,6 +2,7 @@ FROM elixir:1.6-alpine
 MAINTAINER Marnen Laibow-Koser <marnen@marnen.org>
 
 RUN apk add --update build-base
+RUN apk add postgresql-client
 RUN apk add yarn
 RUN apk add inotify-tools
 
