@@ -10,7 +10,8 @@ defmodule Contraq.Mixfile do
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      preferred_cli_env: ["white_bread.run": :test]
     ]
   end
 
