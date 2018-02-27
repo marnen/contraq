@@ -2,6 +2,7 @@ FROM elixir:1.6-alpine
 MAINTAINER Marnen Laibow-Koser <marnen@marnen.org>
 
 RUN apk add --update yarn
+RUN apk add inotify-tools
 
 # Install or upgrade Hex and Rebar.
 RUN mix local.hex --force
