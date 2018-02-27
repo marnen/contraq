@@ -25,3 +25,9 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+config :white_bread,
+  outputers: [{WhiteBread.Outputers.Console, []},
+              {WhiteBread.Outputers.HTML, path: "#{__DIR__}/../whitebread_report.html"},
+              # {WhiteBread.Outputers.JSON, path: "~/build/whitebread_report.json"}
+             ]
