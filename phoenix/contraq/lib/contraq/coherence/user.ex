@@ -3,10 +3,10 @@ defmodule Contraq.Coherence.User do
   use Ecto.Schema
   use Coherence.Schema
 
-  
+
 
   schema "users" do
-    field :name, :string
+    # field :name, :string
     field :email, :string
     coherence_schema()
 
@@ -15,8 +15,10 @@ defmodule Contraq.Coherence.User do
 
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, [:name, :email] ++ coherence_fields())
-    |> validate_required([:name, :email])
+    # |> cast(params, [:name, :email] ++ coherence_fields())
+    |> cast(params, [:email] ++ coherence_fields())
+    # |> validate_required([:name, :email])
+    |> validate_required([:email])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
     |> validate_coherence(params)
