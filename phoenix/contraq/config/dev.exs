@@ -55,4 +55,5 @@ config :contraq, Contraq.Repo,
   password: System.get_env("APP_DB_PASSWORD"),
   database: "contraq_development",
   hostname: "db",
-  pool_size: 10
+  pool_size: 10,
+  migration_source: "schema_migrations_phoenix" # TODO: consider changing this back to the default of schema_migrations
