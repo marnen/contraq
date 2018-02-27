@@ -121,6 +121,40 @@ ALTER SEQUENCE payments_id_seq OWNED BY payments.id;
 
 
 --
+-- Name: rememberables; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE rememberables (
+    id bigint NOT NULL,
+    series_hash character varying(255),
+    token_hash character varying(255),
+    token_created_at timestamp without time zone,
+    user_id bigint,
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: rememberables_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE rememberables_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: rememberables_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE rememberables_id_seq OWNED BY rememberables.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -146,7 +180,7 @@ CREATE TABLE schema_migrations_phoenix (
 CREATE TABLE users (
     id integer NOT NULL,
     email character varying DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    password_hash character varying DEFAULT ''::character varying NOT NULL,
     reset_password_token character varying,
     reset_password_sent_at timestamp without time zone,
     remember_created_at timestamp without time zone,
@@ -194,6 +228,13 @@ ALTER TABLE ONLY payments ALTER COLUMN id SET DEFAULT nextval('payments_id_seq':
 
 
 --
+-- Name: rememberables id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY rememberables ALTER COLUMN id SET DEFAULT nextval('rememberables_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -222,6 +263,14 @@ ALTER TABLE ONLY gigs
 
 ALTER TABLE ONLY payments
     ADD CONSTRAINT payments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: rememberables rememberables_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY rememberables
+    ADD CONSTRAINT rememberables_pkey PRIMARY KEY (id);
 
 
 --
@@ -262,6 +311,34 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 
 
 --
+-- Name: rememberables_series_hash_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX rememberables_series_hash_index ON rememberables USING btree (series_hash);
+
+
+--
+-- Name: rememberables_token_hash_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX rememberables_token_hash_index ON rememberables USING btree (token_hash);
+
+
+--
+-- Name: rememberables_user_id_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX rememberables_user_id_index ON rememberables USING btree (user_id);
+
+
+--
+-- Name: rememberables_user_id_series_hash_token_hash_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX rememberables_user_id_series_hash_token_hash_index ON rememberables USING btree (user_id, series_hash, token_hash);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -285,8 +362,16 @@ ALTER TABLE ONLY payments
 
 
 --
+-- Name: rememberables rememberables_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY rememberables
+    ADD CONSTRAINT rememberables_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+
+
+--
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO "schema_migrations" (version) VALUES (20160227214950), (20160301025311), (20170226051306), (20180121035645), (20180123182052);
+INSERT INTO "schema_migrations_phoenix" (version) VALUES (20180227052552), (20180227052553);
 
