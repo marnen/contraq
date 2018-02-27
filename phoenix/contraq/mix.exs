@@ -40,7 +40,7 @@ defmodule Contraq.Mixfile do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
-      {:gettext, "~> 0.11"},
+      {:gettext, "~> 0.13.1"}, # see https://github.com/smpallen99/coherence/issues/329
       {:cowboy, "~> 1.0"},
       {:coherence, "~> 0.5"},
       {:white_bread, "~> 4.1.0", only: [:dev, :test]}
