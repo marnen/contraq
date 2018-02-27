@@ -4,3 +4,5 @@ log/*
 node_modules/*
 tmp/*
 phoenix/contraq/whitebread_report.html
+phoenix/contraq/_build/*
+phoenix/contraq/deps/*

@@ -43,6 +43,7 @@ defmodule Contraq.Mixfile do
       {:gettext, "~> 0.13.1"}, # see https://github.com/smpallen99/coherence/issues/329
       {:cowboy, "~> 1.0"},
       {:coherence, "~> 0.5"},
+      {:wallaby, "~> 0.19.2", [runtime: false, only: :test]},
       {:white_bread, "~> 4.1.0", only: [:dev, :test]}
     ]
   end
