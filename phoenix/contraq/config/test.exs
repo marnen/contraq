@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :contraq, Contraq.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env("APP_DB_USERNAME"),
+  password: System.get_env("APP_DB_PASSWORD"),
   database: "contraq_test",
-  hostname: "localhost",
+  hostname: "db",
   pool: Ecto.Adapters.SQL.Sandbox
