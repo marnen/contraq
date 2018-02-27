@@ -2,6 +2,6 @@ defmodule WhiteBreadConfig do
   use WhiteBread.SuiteConfiguration
 
   suite name:          "All",
-        context:       WhiteBreadContext,
+        context:       DefaultContext,
         feature_paths: ["features/"]
 end
