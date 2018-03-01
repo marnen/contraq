@@ -1,9 +1,7 @@
 defmodule UserSessionSteps do
-  use Wallaby.DSL
   use WhiteBread.Context
-  import ContraqWeb.Router.Helpers
+  use StepHelpers.Web
   alias Contraq.Factory
-  alias ContraqWeb.Endpoint
 
   given_ "I am not logged in", fn %{session: session} = state ->
     session |> visit(session_path Endpoint, :delete)
