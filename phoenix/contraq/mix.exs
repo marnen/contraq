@@ -11,7 +11,7 @@ defmodule Contraq.Mixfile do
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
       deps: deps(),
-      preferred_cli_env: ["white_bread.run": :test]
+      preferred_cli_env: [espec: :test, "white_bread.run": :test]
     ]
   end
 
