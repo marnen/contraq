@@ -3,6 +3,7 @@ defmodule DefaultContext do
 
   feature_starting_state fn ->
     System.put_env "QT_QPA_PLATFORM", "offscreen" # see https://github.com/ariya/phantomjs/issues/14376
+    {:ok, _} = Application.ensure_all_started(:faker)
     {:ok, _} = Application.ensure_all_started(:wallaby)
     %{}
   end
@@ -17,7 +18,5 @@ defmodule DefaultContext do
 
   scenario_finalize fn _state ->
     Ecto.Adapters.SQL.Sandbox.checkin(Contraq.Repo, [])
-  end
-
   end
 end
