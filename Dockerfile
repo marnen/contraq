@@ -4,7 +4,7 @@ MAINTAINER Marnen Laibow-Koser <marnen@marnen.org>
 # Allow HTTPS APT sources; see https://askubuntu.com/questions/104160/method-driver-usr-lib-apt-methods-https-could-not-be-found-update-error
 RUN apt-get update && apt-get install -y apt-transport-https
 
-RUN apt-get install -y make bzip2
+RUN apt-get install -y build-essential bzip2
 RUN apt-get install -y postgresql-client
 RUN apt-get install -y inotify-tools
 
@@ -34,6 +34,8 @@ WORKDIR ${workdir}
 
 COPY ${srcdir}/mix.exs ${srcdir}/mix.lock ${workdir}/
 RUN mix deps.get
+# Rebuild Comeonin; see https://github.com/riverrun/comeonin/issues/102
+RUN if [ -d deps/comeonin ]; then cd deps/comeonin && make clean && make && cd -; fi
 
 COPY ${srcdir}/assets/package.json ${srcdir}/assets/yarn.lock ${workdir}/assets/
 WORKDIR ${workdir}/assets/

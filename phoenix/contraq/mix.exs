@@ -42,6 +42,7 @@ defmodule Contraq.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.13.1"}, # see https://github.com/smpallen99/coherence/issues/329
       {:cowboy, "~> 1.0"},
+      {:bcrypt_elixir, "~> 1.0"}, # see https://github.com/riverrun/comeonin/issues/106
       {:coherence, "~> 0.5"},
       {:faker, "~> 0.9", [only: :test]},
       {:wallaby, "~> 0.19.2", [runtime: false, only: :test]},
