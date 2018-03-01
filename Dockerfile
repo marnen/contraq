@@ -4,7 +4,7 @@ MAINTAINER Marnen Laibow-Koser <marnen@marnen.org>
 # Allow HTTPS APT sources; see https://askubuntu.com/questions/104160/method-driver-usr-lib-apt-methods-https-could-not-be-found-update-error
 RUN apt-get update && apt-get install -y apt-transport-https
 
-RUN apt-get install -y build-essential bzip2
+RUN apt-get install -y build-essential bzip2 git
 RUN apt-get install -y postgresql-client
 RUN apt-get install -y inotify-tools
 
