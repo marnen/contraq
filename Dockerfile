@@ -4,7 +4,7 @@ MAINTAINER Marnen Laibow-Koser <marnen@marnen.org>
 # Allow HTTPS APT sources; see https://askubuntu.com/questions/104160/method-driver-usr-lib-apt-methods-https-could-not-be-found-update-error
 RUN apt-get update && apt-get install -y apt-transport-https
 
-RUN apt-get install -y make
+RUN apt-get install -y make bzip2
 RUN apt-get install -y postgresql-client
 RUN apt-get install -y inotify-tools
 
@@ -19,8 +19,9 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" >/etc/apt/sources.list
 RUN apt-get update && apt-get install -y nodejs yarn
 
 # Install PhantomJS.
-RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >/etc/apt/sources.list.d/backports.list
-RUN apt-get update && apt-get install -y phantomjs
+RUN apt-get install -y fontconfig
+RUN yarn global add phantomjs-prebuilt
+RUN phantomjs --version
 
 # Install or upgrade Hex and Rebar.
 RUN mix local.hex --force
