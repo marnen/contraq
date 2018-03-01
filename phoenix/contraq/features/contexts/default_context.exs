@@ -1,7 +1,9 @@
 defmodule DefaultContext do
   use WhiteBread.Context
 
-  import_steps_from DefaultContext.AllSteps
+  import_steps_from DefaultContext.UserSteps
+  import_steps_from DefaultContext.UserSessionSteps
+  import_steps_from DefaultContext.WebSteps
 
   {:ok, _} = Application.ensure_all_started(:faker)
   Application.put_env(:wallaby, :base_url, ContraqWeb.Endpoint.url)
@@ -24,13 +26,22 @@ defmodule DefaultContext do
   end
 end
 
-defmodule DefaultContext.AllSteps do
+defmodule DefaultContext.UserSteps do
+  use WhiteBread.Context
+  alias Contraq.Factory
+
+  given_ "the following user exists:", fn state, {:table_data, [attributes]} ->
+    Factory.insert! :user, attributes
+    {:ok, state}
+  end
+end
+
+defmodule DefaultContext.UserSessionSteps do
   use Wallaby.DSL
   use WhiteBread.Context
-
   import ContraqWeb.Router.Helpers
-  alias ContraqWeb.Endpoint
   alias Contraq.Factory
+  alias ContraqWeb.Endpoint
 
   given_ "I am not logged in", fn %{session: session} = state ->
     session |> visit(session_path Endpoint, :delete)
@@ -44,16 +55,6 @@ defmodule DefaultContext.AllSteps do
     {:ok, state}
   end
 
-  given_ "the following user exists:", fn state, {:table_data, [attributes]} ->
-    Factory.insert! :user, attributes
-    {:ok, state}
-  end
-
-  when_ "I go to the login page", fn %{session: session} = state ->
-    session |> visit(session_path Endpoint, :new)
-    {:ok, state}
-  end
-
   when_ ~r/^I log in with e-?mail "(?<email>[^"]+)" and password "(?<password>[^"]+)"$/,
   fn %{session: session} = state, attributes ->
     session |> login_as(attributes)
@@ -61,6 +62,7 @@ defmodule DefaultContext.AllSteps do
   end
 
   when_ "I log out", fn %{session: session} = state ->
+    # TODO: we should use method DELETE for this
     session |> visit(session_path Endpoint, :delete)
     {:ok, state}
   end
@@ -81,5 +83,17 @@ defmodule DefaultContext.AllSteps do
     |> fill_in(Query.text_field("Email"), with: email)
     |> fill_in(Query.text_field("Password"), with: password)
     |> click(Query.button "Sign In")
+  end
+end
+
+defmodule DefaultContext.WebSteps do
+  use Wallaby.DSL
+  use WhiteBread.Context
+  import ContraqWeb.Router.Helpers
+  alias ContraqWeb.Endpoint
+
+  when_ "I go to the login page", fn %{session: session} = state ->
+    session |> visit(session_path Endpoint, :new)
+    {:ok, state}
   end
 end
