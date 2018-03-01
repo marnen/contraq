@@ -4,7 +4,7 @@ MAINTAINER Marnen Laibow-Koser <marnen@marnen.org>
 # Allow HTTPS APT sources; see https://askubuntu.com/questions/104160/method-driver-usr-lib-apt-methods-https-could-not-be-found-update-error
 RUN apt-get update && apt-get install -y apt-transport-https
 
-# RUN apk update && apk add build-base
+RUN apt-get install -y make
 RUN apt-get install -y postgresql-client
 RUN apt-get install -y inotify-tools
 
