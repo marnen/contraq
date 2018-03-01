@@ -4,7 +4,9 @@ use Mix.Config
 # you can enable the server option below.
 config :contraq, ContraqWeb.Endpoint,
   http: [port: 4001],
-  server: false
+  server: true # TODO: should really be false except for white_bread
+
+config :contraq, sql_sandbox: true
 
 # Print only warnings and errors during test
 config :logger, level: :warn
