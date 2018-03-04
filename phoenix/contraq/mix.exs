@@ -10,7 +10,8 @@ defmodule Contraq.Mixfile do
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      preferred_cli_env: [espec: :test, "white_bread.run": :test]
     ]
   end
 
@@ -20,7 +21,7 @@ defmodule Contraq.Mixfile do
   def application do
     [
       mod: {Contraq.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :coherence]
     ]
   end
 
@@ -39,8 +40,14 @@ defmodule Contraq.Mixfile do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
-      {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:gettext, "~> 0.13.1"}, # see https://github.com/smpallen99/coherence/issues/329
+      {:cowboy, "~> 1.0"},
+      {:bcrypt_elixir, "~> 1.0"}, # see https://github.com/riverrun/comeonin/issues/106
+      {:coherence, "~> 0.5"},
+      {:espec_phoenix, "~> 0.6.9", only: :test},
+      {:faker, "~> 0.9", [only: :test]},
+      {:wallaby, "~> 0.19.2", [runtime: false, only: :test]},
+      {:white_bread, "~> 4.1.0", git: "https://github.com/marnen/white-bread.git", ref: "6afd4a7c9c82e88c4973e0534a376dc267971651", only: [:dev, :test]} # https://github.com/meadsteve/white-bread/pull/95
     ]
   end
 

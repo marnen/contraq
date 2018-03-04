@@ -25,6 +25,10 @@
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
+      <%= if @current_user do %>
+        <div>Logged in as <%= @current_user.email %></div>
+      <% end %>
+
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
