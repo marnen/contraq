@@ -4,12 +4,17 @@ MAINTAINER Marnen Laibow-Koser <marnen@marnen.org>
 # Allow HTTPS APT sources; see https://askubuntu.com/questions/104160/method-driver-usr-lib-apt-methods-https-could-not-be-found-update-error
 RUN apt-get update && apt-get install -y apt-transport-https
 
-RUN apt-get install -y build-essential bzip2 git
-RUN apt-get install -y postgresql-client
+RUN apt-get install -y build-essential bzip2 git curl
+
+# Add Postgres APT sources so we can get version 10 of the client.
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" >/etc/apt/sources.list.d/postgresql.list
+RUN curl -sS https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+RUN apt-get update && apt-get install -y postgresql-client
+RUN psql --version
+
 RUN apt-get install -y inotify-tools
 
 # Add Yarn public key; see https://github.com/yarnpkg/yarn/issues/4453.
-RUN apt-get install -y curl
 RUN curl -sS https://raw.githubusercontent.com/yarnpkg/releases/gh-pages/debian/pubkey.gpg | apt-key add -
 
 # Install Node and Yarn.
