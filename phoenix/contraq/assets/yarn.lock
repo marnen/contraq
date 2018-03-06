@@ -3021,7 +3021,7 @@ safe-buffer@5.1.1, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, s
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
-sass-brunch@2.10.4:
+sass-brunch@^2.10.4:
   version "2.10.4"
   resolved "https://registry.yarnpkg.com/sass-brunch/-/sass-brunch-2.10.4.tgz#36bb0f08f223df7dac1363bc05ad5ac32d3013d8"
   dependencies:
