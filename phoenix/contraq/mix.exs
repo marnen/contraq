@@ -46,6 +46,7 @@ defmodule Contraq.Mixfile do
       {:coherence, "~> 0.5"},
       {:espec_phoenix, "~> 0.6.9", only: :test},
       {:faker, "~> 0.9", [only: :test]},
+      {:phoenix_haml, "~> 0.2"},
       {:wallaby, "~> 0.19.2", [runtime: false, only: :test]},
       {:white_bread, "~> 4.1.0", git: "https://github.com/marnen/white-bread.git", ref: "6afd4a7c9c82e88c4973e0534a376dc267971651", only: [:dev, :test]} # https://github.com/meadsteve/white-bread/pull/95
     ]

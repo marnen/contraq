@@ -37,7 +37,7 @@ config :contraq, ContraqWeb.Endpoint,
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/contraq_web/views/.*(ex)$},
-      ~r{lib/contraq_web/templates/.*(eex)$}
+      ~r{lib/contraq_web/templates/.*(eex|haml)$}
     ]
   ]
 
