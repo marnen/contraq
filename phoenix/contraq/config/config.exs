@@ -22,6 +22,8 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :phoenix, :template_engines, haml: PhoenixHaml.Engine
+
 config :white_bread,
   outputers: [{WhiteBread.Outputers.Console, []},
               {WhiteBread.Outputers.HTML, path: "#{__DIR__}/../whitebread_report.html"},
