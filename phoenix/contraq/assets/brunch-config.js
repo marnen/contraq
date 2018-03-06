@@ -2,7 +2,13 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: "js/app.js"
+      joinTo: {
+        "js/vendor.js": /^node_modules/,
+        "js/app.js": [
+          "assets/js/**/*.js",
+          "lib/contraq_web/cells/**/*.js"
+        ]
+      }
 
       // To use a separate vendor.js bundle, specify two files path
       // http://brunch.io/docs/config#-files-
@@ -20,8 +26,13 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css"
-    },
+      joinTo: {
+        "css/app.css": [
+          "assets/css/app.css",
+          "lib/contraq_web/cells/**/*.css"
+        ]
+      }
+    }
     templates: {
       joinTo: "js/app.js"
     }
