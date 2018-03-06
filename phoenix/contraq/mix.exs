@@ -45,6 +45,7 @@ defmodule Contraq.Mixfile do
       {:bcrypt_elixir, "~> 1.0"}, # see https://github.com/riverrun/comeonin/issues/106
       {:coherence, "~> 0.5"},
       {:espec_phoenix, "~> 0.6.9", only: :test},
+      {:ex_cell, "~> 0.0.11"},
       {:faker, "~> 0.9", [only: :test]},
       {:phoenix_haml, "~> 0.2"},
       {:wallaby, "~> 0.19.2", [runtime: false, only: :test]},

@@ -23,6 +23,7 @@ defmodule ContraqWeb do
       import Plug.Conn
       import ContraqWeb.Router.Helpers
       import ContraqWeb.Gettext
+      import ExCell.Controller
     end
   end
 
@@ -40,6 +41,7 @@ defmodule ContraqWeb do
       import ContraqWeb.Router.Helpers
       import ContraqWeb.ErrorHelpers
       import ContraqWeb.Gettext
+      import ExCell.View
     end
   end
 
@@ -55,6 +57,26 @@ defmodule ContraqWeb do
     quote do
       use Phoenix.Channel
       import ContraqWeb.Gettext
+    end
+  end
+
+  def cell(opts \\ []) do
+    quote do
+      use ExCell.Cell, namespace: ContraqWeb,
+                       adapter: ExCell.Adapters.CellJS
+
+      use Phoenix.View, root: "lib/contraq_web/cells",
+                        path: ExCell.View.relative_path(__MODULE__, ContraqWeb)
+
+      import Phoenix.Controller,
+             only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
+
+      use Phoenix.HTML
+
+      import ContraqWeb.Router.Helpers
+      import ContraqWeb.Gettext
+
+      # Add everything you want to use in the cells
     end
   end
 
