@@ -5,8 +5,8 @@ exports.config = {
       joinTo: {
         "js/vendor.js": /^node_modules/,
         "js/app.js": [
-          "assets/js/**/*.js",
-          "lib/contraq_web/cells/**/*.js"
+          "js/**/*.js",
+          "../lib/contraq_web/cells/**/*.js"
         ]
       }
 
@@ -28,8 +28,8 @@ exports.config = {
     stylesheets: {
       joinTo: {
         "css/app.css": [
-          "assets/css/app.css",
-          "lib/contraq_web/cells/**/*.css"
+          "css/**/*.css",
+          "../lib/contraq_web/cells/**/*.css"
         ]
       }
     },
