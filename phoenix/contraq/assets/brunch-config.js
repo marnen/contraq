@@ -32,7 +32,7 @@ exports.config = {
           "lib/contraq_web/cells/**/*.css"
         ]
       }
-    }
+    },
     templates: {
       joinTo: "js/app.js"
     }
