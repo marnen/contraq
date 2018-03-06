@@ -37,6 +37,7 @@ defmodule ContraqWeb do
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
+      import FontAwesomePhoenix.HTML
 
       import ContraqWeb.Router.Helpers
       import ContraqWeb.ErrorHelpers

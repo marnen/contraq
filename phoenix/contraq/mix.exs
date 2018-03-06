@@ -46,6 +46,7 @@ defmodule Contraq.Mixfile do
       {:coherence, "~> 0.5"},
       {:espec_phoenix, "~> 0.6.9", only: :test},
       {:ex_cell, "~> 0.0.11"},
+      {:font_awesome_phoenix, "~> 0.1"},
       {:faker, "~> 0.9", [only: :test]},
       {:phoenix_haml, "~> 0.2"},
       {:wallaby, "~> 0.19.2", [runtime: false, only: :test]},
