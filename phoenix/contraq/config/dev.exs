@@ -34,7 +34,7 @@ config :contraq, ContraqWeb.Endpoint,
 config :contraq, ContraqWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+      ~r{priv/static/.*(js|css|sass|scss|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/contraq_web/views/.*(ex)$},
       ~r{lib/contraq_web/templates/.*(eex|haml)$}

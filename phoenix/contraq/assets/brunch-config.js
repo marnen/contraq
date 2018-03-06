@@ -28,8 +28,8 @@ exports.config = {
     stylesheets: {
       joinTo: {
         "css/app.css": [
-          "css/**/*.css",
-          "../lib/contraq_web/cells/**/*.css"
+          /^css\/.*[^./]\.(css|scss|sass)/,
+          /^\.\.\/lib\/contraq_web\/cells\/.*[^./]\.(css|scss|sass)/
         ]
       }
     },
@@ -58,6 +58,9 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/vendor/]
+    },
+    sass: {
+      mode: 'native'
     }
   },
 
