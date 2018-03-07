@@ -73,6 +73,7 @@ defmodule ContraqWeb do
              only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
 
       use Phoenix.HTML
+      import FontAwesomePhoenix.HTML
 
       import ContraqWeb.Router.Helpers
       import ContraqWeb.Gettext

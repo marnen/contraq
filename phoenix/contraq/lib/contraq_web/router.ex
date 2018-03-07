@@ -38,6 +38,7 @@ defmodule ContraqWeb.Router do
     pipe_through :browser # Use the default browser stack
     # Public routes
     get "/", PageController, :index
+    resources "/gigs", GigController, only: [:index, :new, :create]
   end
 
 

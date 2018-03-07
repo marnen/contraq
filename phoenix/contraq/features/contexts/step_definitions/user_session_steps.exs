@@ -8,10 +8,11 @@ defmodule UserSessionSteps do
     {:ok, state}
   end
 
-  given_ ~r/^I am logged in with e-?mail "(?<email>[^"]+)" and password "(?<password>[^"]+)"$/,
+  given_ ~r/^I am logged in(?: with e-?mail "(?<email>[^"]+)" and password "(?<password>[^"]+)")?$/,
   fn %{session: session} = state, attributes ->
-    Factory.insert! :user, attributes
-    session |> visit(session_path Endpoint, :new) |> login_as(attributes)
+    cleaned_attributes = attributes |> Enum.reject(fn {_, value} -> value == "" end) |> Enum.into(%{})
+    user = Factory.insert! :user, cleaned_attributes
+    session |> visit(session_path Endpoint, :new) |> login_as(user)
     {:ok, state}
   end
 
