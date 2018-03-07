@@ -1,6 +1,5 @@
 defmodule Contraq.Gigs.Gig do
   use ContraqWeb, :model
-  alias Contraq.Gigs.Gig
 
 
   schema "gigs" do
@@ -21,9 +20,9 @@ defmodule Contraq.Gigs.Gig do
   end
 
   @doc false
-  def changeset(%Gig{} = gig, attrs) do
+  def changeset(%__MODULE__{} = gig, attrs) do
     gig
     |> cast(attrs, [:name, :start_time, :end_time, :venue, :street, :city, :state, :zip]) # , :amount_due, :terms])
-    |> validate_required([:name, :start_time, :end_time, :venue, :street, :city, :state, :zip, :amount_due, :terms])
+    |> validate_required([:name, :start_time, :end_time])
   end
 end
