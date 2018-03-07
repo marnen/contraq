@@ -12,7 +12,7 @@ defmodule Contraq.Mixfile do
       aliases: aliases(),
       deps: deps(),
       preferred_cli_env: [espec: :test, "white_bread.run": :test],
-      dialyzer: [plt_add_deps: :transitive]
+      dialyzer: [plt_add_deps: :transitive, ignore_warnings: "dialyzer.ignore-warnings"]
     ]
   end
 
