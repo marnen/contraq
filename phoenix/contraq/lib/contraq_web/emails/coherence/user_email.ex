@@ -1,6 +1,7 @@
 Code.ensure_loaded Phoenix.Swoosh
 
 defmodule ContraqWeb.Coherence.UserEmail do
+  @dialyzer [{:no_match, add_reply_to: 1}, {:no_match, from_email: 0}]
   @moduledoc false
   use Phoenix.Swoosh, view: ContraqWeb.Coherence.EmailView, layout: {ContraqWeb.Coherence.LayoutView, :email}
   alias Swoosh.Email
