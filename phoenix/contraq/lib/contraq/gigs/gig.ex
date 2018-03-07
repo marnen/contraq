@@ -5,17 +5,17 @@ defmodule Contraq.Gigs.Gig do
 
 
   schema "gigs" do
-    field :amount_due, :decimal, precision: 8, scale: 2
-    field :city, :string
-    field :end_time, :naive_datetime
+    field :user_id, :id
     field :name, :string
     field :start_time, :naive_datetime
-    field :state, :string, size: 2
-    field :street, :string
-    field :terms, :integer
+    field :end_time, :naive_datetime
     field :venue, :string
+    field :street, :string
+    field :city, :string
+    field :state, :string, size: 2
     field :zip, :string
-    field :user_id, :id
+    field :amount_due, :decimal, precision: 8, scale: 2
+    field :terms, :integer
 
     timestamps()
   end
