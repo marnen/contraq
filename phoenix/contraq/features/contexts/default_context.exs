@@ -21,7 +21,8 @@ defmodule DefaultContext do
     state |> put_in([:session], session)
   end
 
-  scenario_finalize fn _status, _state ->
+  scenario_finalize fn _status, %{session: session} ->
+    :ok = Wallaby.end_session session
     Ecto.Adapters.SQL.Sandbox.checkin(Contraq.Repo, [])
   end
 end
