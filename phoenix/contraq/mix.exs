@@ -44,6 +44,7 @@ defmodule Contraq.Mixfile do
       {:cowboy, "~> 1.0"},
       {:bcrypt_elixir, "~> 1.0"}, # see https://github.com/riverrun/comeonin/issues/106
       {:coherence, "~> 0.5"},
+      {:dialyxir, "~> 0.5.0", only: [:dev], runtime: false},
       {:espec_phoenix, "~> 0.6.9", only: :test},
       {:ex_cell, "~> 0.0.11"},
       {:font_awesome_phoenix, "~> 0.1"},
