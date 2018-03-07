@@ -1,14 +1,13 @@
 defmodule Contraq.Gigs.Gig do
-  use Ecto.Schema
-  import Ecto.Changeset
+  use ContraqWeb, :model
   alias Contraq.Gigs.Gig
 
 
   schema "gigs" do
     field :user_id, :id
     field :name, :string
-    field :start_time, :naive_datetime
-    field :end_time, :naive_datetime
+    field :start_time, Timex.Ecto.DateTime
+    field :end_time, Timex.Ecto.DateTime
     field :venue, :string
     field :street, :string
     field :city, :string
