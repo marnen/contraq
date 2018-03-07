@@ -44,7 +44,10 @@ config :contraq, ContraqWeb.Endpoint,
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
-config :mix_test_watch, tasks: ["espec", "white_bread.run"]
+config :mix_test_watch, [
+  tasks: ["espec", "white_bread.run"],
+  extra_extensions: [".feature"]
+]
 
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
