@@ -17,14 +17,6 @@ defmodule ContraqWeb do
   and import those modules here.
   """
 
-  def model do
-    quote do
-      use Ecto.Schema
-      import Ecto.Changeset
-      @timestamps_opts [type: Timex.Ecto.DateTime]
-    end
-  end
-
   def controller do
     quote do
       use Phoenix.Controller, namespace: ContraqWeb
