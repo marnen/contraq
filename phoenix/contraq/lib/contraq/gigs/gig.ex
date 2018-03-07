@@ -13,8 +13,9 @@ defmodule Contraq.Gigs.Gig do
     field :city, :string
     field :state, :string, size: 2
     field :zip, :string
-    field :amount_due, :decimal, precision: 8, scale: 2
-    field :terms, :integer
+    # TODO: re-enable these when we implement these features.
+    # field :amount_due, :decimal, precision: 8, scale: 2
+    # field :terms, :integer
 
     timestamps()
   end
@@ -22,7 +23,7 @@ defmodule Contraq.Gigs.Gig do
   @doc false
   def changeset(%Gig{} = gig, attrs) do
     gig
-    |> cast(attrs, [:name, :start_time, :end_time, :venue, :street, :city, :state, :zip, :amount_due, :terms])
+    |> cast(attrs, [:name, :start_time, :end_time, :venue, :street, :city, :state, :zip]) # , :amount_due, :terms])
     |> validate_required([:name, :start_time, :end_time, :venue, :street, :city, :state, :zip, :amount_due, :terms])
   end
 end
