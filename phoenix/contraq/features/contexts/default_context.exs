@@ -1,6 +1,7 @@
 defmodule DefaultContext do
   use WhiteBread.Context
 
+  import_steps_from GigSteps
   import_steps_from UserSteps
   import_steps_from UserSessionSteps
   import_steps_from WebSteps

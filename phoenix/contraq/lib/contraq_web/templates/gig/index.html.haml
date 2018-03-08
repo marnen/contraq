@@ -1,1 +1,4 @@
 %p= cell ContraqWeb.ButtonCell, model: :gig, action: :new
+
+- for gig <- @gigs do
+  = cell ContraqWeb.GigCell, gig: gig

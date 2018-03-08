@@ -1,0 +1,5 @@
+- container! @gig do
+  %h1.name= link_to @gig
+  - for field <- fields do
+    - field_class = dasherize(field)
+    %div{class: field_class}= apply(__MODULE__, field, [@gig])
