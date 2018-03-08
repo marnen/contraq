@@ -1,33 +1,81 @@
 defmodule Contraq.Factory do
   # Cribbed from http://blog.plataformatec.com.br/wp-content/uploads/2016/12/whats-new-in-ecto-2-0-1.pdf#page=39
 
-  alias Contraq.Repo
-  alias Contraq.Coherence.User
-  import Phoenix.Naming, only: [camelize: 1]
+  @type factory :: atom
 
-  def build(:user) do
-    %{
+  alias Contraq.Repo
+
+  @tags %{
+    gig: Contraq.Gigs.Gig,
+    user: Contraq.Coherence.User
+  }
+  @build_defaults [required_only: false]
+
+  @spec base(factory, keyword) :: struct
+  defp base(factory_name, opts \\ [])
+
+  defp base(:gig, opts) do
+    [required_only: required_only] = Keyword.merge @build_defaults, opts
+    required = %{
+      name: Faker.Lorem.sentence,
+      start_time: Timex.to_datetime(Faker.Date.forward(100)), # TODO: randomize the time too?
+      end_time: &(Timex.shift &1[:start_time], minutes: :rand.uniform(4*60)),
+      user: fn _ -> build :user end
+    }
+    optional = %{
+      city: Faker.Address.city,
+      state: Faker.Address.state_abbr
+    }
+    if required_only, do: required, else: Map.merge optional, required
+  end
+
+  defp base(:user, opts) do
+    [required_only: required_only] = Keyword.merge @build_defaults, opts
+    required = %{
       email: Faker.Internet.email,
       password: Faker.Lorem.sentence,
       password_confirmation: &(&1[:password])
     }
+    optional = %{}
+    if required_only, do: required, else: Map.merge optional, required
   end
 
-  def build(factory_name, attributes) do
-    base = build(factory_name)
+  @spec build(factory, map, keyword) :: struct
+  def build(factory_name, %{} = attributes, opts) do
+    base = base(factory_name, opts)
     merged_attributes = Map.merge(base, attributes)
     expanded_attributes = for {key, value} <- merged_attributes, into: %{} do
       new_value = if is_function(value), do: value.(merged_attributes), else: value
       {key, new_value}
     end
-    {tag, _} = Code.eval_string(factory_name |> to_string |> camelize, [], aliases: __ENV__.aliases) # TODO: isn't there a better way to do this?
-    struct tag, expanded_attributes
+    struct Map.fetch!(@tags, factory_name), expanded_attributes
   end
 
-  def insert!(factory_name, attributes \\ []) do
-    attributes_map = attributes |> Enum.into(%{})
-    record = build(factory_name, attributes_map)
+  @spec build(factory, map) :: struct
+  def build(factory_name, %{} = attributes), do: build(factory_name, attributes, [])
+
+  @spec build(factory, keyword) :: struct
+  def build(factory_name, opts), do: build(factory_name, %{}, opts)
+
+  @spec build(factory) :: struct
+  def build(factory_name), do: build(factory_name, %{}, [])
+
+  @spec insert!(factory, map, keyword) :: struct
+  def insert!(factory_name, %{} = attributes, opts) do
+    record = build(factory_name, attributes, opts)
     tag = record.__struct__
     Repo.insert! tag.changeset(struct(tag), Map.from_struct record)
   end
+
+  @spec insert!(factory, map) :: struct
+  def insert!(factory_name, %{} = attributes), do: insert!(factory_name, attributes, [])
+
+  @spec insert!(factory, map) :: struct
+  def insert!(factory_name, %{} = attributes), do: insert!(factory_name, attributes, [])
+
+  @spec insert!(factory, keyword) :: struct
+  def insert!(factory_name, opts), do: insert!(factory_name, %{}, opts)
+
+  @spec insert!(factory) :: struct
+  def insert!(factory_name), do: build(factory_name, %{}, [])
 end

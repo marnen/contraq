@@ -1,29 +1,41 @@
 defmodule Contraq.Gigs.Gig do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Contraq.Gigs.Gig
+  alias Contraq.Coherence.User
+  alias Ecto.Changeset
 
 
   schema "gigs" do
-    field :amount_due, :decimal, precision: 8, scale: 2
-    field :city, :string
-    field :end_time, :naive_datetime
+    belongs_to :user, Contraq.Coherence.User
     field :name, :string
     field :start_time, :naive_datetime
-    field :state, :string, size: 2
-    field :street, :string
-    field :terms, :integer
+    field :end_time, :naive_datetime
     field :venue, :string
+    field :street, :string
+    field :city, :string
+    field :state, :string, size: 2
     field :zip, :string
-    field :user_id, :id
+    # TODO: re-enable these when we implement these features.
+    # field :amount_due, :decimal, precision: 8, scale: 2
+    # field :terms, :integer
 
     timestamps()
   end
 
   @doc false
-  def changeset(%Gig{} = gig, attrs) do
+  def changeset(%__MODULE__{} = gig, attrs) do
     gig
-    |> cast(attrs, [:name, :start_time, :end_time, :venue, :street, :city, :state, :zip, :amount_due, :terms])
-    |> validate_required([:name, :start_time, :end_time, :venue, :street, :city, :state, :zip, :amount_due, :terms])
+    |> cast(attrs, [:name, :start_time, :end_time, :venue, :street, :city, :state, :zip]) # , :amount_due, :terms])
+    |> save_user
+    |> validate_required([:name, :start_time, :end_time])
+    |> foreign_key_constraint(:user_id)
+  end
+
+  @spec save_user(Changeset.t) :: Changeset.t
+  defp save_user(%Changeset{params: params} = changeset) do
+    case user = params["user"] do
+      %User{} -> changeset |> put_assoc(:user, user)
+      _ -> changeset |> cast_assoc(:user, required: true)
+    end
   end
 end

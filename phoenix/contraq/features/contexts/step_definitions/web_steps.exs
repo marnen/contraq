@@ -14,12 +14,17 @@ defmodule WebSteps do
   end
 
   when_ ~r/^I go to (?<page_name>.+)$/, fn %{session: session} = state, %{page_name: page_name} ->
-    session |> visit(path_to page_name)
-    {:ok, state}
+    new_session = session |> visit(path_to page_name)
+    {:ok, state |> put_in([:session], new_session)}
   end
 
   then_ ~r/^I should be on (?<page_name>.+)$/, fn %{session: session} = state, %{page_name: page_name} ->
     assert current_path(session) == path_to(page_name)
+    {:ok, state}
+  end
+
+  then_ ~r/^I should (?<negation>not )?see "(?<text>[^"]+)"$/, fn %{session: session} = state, %{negation: negation, text: text} ->
+    assert (session |> has_text?(text)) == (String.length(negation) == 0)
     {:ok, state}
   end
 

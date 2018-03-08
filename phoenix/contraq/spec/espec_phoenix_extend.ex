@@ -8,15 +8,15 @@ defmodule ESpec.Phoenix.Extend do
   def controller do
     quote do
       alias Contraq
-      import Contraq.Router.Helpers
+      import ContraqWeb.Router.Helpers
 
-      @endpoint Contraq.Endpoint
+      @endpoint ContraqWeb.Endpoint
     end
   end
 
   def view do
     quote do
-      import Contraq.Router.Helpers
+      import ContraqWeb.Router.Helpers
     end
   end
 
@@ -24,7 +24,7 @@ defmodule ESpec.Phoenix.Extend do
     quote do
       alias Contraq.Repo
 
-      @endpoint Contraq.Endpoint
+      @endpoint ContraqWeb.Endpoint
     end
   end
 
