@@ -7,7 +7,7 @@ defmodule Gigs.GigSpec do
   import Map, only: [delete: 2]
 
   context "validations" do
-    let :valid_attributes, do: Map.from_struct(Factory.insert! :gig)
+    let :valid_attributes, do: Map.from_struct(Factory.insert! :gig, required_only: true)
     let :valid_changeset, do: Gig.changeset(%Gig{}, valid_attributes)
 
     it "is valid with valid attributes" do
