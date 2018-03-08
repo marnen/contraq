@@ -3,9 +3,8 @@ defmodule Contraq.Coherence.User do
   use Ecto.Schema
   use Coherence.Schema
 
-
-
   schema "users" do
+    has_many :gigs, Contraq.Gigs.Gig
     # field :name, :string
     field :email, :string
     coherence_schema()

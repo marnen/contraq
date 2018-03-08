@@ -1,6 +1,8 @@
 defmodule Gigs.GigSpec do
+  alias Contraq.Coherence.User
   alias Contraq.Factory
   alias Contraq.Gigs.Gig
+  alias Ecto.Association.BelongsTo
   use ESpec.Phoenix, model: Gig, async: true
   import Map, only: [delete: 2]
 
@@ -17,6 +19,12 @@ defmodule Gigs.GigSpec do
         attributes = valid_attributes |> delete(unquote field)
         refute Gig.changeset(%Gig{}, attributes).valid?
       end
+    end
+  end
+
+  context "associations" do
+    it "belongs to a user" do
+      expect Gig.__schema__(:association, :user) |> to(match_pattern %BelongsTo{queryable: User})
     end
   end
 end

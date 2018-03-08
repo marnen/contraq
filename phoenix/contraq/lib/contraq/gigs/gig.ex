@@ -4,7 +4,7 @@ defmodule Contraq.Gigs.Gig do
 
 
   schema "gigs" do
-    field :user_id, :id
+    belongs_to :user, Contraq.Coherence.User
     field :name, :string
     field :start_time, :naive_datetime
     field :end_time, :naive_datetime
