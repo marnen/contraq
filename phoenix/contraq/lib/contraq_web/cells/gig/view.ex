@@ -2,9 +2,10 @@ defmodule ContraqWeb.GigCell do
   use ContraqWeb, :cell
   alias ContraqWeb.Endpoint
   alias Contraq.Gigs.Gig
+  alias Phoenix.HTML
   import Phoenix.HTML.Link, only: [link: 2]
 
-  @spec container(%Gig{}) :: String.t
+  @spec container(%Gig{}) :: HTML.safe
   def container!(%Gig{id: id}, do: content) do
     container tag: :article, id: "gig-#{id}" do
       content
@@ -32,7 +33,7 @@ defmodule ContraqWeb.GigCell do
     [:time_range, :location]
   end
 
-  @spec link_to(%Gig{}) :: String.t
+  @spec link_to(%Gig{}) :: HTML.safe
   defp link_to(%Gig{name: name} = gig) do
     link name, to: gig_path(Endpoint, :show, gig)
   end
