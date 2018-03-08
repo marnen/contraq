@@ -7,15 +7,20 @@ defmodule Gigs.GigSpec do
   import Map, only: [delete: 2]
 
   context "validations" do
-    let :valid_attributes, do: Map.from_struct(Factory.build :gig)
+    let :valid_attributes, do: Map.from_struct(Factory.insert! :gig)
     let :valid_changeset, do: Gig.changeset(%Gig{}, valid_attributes)
 
     it "is valid with valid attributes" do
       assert valid_changeset.valid?
     end
 
-    for {field, label} <- %{name: "a name", start_time: "a start time", end_time: "an end time"} do
-      it "requires a #{label}" do
+    for {field, label} <- %{
+      name: "a name",
+      start_time: "a start time",
+      end_time: "an end time",
+      user: "a user"
+    } do
+      it "requires #{label}" do
         attributes = valid_attributes |> delete(unquote field)
         refute Gig.changeset(%Gig{}, attributes).valid?
       end

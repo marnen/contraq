@@ -1,6 +1,8 @@
 defmodule Contraq.Gigs.Gig do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Contraq.Coherence.User
+  alias Ecto.Changeset
 
 
   schema "gigs" do
@@ -24,6 +26,16 @@ defmodule Contraq.Gigs.Gig do
   def changeset(%__MODULE__{} = gig, attrs) do
     gig
     |> cast(attrs, [:name, :start_time, :end_time, :venue, :street, :city, :state, :zip]) # , :amount_due, :terms])
+    |> save_user
     |> validate_required([:name, :start_time, :end_time])
+    |> foreign_key_constraint(:user_id)
+  end
+
+  @spec save_user(Changeset.t) :: Changeset.t
+  defp save_user(%Changeset{params: params} = changeset) do
+    case user = params["user"] do
+      %User{} -> changeset |> put_assoc(:user, user)
+      _ -> changeset |> cast_assoc(:user, required: true)
+    end
   end
 end
