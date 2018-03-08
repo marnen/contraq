@@ -38,13 +38,13 @@ defmodule ContraqWeb.Router do
     pipe_through :browser # Use the default browser stack
     # Public routes
     get "/", PageController, :index
-    resources "/gigs", GigController, only: [:index, :show, :new, :create]
   end
 
 
   scope "/", ContraqWeb do
     pipe_through :protected
     # Add protected routes below
+    resources "/gigs", GigController, only: [:index, :show, :new, :create]
   end
 
   # Other scopes may use custom stacks.

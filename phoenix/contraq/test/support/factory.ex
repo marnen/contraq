@@ -12,7 +12,8 @@ defmodule Contraq.Factory do
     %{
       name: Faker.Lorem.sentence,
       start_time: Timex.to_datetime(Faker.Date.forward(100)), # TODO: randomize the time too?
-      end_time: &(Timex.shift &1[:start_time], minutes: :rand.uniform(4*60))
+      end_time: &(Timex.shift &1[:start_time], minutes: :rand.uniform(4*60)),
+      user: fn _ -> build :user end
     }
   end
 

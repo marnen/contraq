@@ -3,6 +3,7 @@ defmodule GigSteps do
   use Wallaby.DSL
   alias Contraq.Repo
   alias Contraq.Gigs.Gig
+  alias Contraq.Coherence.User
   alias Contraq.Factory
 
   @time_format Application.get_env(:contraq, ContraqWeb)[:datetime_format]
@@ -12,24 +13,24 @@ defmodule GigSteps do
     {:ok, state}
   end
 
-  given_ "I have the following gigs:", fn state, {:table_data, table_data} ->
+  given_ "I have the following gigs:",
+  fn %{current_user: %User{} = current_user} = state, {:table_data, table_data} ->
     # TODO: should we use a changeset here?
-    for gig <- table_data do
-      attributes = for {key, value} <- gig, into: %{} do
-        new_key = key |> to_string |> String.replace(~r{\s}, "_")
-        {:ok, new_value} = if new_key |> String.ends_with?("_time") do
-          Timex.parse value, @time_format
-        else
-          {:ok, value}
-        end
-        {String.to_atom(new_key), new_value}
-      end
+    for row <- table_data, do: Factory.insert! :gig, gig_attributes(row) |> Map.merge(%{user: current_user})
+    {:ok, state}
+  end
+
+  given_ "the following gigs exist:", fn state, {:table_data, table_data} ->
+    for row <- table_data do
+      attributes = gig_attributes(row) |> Map.merge(%{user: Contraq.Coherence.Schemas.get_user_by_email(row[:user])})
       Factory.insert! :gig, attributes
     end
     {:ok, state}
   end
 
-  then_ "I should see the following gigs:", fn %{session: session} = state, {:table_data, table_data} ->
+
+  then_ "I should see the following gigs:",
+  fn %{session: session} = state, {:table_data, table_data} ->
     for fields <- table_data do
       # TODO: refactor this mess! It was translated from some already bad Ruby code; it still needs work. :)
 
@@ -51,6 +52,18 @@ defmodule GigSteps do
       assert session |> has?(Query.xpath selector)
     end
     {:ok, state}
+  end
+
+  @spec gig_attributes(map) :: map
+  defp gig_attributes(%{} = attributes) do
+    for {key, value} <- attributes, into: %{} do
+      new_key = key |> to_string |> String.replace(~r{\s}, "_")
+      new_value = cond do
+         new_key |> String.ends_with?("_time") -> Timex.parse! value, @time_format
+         true -> value
+      end
+      {String.to_atom(new_key), new_value}
+    end
   end
 
   defp xpath(class_name: class_name, text: text) do

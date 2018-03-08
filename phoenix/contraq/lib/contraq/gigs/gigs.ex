@@ -3,9 +3,10 @@ defmodule Contraq.Gigs do
   The Gigs context.
   """
 
+  import Ecto, only: [assoc: 2]
   import Ecto.Query, warn: false
   alias Contraq.Repo
-
+  alias Contraq.Coherence.User
   alias Contraq.Gigs.Gig
 
   @doc """
@@ -17,8 +18,9 @@ defmodule Contraq.Gigs do
       [%Gig{}, ...]
 
   """
-  def list_gigs do
-    Repo.all(Gig)
+  @spec list_gigs(user: %User{}) :: [%Gig{}]
+  def list_gigs(user: user = %User{}) do
+    Repo.all assoc(user, :gigs)
   end
 
   @doc """
