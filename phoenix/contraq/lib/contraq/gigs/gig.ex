@@ -8,8 +8,8 @@ defmodule Contraq.Gigs.Gig do
   schema "gigs" do
     belongs_to :user, Contraq.Coherence.User
     field :name, :string
-    field :start_time, :naive_datetime
-    field :end_time, :naive_datetime
+    field :start_time, Timex.Ecto.DateTime
+    field :end_time, Timex.Ecto.DateTime
     field :venue, :string
     field :street, :string
     field :city, :string

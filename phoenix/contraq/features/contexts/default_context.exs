@@ -10,6 +10,7 @@ defmodule DefaultContext do
   {:ok, _} = Application.ensure_all_started(:faker)
   Application.put_env(:wallaby, :base_url, ContraqWeb.Endpoint.url)
   {:ok, _} = Application.ensure_all_started(:wallaby)
+  {:ok, _} = ESpec.start
 
   feature_starting_state fn ->
     %{}
