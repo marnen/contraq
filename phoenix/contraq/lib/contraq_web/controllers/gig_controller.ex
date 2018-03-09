@@ -4,8 +4,10 @@ defmodule ContraqWeb.GigController do
   alias Contraq.Gigs
   alias Contraq.Gigs.Gig
 
+  import Coherence, only: [current_user: 1]
+
   def index(conn, _params) do
-    gigs = Gigs.list_gigs()
+    gigs = Gigs.list_gigs(user: current_user conn)
     render(conn, "index.html", gigs: gigs)
   end
 
