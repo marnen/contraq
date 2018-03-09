@@ -58,7 +58,7 @@ defmodule Contraq.Mixfile do
       {:phoenix_haml, "~> 0.2"},
       {:timex, "~> 3.0"},
       {:wallaby, "~> 0.19.2", [runtime: false, only: :test]},
-      {:white_bread, "~> 4.1.1", only: [:dev, :test]}
+      {:white_bread, only: [:dev, :test], github: "marnen/white-bread", ref: "4289bb8b5ad9fc3fd4dcffd6d4737a02a69c5615"} # TODO: waiting for https://github.com/meadsteve/white-bread/pull/96
     ]
   end
 
