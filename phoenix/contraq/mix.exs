@@ -57,6 +57,7 @@ defmodule Contraq.Mixfile do
       {:mix_test_watch, "~> 0.5", only: :dev, runtime: false, github: "ignota/mix-test.watch", ref: "8ee5c331059e821830a325cd59e87821b3434f88"}, # TODO: waiting for https://github.com/lpil/mix-test.watch/pull/85
       {:phoenix_haml, "~> 0.2"},
       {:timex, "~> 3.0"},
+      {:timex_ecto, "~> 3.0"},
       {:wallaby, "~> 0.19.2", [runtime: false, only: :test]},
       {:white_bread, only: [:dev, :test], github: "marnen/white-bread", ref: "4289bb8b5ad9fc3fd4dcffd6d4737a02a69c5615"} # TODO: waiting for https://github.com/meadsteve/white-bread/pull/96
     ]
