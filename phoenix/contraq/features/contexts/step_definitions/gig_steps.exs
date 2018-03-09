@@ -72,6 +72,7 @@ defmodule GigSteps do
     end
   end
 
+  @spec xpath([class_name: String.t, text: String.t]) :: String.t
   defp xpath(class_name: class_name, text: text) do
     "//*[@class='#{class_name}'][contains(normalize-space(.), '#{text}')]"
   end
