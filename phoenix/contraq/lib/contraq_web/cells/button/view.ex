@@ -2,6 +2,12 @@ defmodule ContraqWeb.ButtonCell do
   use ContraqWeb, :cell
   alias ContraqWeb.Endpoint
 
+  @icon_names %{
+    edit: "pencil",
+    new: "plus-circle",
+    save: "check-circle"
+  }
+
   defp css_class(%{action: action, model: model}) do
     Enum.join [:button, action, model_underscored(model)], " "
   end
@@ -10,12 +16,8 @@ defmodule ContraqWeb.ButtonCell do
     String.downcase Phoenix.Naming.humanize model_underscored(model)
   end
 
-  defp icon_name(:edit) do
-    "pencil"
-  end
-
-  defp icon_name(:new) do
-    "plus-circle"
+  defp icon_name(action) do
+    @icon_names[action]
   end
 
   defp link_options(%{action: action, model: model}) do

@@ -1,5 +1,5 @@
 defmodule GigSteps do
-  use WhiteBread.Context
+  use WhiteBread.Context, test_library: :espec
   use Wallaby.DSL
   alias Contraq.Repo
   alias Contraq.Gigs.Gig
@@ -28,6 +28,12 @@ defmodule GigSteps do
     {:ok, state}
   end
 
+  then_ ~r/^I should see a gig with name: "(?<name>[^"]+)"$/,
+  fn %{session: session} = state, %{name: name} ->
+    # TODO: use selectors helper
+    assert(session |> has?(Query.css ".gig .name", text: name))
+    {:ok, state}
+  end
 
   then_ "I should see the following gigs:",
   fn %{session: session} = state, {:table_data, table_data} ->

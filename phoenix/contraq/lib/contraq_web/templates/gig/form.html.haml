@@ -1,12 +1,42 @@
 - form_for @changeset, @action, fn f ->
-  = if @changeset.action do
-    .alert.alert-danger
-      %p Oops, something went wrong! Please check the errors below.
+  = label f, :name
+  = text_input f, :name
+  %br
 
-  .form-group
-    = label f, :name, class: "control-label"
-    = text_input f, :name, class: "form-control"
-    = error_tag f, :name
+  = label f, :start_time
+  = text_input f, :start_time, type: "datetime-local"
+  %br
 
-  .form-group
-    = submit "Submit", class: "btn btn-primary"
+  = label f, :end_time
+  = text_input f, :end_time, type: "datetime-local"
+  %br
+
+  = label f, :venue
+  = text_input f, :venue
+  %br
+
+  = label f, :street
+  = text_input f, :street
+  %br
+
+  = label f, :city
+  = text_input f, :city
+  %br
+
+  = label f, :state
+  = text_input f, :state, size: 2
+  %br
+
+  = label f, :zip
+  = text_input f, :zip
+  %br
+
+  -# = label f, :amount_due
+  -# = f.number_field :amount_due, value: gig.decorate.amount_due
+  -# %br
+  -#
+  -# = label f, :terms
+  -# = cell :days_field, f, name: :terms
+  -# %br
+
+  = cell ContraqWeb.ButtonCell, model: f, action: :save

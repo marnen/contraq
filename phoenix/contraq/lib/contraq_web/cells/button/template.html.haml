@@ -1,2 +1,6 @@
-- link to: link_options(assigns), class: css_class(assigns) do
-  = cell ContraqWeb.IconLabelCell, text: text(assigns), icon_name: icon_name(@action)
+- if @action == :save do
+  - submit class: css_class(assigns) do
+    = cell ContraqWeb.IconLabelCell, text: text(assigns), icon_name: icon_name(@action)
+- else
+  - link to: link_options(assigns), class: css_class(assigns) do
+    = cell ContraqWeb.IconLabelCell, text: text(assigns), icon_name: icon_name(@action)

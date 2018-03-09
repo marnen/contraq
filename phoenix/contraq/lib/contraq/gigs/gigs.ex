@@ -51,6 +51,7 @@ defmodule Contraq.Gigs do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec create_gig(%{optional(String.t) => any}) :: {:ok, %Gig{}} | {:error, %Ecto.Changeset{}}
   def create_gig(attrs \\ %{}) do
     %Gig{}
     |> Gig.changeset(attrs)

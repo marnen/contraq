@@ -16,17 +16,17 @@ defmodule ContraqWeb.GigController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  # def create(conn, %{"gig" => gig_params}) do
-  #   case Gigs.create_gig(gig_params) do
-  #     {:ok, gig} ->
-  #       conn
-  #       |> put_flash(:info, "Gig created successfully.")
-  #       |> redirect(to: gig_path(conn, :show, gig))
-  #     {:error, %Ecto.Changeset{} = changeset} ->
-  #       render(conn, "new.html", changeset: changeset)
-  #   end
-  # end
-  #
+  def create(conn, %{"gig" => gig_params}) do
+    case Gigs.create_gig(Map.merge gig_params, %{"user" => current_user(conn)}) do
+      {:ok, gig} ->
+        conn
+        |> put_flash(:info, "Gig created successfully.")
+        |> redirect(to: gig_path(conn, :index))
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "new.html", changeset: changeset)
+    end
+  end
+
   # def show(conn, %{"id" => id}) do
   #   gig = Gigs.get_gig!(id)
   #   render(conn, "show.html", gig: gig)

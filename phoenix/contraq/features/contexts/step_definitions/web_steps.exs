@@ -1,5 +1,5 @@
 defmodule WebSteps do
-  use WhiteBread.Context
+  use WhiteBread.Context, test_library: :espec
   use StepHelpers.Web
 
   given_ ~r/^I am on (?<page_name>.+)$/, fn %{session: session} = state, %{page_name: page_name} ->
