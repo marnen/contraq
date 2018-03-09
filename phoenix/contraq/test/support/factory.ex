@@ -70,9 +70,6 @@ defmodule Contraq.Factory do
   @spec insert!(factory, map) :: struct
   def insert!(factory_name, %{} = attributes), do: insert!(factory_name, attributes, [])
 
-  @spec insert!(factory, map) :: struct
-  def insert!(factory_name, %{} = attributes), do: insert!(factory_name, attributes, [])
-
   @spec insert!(factory, keyword) :: struct
   def insert!(factory_name, opts), do: insert!(factory_name, %{}, opts)
 
