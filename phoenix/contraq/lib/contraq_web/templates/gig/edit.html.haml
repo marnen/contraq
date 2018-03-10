@@ -1,0 +1,3 @@
+%h2 Edit Gig
+= render "form.html", Map.put(assigns, :action, gig_path(@conn, :update, @gig))
+%span= link "Back", to: gig_path(@conn, :index)

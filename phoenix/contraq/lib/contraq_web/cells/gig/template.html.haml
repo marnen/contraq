@@ -3,3 +3,4 @@
   - for field_name <- fields do
     - field_class = dasherize(field_name)
     %div{class: field_class}= field @gig, field_name
+  .actions= cell ContraqWeb.ButtonCell, model: @gig, action: :edit

@@ -32,25 +32,25 @@ defmodule ContraqWeb.GigController do
   #   render(conn, "show.html", gig: gig)
   # end
   #
-  # def edit(conn, %{"id" => id}) do
-  #   gig = Gigs.get_gig!(id)
-  #   changeset = Gigs.change_gig(gig)
-  #   render(conn, "edit.html", gig: gig, changeset: changeset)
-  # end
-  #
-  # def update(conn, %{"id" => id, "gig" => gig_params}) do
-  #   gig = Gigs.get_gig!(id)
-  #
-  #   case Gigs.update_gig(gig, gig_params) do
-  #     {:ok, gig} ->
-  #       conn
-  #       |> put_flash(:info, "Gig updated successfully.")
-  #       |> redirect(to: gig_path(conn, :show, gig))
-  #     {:error, %Ecto.Changeset{} = changeset} ->
-  #       render(conn, "edit.html", gig: gig, changeset: changeset)
-  #   end
-  # end
-  #
+  def edit(conn, %{"id" => id}) do
+    gig = Gigs.get_gig!(id)
+    changeset = Gigs.change_gig(gig)
+    render(conn, "edit.html", gig: gig, changeset: changeset)
+  end
+
+  def update(conn, %{"id" => id, "gig" => gig_params}) do
+    gig = Gigs.get_gig!(id)
+
+    case Gigs.update_gig(gig, Map.merge(gig_params, %{"user" => current_user(conn)})) do
+      {:ok, gig} ->
+        conn
+        |> put_flash(:info, "Gig updated successfully.")
+        |> redirect(to: gig_path(conn, :index))
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", gig: gig, changeset: changeset)
+    end
+  end
+
   # def delete(conn, %{"id" => id}) do
   #   gig = Gigs.get_gig!(id)
   #   {:ok, _gig} = Gigs.delete_gig(gig)

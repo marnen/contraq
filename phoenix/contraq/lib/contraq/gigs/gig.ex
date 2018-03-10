@@ -2,6 +2,7 @@ defmodule Contraq.Gigs.Gig do
   use Ecto.Schema
   import Ecto.Changeset
   alias Contraq.Coherence.User
+  alias Contraq.Repo
   alias Ecto.Changeset
 
 
@@ -25,6 +26,7 @@ defmodule Contraq.Gigs.Gig do
   @doc false
   def changeset(%__MODULE__{} = gig, attrs) do
     gig
+    |> Repo.preload(:user) # TODO: required for dealing with the user, but do we always need to do that?
     |> cast(attrs, [:name, :start_time, :end_time, :venue, :street, :city, :state, :zip]) # , :amount_due, :terms])
     |> save_user
     |> validate_required([:name, :start_time, :end_time])
