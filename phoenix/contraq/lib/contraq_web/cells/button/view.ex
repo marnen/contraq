@@ -25,10 +25,9 @@ defmodule ContraqWeb.ButtonCell do
     apply ContraqWeb.Router.Helpers, :"#{model_underscored model}_path", args
   end
 
-  @spec model_underscored(%Phoenix.HTML.Form{data: struct}) :: String.t
+  @spec model_underscored(struct) :: String.t
   defp model_underscored(%Phoenix.HTML.Form{data: struct}), do: model_underscored struct
 
-  @spec model_underscored(struct) :: String.t
   defp model_underscored(%{__struct__: module}), do:     Phoenix.Naming.resource_name(module)
 
   @spec model_underscored(atom | String.t) :: String.t
