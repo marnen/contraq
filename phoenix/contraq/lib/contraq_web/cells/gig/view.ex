@@ -12,9 +12,9 @@ defmodule ContraqWeb.GigCell do
     end
   end
 
-  @spec dasherize(atom | String.t) :: String.t
-  defp dasherize(string) do
-    string |> to_string |> String.replace("_", "-")
+  @spec class_for(atom | String.t) :: String.t
+  defp class_for(field_name) do
+    field_name |> to_string |> Contraq.Naming.dasherize
   end
 
   @spec field(%Gig{}, atom) :: String.t
