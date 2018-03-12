@@ -44,7 +44,7 @@ defmodule ContraqWeb.Router do
   scope "/", ContraqWeb do
     pipe_through :protected
     # Add protected routes below
-    resources "/gigs", GigController, only: [:index, :show, :new, :create]
+    resources "/gigs", GigController, except: [:delete]
   end
 
   # Other scopes may use custom stacks.

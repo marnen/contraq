@@ -21,13 +21,16 @@ defmodule ContraqWeb.ButtonCell do
   end
 
   defp link_options(%{action: action, model: model}) do
-    apply ContraqWeb.Router.Helpers, :"#{model_underscored model}_path", [Endpoint, action]
+    args = if action == :edit, do: [Endpoint, action, model], else: [Endpoint, action]
+    apply ContraqWeb.Router.Helpers, :"#{model_underscored model}_path", args
   end
 
-  defp model_underscored(%Phoenix.HTML.Form{data: %{__struct__: module}}) do
-    Phoenix.Naming.resource_name(module)
-  end
+  @spec model_underscored(struct) :: String.t
+  defp model_underscored(%Phoenix.HTML.Form{data: struct}), do: model_underscored struct
 
+  defp model_underscored(%{__struct__: module}), do:     Phoenix.Naming.resource_name(module)
+
+  @spec model_underscored(atom | String.t) :: String.t
   defp model_underscored(model) do
     model |> to_string |> Phoenix.Naming.underscore
   end

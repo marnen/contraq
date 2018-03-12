@@ -9,7 +9,7 @@ config :contraq, ContraqWeb.Endpoint,
 config :contraq, sql_sandbox: true
 
 # Print only warnings and errors during test
-config :logger, level: :warn
+config :logger, level: :info #:warn
 
 # Configure your database
 config :contraq, Contraq.Repo,

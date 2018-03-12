@@ -3,7 +3,7 @@ defmodule WebSteps do
   use StepHelpers.Web
 
   given_ ~r/^I am on (?<page_name>.+)$/, fn %{session: session} = state, %{page_name: page_name} ->
-    new_session = session |> visit(path_to page_name)
+    new_session = session |> visit(path_to page_name, state)
     {:ok, put_in(state[:session], new_session)}
   end
 
@@ -21,12 +21,20 @@ defmodule WebSteps do
   end
 
   when_ ~r/^I go to (?<page_name>.+)$/, fn %{session: session} = state, %{page_name: page_name} ->
-    new_session = session |> visit(path_to page_name)
+    new_session = session |> visit(path_to page_name, state)
     {:ok, state |> put_in([:session], new_session)}
   end
 
+  then_ ~r/^I should not be able to get to (?<page_name>.+)$/,
+  fn %{session: session} = state, %{page_name: page_name} ->
+    path = path_to page_name, state
+    session |> visit(path)
+    expect(current_path session).not_to eq path
+    {:ok, state}
+  end
+
   then_ ~r/^I should (?<negation>not )?be on (?<page_name>.+)$/, fn %{session: session} = state, %{negation: negation, page_name: page_name} ->
-    expect(current_path(session) == path_to(page_name)).to eq(String.length(negation) == 0)
+    expect(current_path(session) == path_to(page_name, state)).to eq(String.length(negation) == 0)
     {:ok, state}
   end
 
@@ -43,12 +51,15 @@ defmodule WebSteps do
     end
   end
 
-  defp path_to(page_name) do
+  @spec path_to(String.t, map) :: String.t
+  defp path_to(page_name, state \\ %{}) do
     case page_name do
+      "the edit page for the gig" -> gig_path(Endpoint, :edit, state[:gig])
       "the gigs page" -> gig_path(Endpoint, :index)
+      "the gig's page" -> gig_path(Endpoint, :show, state[:gig])
       "the login page" -> session_path(Endpoint, :new)
       "the new gig page" -> gig_path(Endpoint, :new)
-      _ -> raise ArgumentError, message: "No mapping defined for page '#{page_name}'. Please add a mapping in #{__ENV__.file}."
+      _ -> raise ArgumentError, message: ~s(No mapping defined for page "#{page_name}". Please add a mapping in #{__ENV__.file}.)
     end
   end
 end

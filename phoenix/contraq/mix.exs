@@ -48,6 +48,7 @@ defmodule Contraq.Mixfile do
       {:gettext, "~> 0.13.1"}, # see https://github.com/smpallen99/coherence/issues/329
       {:cowboy, "~> 1.0"},
       {:bcrypt_elixir, "~> 1.0"}, # see https://github.com/riverrun/comeonin/issues/106
+      {:bodyguard, "~> 2.2.2"},
       {:coherence, "~> 0.5"},
       {:dialyxir, "~> 0.5.0", only: [:dev], runtime: false},
       {:espec_phoenix, "~> 0.6.9", only: :test},

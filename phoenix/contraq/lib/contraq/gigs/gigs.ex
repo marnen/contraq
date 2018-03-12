@@ -3,6 +3,8 @@ defmodule Contraq.Gigs do
   The Gigs context.
   """
 
+  @behaviour Bodyguard.Policy
+
   import Ecto, only: [assoc: 2]
   import Ecto.Query, warn: false
   alias Contraq.Repo
@@ -103,5 +105,15 @@ defmodule Contraq.Gigs do
   """
   def change_gig(%Gig{} = gig) do
     Gig.changeset(gig, %{})
+  end
+
+  @impl Bodyguard.Policy
+  def authorize(:edit, user = %User{}, gig = %Gig{}) do
+    gig = Repo.preload gig, :user
+    gig.user.id == user.id
+  end
+
+  def authorize(_, _, _) do
+    false
   end
 end
