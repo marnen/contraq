@@ -40,19 +40,27 @@ defmodule Contraq.Factory do
     if required_only, do: required, else: Map.merge optional, required
   end
 
-  @spec build(factory, map, keyword) :: struct
-  def build(factory_name, %{} = attributes, opts) do
+  @spec attributes(factory, map, keyword) :: map
+  def attributes(factory_name, %{} = extra_attributes, opts) do
     base = base(factory_name, opts)
-    merged_attributes = Map.merge(base, attributes)
-    expanded_attributes = for {key, value} <- merged_attributes, into: %{} do
+    merged_attributes = Map.merge(base, extra_attributes)
+    for {key, value} <- merged_attributes, into: %{} do
       new_value = if is_function(value), do: value.(merged_attributes), else: value
       {key, new_value}
     end
-    struct Map.fetch!(@tags, factory_name), expanded_attributes
+  end
+
+  @spec attributes(factory, keyword) :: map
+  def attributes(factory_name, opts), do: attributes(factory_name, %{}, opts)
+
+  @spec build(factory, map, keyword) :: struct
+  def build(factory_name, %{} = extra_attributes, opts) do
+    attributes = attributes(factory_name, extra_attributes, opts)
+    struct Map.fetch!(@tags, factory_name), attributes
   end
 
   @spec build(factory, map) :: struct
-  def build(factory_name, %{} = attributes), do: build(factory_name, attributes, [])
+  def build(factory_name, %{} = extra_attributes), do: build(factory_name, extra_attributes, [])
 
   @spec build(factory, keyword) :: struct
   def build(factory_name, opts), do: build(factory_name, %{}, opts)
@@ -61,14 +69,14 @@ defmodule Contraq.Factory do
   def build(factory_name), do: build(factory_name, %{}, [])
 
   @spec insert!(factory, map, keyword) :: struct
-  def insert!(factory_name, %{} = attributes, opts) do
-    record = build(factory_name, attributes, opts)
+  def insert!(factory_name, %{} = extra_attributes, opts) do
+    record = build(factory_name, extra_attributes, opts)
     tag = record.__struct__
     Repo.insert! tag.changeset(struct(tag), Map.from_struct record)
   end
 
   @spec insert!(factory, map) :: struct
-  def insert!(factory_name, %{} = attributes), do: insert!(factory_name, attributes, [])
+  def insert!(factory_name, %{} = extra_attributes), do: insert!(factory_name, extra_attributes, [])
 
   @spec insert!(factory, keyword) :: struct
   def insert!(factory_name, opts), do: insert!(factory_name, %{}, opts)

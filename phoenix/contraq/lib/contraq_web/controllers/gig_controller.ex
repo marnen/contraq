@@ -3,8 +3,12 @@ defmodule ContraqWeb.GigController do
 
   alias Contraq.Gigs
   alias Contraq.Gigs.Gig
+  alias Plug.Conn
 
   import Coherence, only: [current_user: 1]
+
+  plug :load_gig! when action not in [:index, :new, :create, :show]
+  plug :authorize! when action not in [:index, :new, :create, :show]
 
   def index(conn, _params) do
     gigs = Gigs.list_gigs(user: current_user conn)
@@ -27,15 +31,14 @@ defmodule ContraqWeb.GigController do
     end
   end
 
-  # def show(conn, %{"id" => id}) do
-  #   gig = Gigs.get_gig!(id)
-  #   render(conn, "show.html", gig: gig)
-  # end
-  #
-  def edit(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id}) do
     gig = Gigs.get_gig!(id)
-    changeset = Gigs.change_gig(gig)
-    render(conn, "edit.html", gig: gig, changeset: changeset)
+    render(conn, "show.html", gig: gig)
+  end
+
+  def edit(%Conn{assigns: assigns} = conn, %{"id" => id}) do
+    changeset = Gigs.change_gig(assigns.gig)
+    render(conn, "edit.html", assigns |> put_in([:changeset], changeset))
   end
 
   def update(conn, %{"id" => id, "gig" => gig_params}) do
@@ -59,4 +62,39 @@ defmodule ContraqWeb.GigController do
   #   |> put_flash(:info, "Gig deleted successfully.")
   #   |> redirect(to: gig_path(conn, :index))
   # end
+
+  defp authorize!(conn, _opts) do
+    permission = case action_name(conn) do
+      :update -> :edit
+      other -> other
+    end
+    case Bodyguard.permit Contraq.Gigs, permission, current_user(conn), conn.assigns.gig do
+      :ok -> conn
+      {:error, _} ->
+        conn
+        |> put_flash(:error, gettext("You are not authorized to perform that action."))
+        |> redirect(to: back(conn) || gig_path(conn, :index)) # TODO: use FallbackController?
+        |> halt
+    end
+  end
+
+  @spec back(Conn.t) :: String.t | nil
+  defp back(%Conn{req_headers: headers, host: host, port: port}) do
+    header_map = Enum.into(headers, %{})
+    referer = header_map["referer"]
+    # GO
+    if referer do
+      parsed_referer = URI.parse(referer)
+      if parsed_referer.host == host && parsed_referer.port == port do
+        parsed_referer.path
+      else
+        nil
+      end
+    end
+  end
+
+  defp load_gig!(%Conn{params: %{"id" => id}} = conn, _opts) do
+    gig = Gigs.get_gig! id
+    Conn.assign conn, :gig, gig
+  end
 end

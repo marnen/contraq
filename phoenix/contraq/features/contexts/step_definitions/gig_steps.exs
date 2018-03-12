@@ -9,6 +9,16 @@ defmodule GigSteps do
   @time_format Application.get_env(:contraq, ContraqWeb)[:datetime_format]
   @time_format_fallback "{ISOdate} {h24}:{m}"
 
+  given_ "a gig exists", fn state ->
+    gig = Factory.insert! :gig
+    {:ok, state |> put_in([:gig], gig)}
+  end
+
+  given_ "I have a gig", fn %{current_user: current_user} = state ->
+    gig = Factory.insert! :gig, %{user: current_user}
+    {:ok, state |> put_in([:gig], gig)}
+  end
+
   given_ "I have no gigs", fn state ->
     Repo.delete_all Gig
     {:ok, state}

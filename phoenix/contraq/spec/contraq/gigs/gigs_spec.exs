@@ -6,6 +6,30 @@ defmodule Contraq.GigsSpec do
   alias Contraq.Repo
   import Faker.Util, only: [pick: 1]
 
+  context "authorization" do
+    it "uses Bodyguard" do
+      import Enum, only: [member?: 2]
+      assert Gigs.__info__(:attributes)[:behaviour] |> member?(Bodyguard.Policy)
+    end
+
+    context ":edit" do
+      import Bodyguard, only: [permit: 4]
+      let :action, do: :edit
+      let :user, do: Factory.insert! :user
+      subject do: permit described_module, action, user, gig
+
+      context "user owns gig" do
+        let :gig, do: Factory.insert! :gig, %{user: user}
+        it do: is_expected.to eq :ok
+      end
+
+      context "user does not own gig" do
+        let :gig, do: Factory.insert! :gig
+        it do: is_expected.to be_error_result
+      end
+    end
+  end
+
   context "retrieving gigs" do
     let :gigs_count, do: :rand.uniform 10
     let :gigs, do: (for _ <- 1..gigs_count, do: Factory.insert! :gig)
@@ -93,7 +117,9 @@ defmodule Contraq.GigsSpec do
     let! :result, do: Gigs.delete_gig deleted_gig
 
     it "returns :ok and the deleted gig" do
-      assert {:ok, deleted_gig} = result
+      result = result()
+      id = deleted_gig.id
+      assert {:ok, %Gig{id: id}} = result
     end
 
     it "deletes the gig" do
