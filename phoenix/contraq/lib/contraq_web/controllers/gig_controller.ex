@@ -10,13 +10,6 @@ defmodule ContraqWeb.GigController do
   plug :load_gig! when action not in [:index, :new, :create]
   plug :authorize! when action not in [:index, :new, :create]
 
-  # TODO: put this Gettext stuff somewhere better
-  defmacro _(string, bindings \\ Macro.escape %{}) do
-    quote do
-      gettext(unquote(string), unquote(bindings))
-    end
-  end
-
   def index(conn, _params) do
     gigs = Gigs.list_gigs(user: current_user conn)
     render(conn, "index.html", gigs: gigs, page_title: _("Gigs"))
@@ -80,7 +73,7 @@ defmodule ContraqWeb.GigController do
       :ok -> conn
       {:error, _} ->
         conn
-        |> put_flash(:error, gettext("You are not authorized to perform that action."))
+        |> put_flash(:error, _("You are not authorized to perform that action."))
         |> redirect(to: back(conn) || gig_path(conn, :index)) # TODO: use FallbackController?
         |> halt
     end

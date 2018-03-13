@@ -21,4 +21,16 @@ defmodule ContraqWeb.Gettext do
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
   use Gettext, otp_app: :contraq
+
+  defmacro __using__(_opts \\ []) do
+    quote do
+      import unquote(__MODULE__)
+
+      defmacro _(string, bindings \\ Macro.escape %{}) do
+        quote do
+          gettext(unquote(string), unquote(bindings))
+        end
+      end
+    end
+  end
 end

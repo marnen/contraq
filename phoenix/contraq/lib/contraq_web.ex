@@ -22,7 +22,7 @@ defmodule ContraqWeb do
       use Phoenix.Controller, namespace: ContraqWeb
       import Plug.Conn
       import ContraqWeb.Router.Helpers
-      import ContraqWeb.Gettext
+      use ContraqWeb.Gettext
       import ExCell.Controller
     end
   end
