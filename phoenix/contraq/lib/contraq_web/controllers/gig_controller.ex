@@ -7,17 +7,24 @@ defmodule ContraqWeb.GigController do
 
   import Coherence, only: [current_user: 1]
 
-  plug :load_gig! when action not in [:index, :new, :create, :show]
-  plug :authorize! when action not in [:index, :new, :create, :show]
+  plug :load_gig! when action not in [:index, :new, :create]
+  plug :authorize! when action not in [:index, :new, :create]
+
+  # TODO: put this Gettext stuff somewhere better
+  defmacro _(string, bindings \\ Macro.escape %{}) do
+    quote do
+      gettext(unquote(string), unquote(bindings))
+    end
+  end
 
   def index(conn, _params) do
     gigs = Gigs.list_gigs(user: current_user conn)
-    render(conn, "index.html", gigs: gigs)
+    render(conn, "index.html", gigs: gigs, page_title: _("Gigs"))
   end
 
   def new(conn, _params) do
     changeset = Gigs.change_gig(%Gig{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, page_title: _("Create Gig"))
   end
 
   def create(conn, %{"gig" => gig_params}) do
@@ -27,18 +34,19 @@ defmodule ContraqWeb.GigController do
         |> put_flash(:info, "Gig created successfully.")
         |> redirect(to: gig_path(conn, :index))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, page_title: _("Create Gig"))
     end
   end
 
   def show(conn, %{"id" => id}) do
     gig = Gigs.get_gig!(id)
-    render(conn, "show.html", gig: gig)
+    render(conn, "show.html", gig: gig, page_title: gig.name, header_class: :name)
   end
 
   def edit(%Conn{assigns: assigns} = conn, %{"id" => id}) do
-    changeset = Gigs.change_gig(assigns.gig)
-    render(conn, "edit.html", assigns |> put_in([:changeset], changeset))
+    gig = assigns.gig
+    changeset = Gigs.change_gig(gig)
+    render conn, "edit.html", assigns |> Map.merge(%{changeset: changeset, page_title: _(~s(Edit Gig "%{gig}"), gig: gig.name)})
   end
 
   def update(conn, %{"id" => id, "gig" => gig_params}) do
@@ -50,7 +58,7 @@ defmodule ContraqWeb.GigController do
         |> put_flash(:info, "Gig updated successfully.")
         |> redirect(to: gig_path(conn, :index))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", gig: gig, changeset: changeset)
+        render(conn, "edit.html", gig: gig, changeset: changeset, page_title: _(~s(Edit Gig "%{gig}"), gig: gig.name))
     end
   end
 

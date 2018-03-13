@@ -108,7 +108,8 @@ defmodule Contraq.Gigs do
   end
 
   @impl Bodyguard.Policy
-  def authorize(:edit, user = %User{}, gig = %Gig{}) do
+  def authorize(action, user = %User{}, gig = %Gig{})
+  when action in [:edit, :show] do
     gig = Repo.preload gig, :user
     gig.user.id == user.id
   end
