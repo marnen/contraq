@@ -43,6 +43,11 @@ defmodule WebSteps do
     {:ok, state}
   end
 
+  then_ "I should see the following:", fn %{session: session} = state, {:table_data, table_data} ->
+    for row <- table_data, do: assert session |> has_text?(row[:text])
+    {:ok, state}
+  end
+
   defp click_link_or_button(session, text) do
     try do
       session |> click(Query.link text)
