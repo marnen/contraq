@@ -53,13 +53,19 @@ defmodule WebSteps do
 
   @spec path_to(String.t, map) :: String.t
   defp path_to(page_name, state \\ %{}) do
-    case page_name do
-      "the edit page for the gig" -> gig_path(Endpoint, :edit, state[:gig])
-      "the gigs page" -> gig_path(Endpoint, :index)
-      "the gig's page" -> gig_path(Endpoint, :show, state[:gig])
-      "the login page" -> session_path(Endpoint, :new)
-      "the new gig page" -> gig_path(Endpoint, :new)
-      _ -> raise ArgumentError, message: ~s(No mapping defined for page "#{page_name}". Please add a mapping in #{__ENV__.file}.)
+    alias Contraq.Gigs.Gig
+    alias Contraq.Repo
+    cond do
+      page_name == "the edit page for the gig" -> gig_path(Endpoint, :edit, state[:gig])
+      captures = Regex.named_captures ~r/^the gig page for "(?<name>.+)"$/, page_name ->
+        with gig <- Repo.get_by!(Gig, name: captures["name"]) do
+          gig_path(Endpoint, :show, gig)
+        end
+      page_name == "the gigs page" -> gig_path(Endpoint, :index)
+      page_name == "the gig's page" -> gig_path(Endpoint, :show, state[:gig])
+      page_name == "the login page" -> session_path(Endpoint, :new)
+      page_name == "the new gig page" -> gig_path(Endpoint, :new)
+      true -> raise ArgumentError, message: ~s(No mapping defined for page "#{page_name}". Please add a mapping in #{__ENV__.file}.)
     end
   end
 end

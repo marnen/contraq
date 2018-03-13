@@ -7,8 +7,8 @@ defmodule ContraqWeb.GigController do
 
   import Coherence, only: [current_user: 1]
 
-  plug :load_gig! when action not in [:index, :new, :create, :show]
-  plug :authorize! when action not in [:index, :new, :create, :show]
+  plug :load_gig! when action not in [:index, :new, :create]
+  plug :authorize! when action not in [:index, :new, :create]
 
   def index(conn, _params) do
     gigs = Gigs.list_gigs(user: current_user conn)

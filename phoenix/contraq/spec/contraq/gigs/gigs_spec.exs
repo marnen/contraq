@@ -12,20 +12,37 @@ defmodule Contraq.GigsSpec do
       assert Gigs.__info__(:attributes)[:behaviour] |> member?(Bodyguard.Policy)
     end
 
-    context ":edit" do
+    context "permissions" do
       import Bodyguard, only: [permit: 4]
-      let :action, do: :edit
       let :user, do: Factory.insert! :user
       subject do: permit described_module, action, user, gig
 
-      context "user owns gig" do
-        let :gig, do: Factory.insert! :gig, %{user: user}
-        it do: is_expected.to eq :ok
+      context ":edit" do
+        let :action, do: :edit
+
+        context "user owns gig" do
+          let :gig, do: Factory.insert! :gig, %{user: user}
+          it do: is_expected.to eq :ok
+        end
+
+        context "user does not own gig" do
+          let :gig, do: Factory.insert! :gig
+          it do: is_expected.to be_error_result
+        end
       end
 
-      context "user does not own gig" do
-        let :gig, do: Factory.insert! :gig
-        it do: is_expected.to be_error_result
+      context ":show" do
+        let :action, do: :show
+
+        context "user owns gig" do
+          let :gig, do: Factory.insert! :gig, %{user: user}
+          it do: is_expected.to eq :ok
+        end
+
+        context "user does not own gig" do
+          let :gig, do: Factory.insert! :gig
+          it do: is_expected.to be_error_result
+        end
       end
     end
   end
