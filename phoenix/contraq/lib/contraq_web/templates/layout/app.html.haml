@@ -1,0 +1,34 @@
+!!! 5
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    %meta(name="viewport" content="width=device-width, initial-scale=1")
+    %meta(name="description" content="")
+    %meta(name="author" content="")
+
+    %title Hello Contraq!
+    - stylesheet_path = static_path @conn, "/css/app.css"
+    %link{rel: "stylesheet", href: stylesheet_path}
+
+  %body
+    .container
+      %header.header
+        %nav(role="navigation")
+          %ul.nav.nav-pills.pull-right
+            %li
+              %a(href="http://www.phoenixframework.org/docs")Get Started
+        %span.logo
+
+      %p.alert.alert-info(role="alert")= get_flash @conn, :info
+      %p.alert.alert-error(role="alert")= get_flash @conn, :error
+
+      - if @current_user do
+        %div= "Logged in as #{@current_user.email}"
+
+      %main(role="main")
+        = render @view_module, @view_template, assigns
+
+    - for filename <- ["vendor", "app"] do
+      - path = static_path(@conn, "/js/#{filename}.js")
+      %script{src: path}
