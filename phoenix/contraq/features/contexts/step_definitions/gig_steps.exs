@@ -53,13 +53,15 @@ defmodule GigSteps do
     for fields <- table_data do
       # TODO: refactor this mess! It was translated from some already bad Ruby code; it still needs work. :)
       fields = atomize_keys(fields)
-      {special_fields, other_fields} = Map.split(fields, [:name, :start_time, :end_time])
+      {special_fields, other_fields} = Map.split(fields, [:name, :start_time, :end_time, :terms, :due_date])
+      terms = if special_fields[:terms], do: "#{special_fields[:terms]} (#{special_fields[:due_date]})"
       time_range = [special_fields[:start_time], special_fields[:end_time]]
       |>  reject(&is_nil/1) |> map(&sloppy_parse!/1) |> map(&Timex.format!(&1, @time_format)) |> join("–")
       other_fields_selector = (for {_, value} <- other_fields, do: "[contains(normalize-space(.), '#{value}')]") |> join
 
       class_mappings = %{
         "name" => special_fields[:name],
+        "terms" => terms,
         "time-range" => time_range
       }
       selector = [
@@ -87,6 +89,7 @@ defmodule GigSteps do
     # TODO: can't we refactor this and maybe remove the time parsing (since timex_ecto does some of it)?
     for {key, value} <- atomize_keys(attributes), into: %{} do
       new_value = cond do
+        key == :terms -> with {integer, _} <- Integer.parse(value), do: integer
         key |> to_string |> String.ends_with?("_time") -> sloppy_parse!(value)
         true -> value
       end

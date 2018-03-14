@@ -18,7 +18,8 @@ config :contraq, ContraqWeb.Endpoint,
            adapter: Phoenix.PubSub.PG2]
 
 config :contraq, ContraqWeb,
-  datetime_format: "{D} {Mshort} {YYYY} {h24}:{m}"
+  datetime_format: "{D} {Mshort} {YYYY} {h24}:{m}",
+  date_format: "{D} {Mshort} {YYYY}"
 
 # Configures Elixir's Logger
 config :logger, :console,

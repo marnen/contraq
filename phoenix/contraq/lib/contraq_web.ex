@@ -41,7 +41,7 @@ defmodule ContraqWeb do
 
       import ContraqWeb.Router.Helpers
       import ContraqWeb.ErrorHelpers
-      import ContraqWeb.Gettext
+      use ContraqWeb.Gettext
       import ExCell.View
     end
   end
@@ -76,7 +76,7 @@ defmodule ContraqWeb do
       import FontAwesomePhoenix.HTML
 
       import ContraqWeb.Router.Helpers
-      import ContraqWeb.Gettext
+      use ContraqWeb.Gettext
 
       # Add everything you want to use in the cells
     end

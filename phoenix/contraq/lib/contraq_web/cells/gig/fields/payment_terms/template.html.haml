@@ -1,0 +1,7 @@
+.payment-terms
+  = cell ContraqWeb.OutputFieldCell, gig: @gig, field: :amount_due, name: _("Amount due:")
+  .terms
+    %span.field-name= _("Terms:")
+    = terms(@gig)
+    - if due_date(@gig) do
+      = "(#{due_date(@gig)})"

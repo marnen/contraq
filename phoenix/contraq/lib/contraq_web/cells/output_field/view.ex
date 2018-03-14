@@ -20,7 +20,7 @@ defmodule ContraqWeb.OutputFieldCell do
       {:ok, result} -> result
       _ -> apply(ContraqWeb.GigView, field, [gig])
     end
-    if Timex.is_valid? value do
+    if !match?(%Decimal{}, value) && Timex.is_valid? value do
       Timex.format! value, Application.get_env(:contraq, ContraqWeb)[:datetime_format]
     else
       value
