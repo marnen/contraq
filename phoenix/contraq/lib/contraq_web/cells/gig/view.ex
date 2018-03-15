@@ -17,11 +17,6 @@ defmodule ContraqWeb.GigCell do
     field_name |> to_string |> Contraq.Naming.dasherize
   end
 
-  @spec field(%Gig{}, atom) :: String.t
-  defp field(%Gig{} = gig, name) do
-    apply(ContraqWeb.GigView, name, [gig])
-  end
-
   @spec fields :: [atom]
   defp fields do
     [:time_range, :location]

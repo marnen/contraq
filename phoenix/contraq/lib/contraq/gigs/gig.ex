@@ -1,10 +1,16 @@
 defmodule Contraq.Gigs.Gig do
   use Ecto.Schema
+  use Decoratex
   import Ecto.Changeset
   alias Contraq.Coherence.User
   alias Contraq.Repo
   alias Ecto.Changeset
 
+  decorations do
+    alias ContraqWeb.GigView
+    decorate_field :location, :string, &GigView.location/1
+    decorate_field :time_range, :string, &GigView.time_range/1
+  end
 
   schema "gigs" do
     belongs_to :user, Contraq.Coherence.User
@@ -20,6 +26,7 @@ defmodule Contraq.Gigs.Gig do
     field :terms, :integer
 
     timestamps()
+    add_decorations
   end
 
   @doc false

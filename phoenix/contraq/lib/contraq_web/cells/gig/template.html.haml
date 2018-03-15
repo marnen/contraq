@@ -2,5 +2,5 @@
   %h1.name= link_to @gig
   - for field_name <- fields do
     - field_class = class_for(field_name)
-    %div{class: field_class}= field @gig, field_name
+    %div{class: field_class}= Map.get @gig, field_name
   .actions= cell ContraqWeb.ButtonCell, model: @gig, action: :edit
