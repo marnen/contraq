@@ -50,6 +50,7 @@ defmodule Contraq.Mixfile do
       {:bcrypt_elixir, "~> 1.0"}, # see https://github.com/riverrun/comeonin/issues/106
       {:bodyguard, "~> 2.2.2"},
       {:coherence, "~> 0.5"},
+      {:decoratex, "~> 1.0.0"},
       {:dialyxir, "~> 0.5.0", only: [:dev], runtime: false},
       {:espec_phoenix, "~> 0.6.9", only: :test},
       {:ex_cell, "~> 0.0.11"},
