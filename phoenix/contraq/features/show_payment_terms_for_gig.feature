@@ -18,15 +18,15 @@ Scenario Outline: Show terms on gig detail page
     | name     | start            | amount | terms   | due_date    |
     | Paid Gig | 1 Feb 2050 20:00 | 150.00 | 10 days | 11 Feb 2050 |
 
-# Scenario Outline: Show terms on gig list
-#   Given I have the following gig:
-#     | name   | start time | amount due | terms   |
-#     | <name> | <start>    | <amount>   | <terms> |
-#   When I go to the gigs page
-#   Then I should see the following gig:
-#     | name   | start time | amount due | terms   | due date   |
-#     | <name> | <start>    | <amount>   | <terms> | <due_date> |
-#
-#   Examples:
-#     | name            | start            | amount | terms   | due_date    |
-#     | Better Paid Gig | 2 Feb 2050 20:00 | 225.25 | 12 days | 14 Feb 2050 |
+Scenario Outline: Show terms on gig list
+  Given I have the following gig:
+    | name   | start time | amount due | terms   |
+    | <name> | <start>    | <amount>   | <terms> |
+  When I go to the gigs page
+  Then I should see the following gig:
+    | name   | start time | amount due | terms   | due date   |
+    | <name> | <start>    | <amount>   | <terms> | <due_date> |
+
+  Examples:
+    | name            | start            | amount | terms   | due_date    |
+    | Better Paid Gig | 2 Feb 2050 20:00 | 225.25 | 12 days | 14 Feb 2050 |

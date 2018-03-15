@@ -8,6 +8,7 @@ defmodule Contraq.Gigs.Gig do
 
   decorations do
     alias ContraqWeb.GigView
+    decorate_field :formatted_terms, :string, &GigView.formatted_terms/1
     decorate_field :location, :string, &GigView.location/1
     decorate_field :time_range, :string, &GigView.time_range/1
   end
