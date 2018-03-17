@@ -66,7 +66,7 @@ defmodule GigSteps do
       }
       selector = [
         "//*[@class='gig']#{other_fields_selector}" |
-        for {class_name, text} <- class_mappings, String.length(String.trim text) > 0 do
+        for {class_name, text} <- class_mappings, not is_nil(text), String.length(String.trim text) > 0 do
           "[#{xpath class_name: class_name, text: text}]"
         end
       ] |> join

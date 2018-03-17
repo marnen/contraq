@@ -11,7 +11,7 @@ defmodule ContraqWeb.GigController do
   plug :authorize! when action not in [:index, :new, :create]
 
   def index(conn, _params) do
-    gigs = Gigs.list_gigs(user: current_user conn)
+    gigs = Gigs.list_gigs(user: current_user conn) |> Enum.map(&Gig.decorate/1)
     render(conn, "index.html", gigs: gigs, page_title: _("Gigs"))
   end
 
@@ -32,7 +32,7 @@ defmodule ContraqWeb.GigController do
   end
 
   def show(conn, %{"id" => id}) do
-    gig = Gigs.get_gig!(id)
+    gig = Gigs.get_gig!(id) |> Gig.decorate
     render(conn, "show.html", gig: gig, page_title: gig.name, header_class: :name)
   end
 

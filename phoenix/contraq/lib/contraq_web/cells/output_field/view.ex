@@ -16,10 +16,7 @@ defmodule ContraqWeb.OutputFieldCell do
 
   @spec property(%Gig{}, atom) :: any
   defp property(%Gig{} = gig, field) do
-    value = case Map.fetch gig, field do
-      {:ok, result} -> result
-      _ -> apply(ContraqWeb.GigView, field, [gig])
-    end
+    value = Map.get gig, field
     if !match?(%Decimal{}, value) && Timex.is_valid? value do
       Timex.format! value, Application.get_env(:contraq, ContraqWeb)[:datetime_format]
     else
